@@ -27,6 +27,67 @@ export default function Footer() {
             >
               LinkedIn
             </a>
+            <a
+              href="https://instagram.com/usf.hcg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-gray-400 transition-transform duration-200 hover:scale-[1.05] hover:text-blue-400"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-4 w-4"
+              >
+                <path
+                  d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  opacity="0.9"
+                />
+                <path
+                  d="M12 16a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  opacity="0.9"
+                />
+                <path
+                  d="M17.2 6.9h.01"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                />
+              </svg>
+              Instagram
+            </a>
+            <a
+              href="mailto:usfhcg@gmail.com"
+              className="inline-flex items-center gap-2 text-gray-400 transition-transform duration-200 hover:scale-[1.05] hover:text-blue-400"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="h-4 w-4"
+              >
+                <path
+                  d="M4 6h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  opacity="0.9"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="m4 8 8 6 8-6"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  opacity="0.9"
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                />
+              </svg>
+              usfhcg@gmail.com
+            </a>
           </div>
         </div>
 
