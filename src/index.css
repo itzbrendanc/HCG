@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-night-950 text-white antialiased;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto,
+      Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: rgba(47, 111, 180, 0.35);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  }
+}
+
+@layer utilities {
+  .bg-hcg-surface {
+    background-image: radial-gradient(
+        900px 420px at 20% 8%,
+        rgba(47, 111, 180, 0.24),
+        transparent 58%
+      ),
+      radial-gradient(
+        760px 460px at 85% 12%,
+        rgba(255, 255, 255, 0.06),
+        transparent 60%
+      ),
+      radial-gradient(
+        860px 520px at 60% 92%,
+        rgba(47, 111, 180, 0.10),
+        transparent 62%
+      );
+  }
+
+  .bg-hcg-night {
+    background-image: radial-gradient(
+        900px 520px at 20% 10%,
+        rgba(47, 111, 180, 0.22),
+        transparent 58%
+      ),
+      radial-gradient(
+        900px 520px at 85% 22%,
+        rgba(255, 255, 255, 0.05),
+        transparent 62%
+      ),
+      radial-gradient(
+        880px 560px at 65% 92%,
+        rgba(47, 111, 180, 0.10),
+        transparent 65%
+      );
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #ffffff, #9cc7ff, #2f6fb4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .ring-hcg {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10);
+  }
+
+  .glass {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.05)
+    );
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10),
+      0 20px 70px rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(14px);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 0 1px rgba(47, 111, 180, 0.28),
+      0 18px 60px rgba(47, 111, 180, 0.16);
+  }
+
+  .hero-logo-blend {
+    mix-blend-mode: screen;
+    opacity: 0.9;
+    filter: brightness(1.05) contrast(1.1);
+  }
+}
