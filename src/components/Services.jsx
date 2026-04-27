@@ -340,6 +340,22 @@ export default function Services() {
               ) : null}
             </AnimatePresence>
           </div>
+
+          <div className="sm:col-span-2">
+            <div className="mt-2 rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur">
+              <p className="text-sm text-white/70">
+                Not sure where to start? We’ll help you identify the highest-impact opportunities.
+              </p>
+              <div className="mt-4">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
+                >
+                  Start With a Consultation
+                </a>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </Section>

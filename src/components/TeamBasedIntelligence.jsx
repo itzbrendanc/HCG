@@ -37,12 +37,25 @@ export default function TeamBasedIntelligence() {
             Why HCG
           </div>
           <h3 className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-            Partnership. Integrity. Impact.
+            Why Work With HCG?
           </h3>
           <p className="mt-4 text-sm leading-relaxed text-white/70">
-            We’re more than consultants—we’re trusted advisors and long-term partners. Our approach
-            is structured, transparent, and built to deliver measurable results.
+            HCG is built for leaders who want premium thinking and practical execution—without noise.
           </p>
+          <ul className="mt-5 grid gap-2 text-sm text-white/70">
+            {[
+              'Structured analysis, not guesswork',
+              'Strategy grounded in market research',
+              'Practical recommendations built for execution',
+              'Fresh perspective with professional discipline',
+              'Clear deliverables and measurable next steps',
+            ].map((t) => (
+              <li key={t} className="flex items-start gap-2">
+                <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-hcg-400" />
+                <span>{t}</span>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="lg:col-span-8">

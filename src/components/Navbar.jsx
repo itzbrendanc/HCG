@@ -69,7 +69,7 @@ export default function Navbar() {
             href="#contact"
             className="rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 shadow-soft transition hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-card"
           >
-            Let’s Connect
+            Work With HCG
           </a>
         </nav>
 
@@ -114,7 +114,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className="mt-2 rounded-xl bg-hcg-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:shadow-glow"
                 >
-                  Request a Consultation
+                  Work With HCG
                 </a>
               </div>
             </div>

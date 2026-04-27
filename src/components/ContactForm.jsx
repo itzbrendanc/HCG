@@ -63,8 +63,8 @@ export default function ContactForm() {
     <Section
       id="contact"
       eyebrow="Contact"
-      title="Request a Consultation"
-      subtitle="Share a few details and HCG will follow up with next steps. Clear, professional communication—no spam."
+      title="Tell us about your business"
+      subtitle="Share what you’re looking to improve, and our team will review your request to identify where HCG can create the most value."
       className="bg-hcg-night"
     >
       <div className="grid gap-6 lg:grid-cols-12">
@@ -130,14 +130,17 @@ export default function ContactForm() {
                 </Field>
               </div>
               <div className="sm:col-span-2">
-                <Field label="What are you trying to improve?" htmlFor="goals">
+                <Field
+                  label="What are you looking to improve or solve?"
+                  htmlFor="goals"
+                >
                   <textarea
                     id="goals"
                     value={form.goals}
                     onChange={onChange('goals')}
                     rows={5}
                     className="w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
-                    placeholder="Strategy alignment, operational clarity, delivery cadence, performance…"
+                    placeholder="Growth, operations, marketing, systems, or a specific challenge…"
                     required
                   />
                 </Field>
@@ -150,13 +153,13 @@ export default function ContactForm() {
                 disabled={!canSubmit}
                 className="rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Request a Consultation
+                Request Consultation
               </button>
               <div className="text-sm text-white/65">
                 {status === 'submitted' ? (
                   <span className="font-semibold text-white">Received. We’ll follow up soon.</span>
                 ) : (
-                  <span>Built for strategy, execution, and lasting impact.</span>
+                  <span>We review every request and respond within 24–48 hours.</span>
                 )}
               </div>
             </div>

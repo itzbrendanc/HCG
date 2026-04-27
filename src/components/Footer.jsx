@@ -12,6 +12,16 @@ export default function Footer() {
             </div>
           </div>
 
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-white/60">Ready to take the next step?</span>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 shadow-soft transition hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-card"
+            >
+              Work With HCG
+            </a>
+          </div>
+
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/60">
             <a href="#privacy" className="transition hover:text-white">
               Privacy Policy

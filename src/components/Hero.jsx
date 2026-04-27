@@ -10,6 +10,12 @@ export default function Hero() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  const handleRequestConsultation = (e) => {
+    e.preventDefault()
+    const el = document.getElementById('contact')
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   return (
     <section id="top" className="relative scroll-mt-24 bg-hcg-surface">
       <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
@@ -40,8 +46,8 @@ export default function Hero() {
               transition={{ duration: 0.65, ease: 'easeOut', delay: 0.05 }}
               className="mt-6 max-w-xl text-lg leading-relaxed text-white/70"
             >
-              We partner with organizations to solve complex challenges, unlock growth, and build a
-              stronger future.
+              We partner with businesses to identify opportunities, solve operational challenges,
+              and drive measurable growth through strategy, marketing, technology, and execution.
             </motion.p>
 
             <motion.div
@@ -51,17 +57,18 @@ export default function Hero() {
               className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
               <a
-                href="#services"
-                onClick={handleExploreServices}
+                href="#contact"
+                onClick={handleRequestConsultation}
                 className="rounded-xl bg-hcg-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
               >
-                Explore Our Services
+                Request a Consultation
               </a>
               <a
-                href="#about"
+                href="#services"
+                onClick={handleExploreServices}
                 className="rounded-xl bg-white/5 px-5 py-3 text-center text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/10"
               >
-                Discover HCG
+                Explore Our Services
               </a>
             </motion.div>
 

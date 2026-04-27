@@ -2,7 +2,9 @@ import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import DescriptionBox from './components/DescriptionBox.jsx'
 import Services from './components/Services.jsx'
+import ExampleEngagements from './components/ExampleEngagements.jsx'
 import Process from './components/Process.jsx'
+import MidPageCta from './components/MidPageCta.jsx'
 import Offers from './components/Offers.jsx'
 import TeamBasedIntelligence from './components/TeamBasedIntelligence.jsx'
 import TeamPortalPreview from './components/TeamPortalPreview.jsx'
@@ -21,7 +23,9 @@ export default function App() {
           <Hero />
           <DescriptionBox />
           <Services />
+          <ExampleEngagements />
           <Process />
+          <MidPageCta />
           <Offers />
           <TeamBasedIntelligence />
           <TeamPortalPreview />

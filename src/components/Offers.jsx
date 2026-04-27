@@ -105,7 +105,7 @@ export default function Offers() {
                     href="#contact"
                     className="inline-flex w-full items-center justify-center rounded-xl bg-white/10 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/15"
                   >
-                    Work With HCG
+                    Let’s Talk
                   </a>
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function Offers() {
                 href="#contact"
                 className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
               >
-                Let’s Connect
+                Work With HCG
               </a>
             </div>
           </div>
