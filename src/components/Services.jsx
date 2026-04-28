@@ -3,7 +3,7 @@ import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
 import MagneticButton from './MagneticButton.jsx'
 import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
-import ServiceMiniVisual from './ServiceMiniVisual.jsx'
+import ServiceMockupVisual from './ServiceMockupVisual.jsx'
 
 const services = [
   {
@@ -74,9 +74,8 @@ function ServiceCard({ title, description, deliverable, kind, selected, onSelect
       <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
 
       <div className="relative grid gap-5">
-        <div className="relative h-28 w-full overflow-hidden rounded-2xl ring-1 ring-white/10">
-          <ServiceMiniVisual kind={kind} active={selected} />
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(420px_180px_at_20%_20%,rgba(65,135,210,0.18),transparent_65%)]" />
+        <div className="relative h-44 w-full overflow-hidden rounded-3xl ring-1 ring-white/10">
+          <ServiceMockupVisual kind={kind} active={selected} />
         </div>
 
       <div
