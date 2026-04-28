@@ -28,6 +28,17 @@ export default function ContactMotionBackground() {
         style={{ transformOrigin: '50% 45%' }}
       />
 
+      {/* Slow particle streams */}
+      <motion.div
+        className="absolute inset-0 opacity-[0.22]"
+        animate={prefersReducedMotion ? undefined : { y: [0, -10, 0] }}
+        transition={prefersReducedMotion ? undefined : { duration: 10.5, repeat: Infinity, ease: 'easeInOut' }}
+        style={{ maskImage: 'radial-gradient(circle at 55% 45%, black 46%, transparent 80%)' }}
+      >
+        <div className="absolute left-1/2 top-[36%] h-px w-[120%] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.6),transparent)]" />
+        <div className="absolute left-1/2 top-[60%] h-px w-[120%] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.18),transparent)]" />
+      </motion.div>
+
       {/* Glowing nodes */}
       {[
         { left: '18%', top: '26%', s: 10 },
@@ -52,4 +63,3 @@ export default function ContactMotionBackground() {
     </div>
   )
 }
-

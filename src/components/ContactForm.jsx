@@ -4,6 +4,7 @@ import Section from './Section.jsx'
 import ContactPathCard from './ContactPathCard.jsx'
 import ContactMotionBackground from './ContactMotionBackground.jsx'
 import MagneticButton from './MagneticButton.jsx'
+import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
 
 const initialBusiness = {
   name: '',
@@ -92,24 +93,29 @@ export default function ContactForm() {
     <Section
       id="contact"
       eyebrow="Work With HCG"
-      title="Choose your path"
-      subtitle="Whether you’re seeking strategic support or looking to join the team, we’ll route you to the right next step."
       className="bg-hcg-night bg-hcg-beams"
       innerClassName="min-h-[90vh]"
     >
-      <div className="grid gap-7 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <div className="text-sm font-semibold tracking-[0.14em] uppercase text-white/55">
-            Work With HCG
-          </div>
-          <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            An interactive decision portal
-          </h3>
-          <p className="mt-4 text-[15px] leading-relaxed text-white/75">
-            Select what you’re here for. We’ll tailor the form and the follow-up.
-          </p>
+      <div className="max-w-5xl">
+        <AnimatedSectionHeading
+          lines={['Ready to move?', 'Let’s build what’s next.']}
+          accentLineIdx={1}
+          className="max-w-4xl"
+        />
+        <motion.div
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.45 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05 }}
+          className="mt-5 text-[16px] font-semibold text-white/75 sm:text-lg"
+        >
+          Choose your path. We’ll take it from there.
+        </motion.div>
+      </div>
 
-          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+      <div className="mt-12 grid gap-7 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             <ContactPathCard
               title="I’m a Business"
               subtitle="Build smarter growth with HCG. Tell us what you’re trying to improve—we’ll identify the clearest next move."
@@ -151,7 +157,7 @@ export default function ContactForm() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.55, ease: 'easeOut' }}
-            className="relative overflow-hidden rounded-3xl glass p-7 ring-1 ring-hcg-400/25 shadow-soft glow-blue"
+            className="relative overflow-hidden rounded-3xl glass p-7 ring-1 ring-hcg-400/35 shadow-soft glow-blue-strong"
           >
             <ContactMotionBackground />
 
@@ -258,7 +264,7 @@ export default function ContactForm() {
                         as="button"
                         type="submit"
                         disabled={!canSubmit}
-                        className="rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                        className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         Apply to Join
                       </MagneticButton>
@@ -355,7 +361,7 @@ export default function ContactForm() {
                         as="button"
                         type="submit"
                         disabled={!canSubmit}
-                        className="rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                        className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         Request Consultation
                       </MagneticButton>
