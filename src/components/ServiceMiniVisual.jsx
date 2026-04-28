@@ -70,6 +70,15 @@ export default function ServiceMiniVisual({ kind = 'strategy', active = false })
   if (kind === 'technology') {
     return (
       <div className={common} aria-hidden="true">
+        <div
+          className="absolute inset-0 opacity-[0.18]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+            backgroundSize: '20px 20px',
+            maskImage: 'radial-gradient(circle at 55% 45%, black 42%, transparent 78%)',
+          }}
+        />
         <svg className="absolute inset-0 h-full w-full" viewBox="0 0 220 120" fill="none">
           <path d="M36 86V44h58v42H36Z" stroke="rgba(65,135,210,0.55)" strokeWidth="2" />
           <path d="M126 32h58v56h-58V32Z" stroke="rgba(255,255,255,0.10)" strokeWidth="2" />
@@ -116,6 +125,11 @@ export default function ServiceMiniVisual({ kind = 'strategy', active = false })
     <div className={common} aria-hidden="true">
       <div className="absolute inset-0 bg-[radial-gradient(closest-side,rgba(65,135,210,0.18),transparent_60%)]" />
       <motion.div
+        className="absolute left-1/2 top-1/2 h-[84px] w-[84px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-hcg-400/16"
+        animate={prefersReducedMotion ? undefined : { rotate: 360 }}
+        transition={prefersReducedMotion ? undefined : { duration: 18, repeat: Infinity, ease: 'linear' }}
+      />
+      <motion.div
         className="absolute left-10 top-10 h-2 w-2 rounded-full bg-hcg-300/80"
         animate={prefersReducedMotion ? undefined : { opacity: [0.25, 0.85, 0.25] }}
         transition={prefersReducedMotion ? undefined : { duration: 3.1, repeat: Infinity, ease: 'easeInOut' }}
@@ -127,8 +141,9 @@ export default function ServiceMiniVisual({ kind = 'strategy', active = false })
         transition={prefersReducedMotion ? undefined : { duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
         style={{ boxShadow: `0 0 0 1px ${glow}, 0 0 24px ${glow}` }}
       />
+      <div className="absolute left-10 right-10 top-10 h-px bg-hcg-400/18" />
+      <div className="absolute left-10 right-10 bottom-10 h-px bg-hcg-400/18" />
       <div className="absolute left-12 right-12 top-[52%] h-px bg-hcg-400/20" />
     </div>
   )
 }
-

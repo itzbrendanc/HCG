@@ -97,6 +97,25 @@ function ServiceCard({ title, description, deliverable, kind, selected, onSelect
         <div className="mt-3 text-sm text-white/70">{deliverable}</div>
       </div>
       </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-6 opacity-0 transition duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="mx-6 mb-6 rounded-2xl bg-black/40 p-4 ring-1 ring-hcg-400/20 backdrop-blur">
+          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">Detail</div>
+          <div className="mt-2 text-sm font-semibold text-white/80">
+            {kind === 'strategy'
+              ? 'Priority bets • tradeoffs'
+              : kind === 'marketing'
+                ? 'Messaging • channel fit'
+                : kind === 'growth'
+                  ? 'Funnel levers • conversion'
+                  : kind === 'operations'
+                    ? 'Owners • cadence'
+                    : kind === 'technology'
+                      ? 'Automation • AI workflows'
+                      : 'Milestones • checkpoints'}
+          </div>
+        </div>
+      </div>
     </motion.button>
   )
 }
