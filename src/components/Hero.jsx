@@ -1,8 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import CinematicHeroEffects from './CinematicHeroEffects.jsx'
-import InteractiveHeadline from './InteractiveHeadline.jsx'
-import MouseParallaxLogo from './MouseParallaxLogo.jsx'
-import MagneticButton from './MagneticButton.jsx'
+import HeroTitleSequence from './HeroTitleSequence.jsx'
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion()
@@ -13,91 +11,32 @@ export default function Hero() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const handleRequestConsultation = (e) => {
-    e.preventDefault()
-    const el = document.getElementById('contact')
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
   return (
     <section id="top" className="relative scroll-mt-24 bg-hcg-surface min-h-screen">
       <CinematicHeroEffects />
       <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-5 py-14 sm:px-8 sm:py-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
-          <div>
-            <motion.p
-              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="inline-flex items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-white/70 uppercase ring-1 ring-white/10"
-            >
-              Hilltop Consulting Group <span className="text-white/35">•</span> HCG
-            </motion.p>
+        <motion.p
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-white/70 uppercase ring-1 ring-white/10"
+        >
+          Hilltop Consulting Group <span className="text-white/35">•</span> HCG
+        </motion.p>
 
-            <InteractiveHeadline />
+        <HeroTitleSequence />
 
-            <motion.p
-              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, ease: 'easeOut', delay: 0.05 }}
-              className="mt-6 max-w-xl text-[18px] leading-relaxed text-white/75 sm:text-lg"
-            >
-              We help businesses find growth opportunities and solve operational challenges—with strategy,
-              technology, and execution support.
-            </motion.p>
-
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, ease: 'easeOut', delay: 0.08 }}
-              className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
-            >
-              <MagneticButton
-                as="a"
-                href="#contact"
-                onClick={handleRequestConsultation}
-                className="rounded-xl bg-hcg-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
-              >
-                Request a Consultation
-              </MagneticButton>
-              <MagneticButton
-                as="a"
-                href="#services"
-                onClick={handleExploreServices}
-                className="rounded-xl bg-white/5 px-5 py-3 text-center text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/10"
-              >
-                Explore Our Services
-              </MagneticButton>
-            </motion.div>
-
-            <div className="mt-10">
-              <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/45">
-                Trusted by forward-thinking teams
-              </div>
-              <div className="mt-4 grid grid-cols-2 gap-4 text-white/40 sm:grid-cols-5">
-                {['Aurora', 'Northpoint', 'Summit', 'Veritas', 'Pioneer'].map((n) => (
-                  <div key={n} className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-hcg-400/70" />
-                    <span className="text-xs font-semibold tracking-[0.12em] uppercase">{n}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <p className="mt-8 text-sm font-semibold text-white/70">
-              Built for strategy, execution, and lasting impact.
-            </p>
+        <div className="mt-10">
+          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/45">
+            Trusted by forward-thinking teams
           </div>
-
-          <div className="lg:justify-self-end">
-            <motion.div
-              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="relative mx-auto flex w-full max-w-4xl items-center justify-center"
-            >
-              <MouseParallaxLogo />
-            </motion.div>
+          <div className="mt-4 grid grid-cols-2 gap-4 text-white/40 sm:grid-cols-5">
+            {['Aurora', 'Northpoint', 'Summit', 'Veritas', 'Pioneer'].map((n) => (
+              <div key={n} className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-hcg-400/70" />
+                <span className="text-xs font-semibold tracking-[0.12em] uppercase">{n}</span>
+              </div>
+            ))}
           </div>
         </div>
 

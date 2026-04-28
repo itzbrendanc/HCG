@@ -1,14 +1,26 @@
-import { useMemo, useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import { useMemo, useRef, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import Section from './Section.jsx'
+import ContactPathCard from './ContactPathCard.jsx'
+import ContactMotionBackground from './ContactMotionBackground.jsx'
+import MagneticButton from './MagneticButton.jsx'
 
-const initial = {
+const initialBusiness = {
   name: '',
   businessName: '',
   email: '',
   link: '',
   industry: '',
   goals: '',
+}
+
+const initialStudent = {
+  name: '',
+  email: '',
+  majorYear: '',
+  roleInterest: '',
+  portfolio: '',
+  why: '',
 }
 
 function Field({ label, htmlFor, children }) {
@@ -24,27 +36,43 @@ function Field({ label, htmlFor, children }) {
 
 export default function ContactForm() {
   const prefersReducedMotion = useReducedMotion()
-  const [form, setForm] = useState(initial)
+  const [path, setPath] = useState('business')
+  const [businessForm, setBusinessForm] = useState(initialBusiness)
+  const [studentForm, setStudentForm] = useState(initialStudent)
   const [submissions, setSubmissions] = useState([])
   const [status, setStatus] = useState('idle')
+  const formRef = useRef(null)
 
   const canSubmit = useMemo(() => {
-    return (
-      form.name.trim() &&
-      form.businessName.trim() &&
-      form.email.trim() &&
-      form.goals.trim()
-    )
-  }, [form])
+    if (path === 'student') {
+      return (
+        studentForm.name.trim() &&
+        studentForm.email.trim() &&
+        studentForm.roleInterest.trim() &&
+        studentForm.why.trim()
+      )
+    }
 
-  const onChange = (key) => (e) => setForm((v) => ({ ...v, [key]: e.target.value }))
+    return (
+      businessForm.name.trim() &&
+      businessForm.businessName.trim() &&
+      businessForm.email.trim() &&
+      businessForm.goals.trim()
+    )
+  }, [path, businessForm, studentForm])
+
+  const onBusinessChange = (key) => (e) =>
+    setBusinessForm((v) => ({ ...v, [key]: e.target.value }))
+  const onStudentChange = (key) => (e) =>
+    setStudentForm((v) => ({ ...v, [key]: e.target.value }))
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!canSubmit) return
 
     const submission = {
-      ...form,
+      ...(path === 'student' ? studentForm : businessForm),
+      type: path,
       submittedAt: new Date().toISOString(),
     }
 
@@ -54,7 +82,8 @@ export default function ContactForm() {
     console.log('[HCG lead submission]', submission)
 
     setSubmissions((prev) => [submission, ...prev].slice(0, 5))
-    setForm(initial)
+    if (path === 'student') setStudentForm(initialStudent)
+    else setBusinessForm(initialBusiness)
     setStatus('submitted')
     window.setTimeout(() => setStatus('idle'), 2500)
   }
@@ -62,148 +91,311 @@ export default function ContactForm() {
   return (
     <Section
       id="contact"
-      eyebrow="Contact"
-      title="Tell us about your business"
-      subtitle="Share what you’re looking to improve, and our team will review your request to identify where HCG can create the most value."
+      eyebrow="Work With HCG"
+      title="Choose your path"
+      subtitle="Whether you’re seeking strategic support or looking to join the team, we’ll route you to the right next step."
       className="bg-hcg-night bg-hcg-beams"
       innerClassName="min-h-[90vh]"
     >
-      <div className="grid gap-6 lg:grid-cols-12">
-        <div className="lg:col-span-7">
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.55, ease: 'easeOut' }}
-            className="rounded-3xl glass p-7 ring-1 ring-white/10 shadow-soft"
-          >
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Name" htmlFor="name">
-                <input
-                  id="name"
-                  value={form.name}
-                  onChange={onChange('name')}
-                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                  placeholder="Your name"
-                  required
-                />
-              </Field>
-              <Field label="Business Name" htmlFor="businessName">
-                <input
-                  id="businessName"
-                  value={form.businessName}
-                  onChange={onChange('businessName')}
-                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                  placeholder="Organization"
-                  required
-                />
-              </Field>
-              <Field label="Email" htmlFor="email">
-                <input
-                  id="email"
-                  value={form.email}
-                  onChange={onChange('email')}
-                  type="email"
-                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                  placeholder="name@company.com"
-                  required
-                />
-              </Field>
-              <Field label="Website / Social Link" htmlFor="link">
-                <input
-                  id="link"
-                  value={form.link}
-                  onChange={onChange('link')}
-                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                  placeholder="Website or LinkedIn…"
-                />
-              </Field>
-              <div className="sm:col-span-2">
-                <Field label="Industry" htmlFor="industry">
-                  <input
-                    id="industry"
-                    value={form.industry}
-                    onChange={onChange('industry')}
-                    className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                    placeholder="e.g., healthcare, logistics, professional services…"
-                  />
-                </Field>
-              </div>
-              <div className="sm:col-span-2">
-                <Field
-                  label="What are you looking to improve or solve?"
-                  htmlFor="goals"
-                >
-                  <textarea
-                    id="goals"
-                    value={form.goals}
-                    onChange={onChange('goals')}
-                    rows={5}
-                  className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                  placeholder="Growth, operations, marketing, systems, or a specific challenge…"
-                  required
-                />
-              </Field>
-              </div>
-            </div>
+      <div className="grid gap-7 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <div className="text-sm font-semibold tracking-[0.14em] uppercase text-white/55">
+            Work With HCG
+          </div>
+          <h3 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            An interactive decision portal
+          </h3>
+          <p className="mt-4 text-[15px] leading-relaxed text-white/75">
+            Select what you’re here for. We’ll tailor the form and the follow-up.
+          </p>
 
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <button
-                type="submit"
-                disabled={!canSubmit}
-                className="rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                Request Consultation
-              </button>
-              <div className="text-sm text-white/65">
-                {status === 'submitted' ? (
-                  <span className="font-semibold text-white">Received. We’ll follow up soon.</span>
-                ) : (
-                  <span className="text-white/75">We review every request and respond within 24–48 hours.</span>
-                )}
-              </div>
-            </div>
-          </motion.form>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+            <ContactPathCard
+              title="I’m a Business"
+              subtitle="Build smarter growth with HCG. Tell us what you’re trying to improve—we’ll identify the clearest next move."
+              selected={path === 'business'}
+              onSelect={() => {
+                setPath('business')
+                formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
+              icon={
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                  <path d="M4 10h16v10H4V10Z" stroke="currentColor" strokeWidth="1.7" opacity="0.9" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.7" opacity="0.55" strokeLinecap="round" />
+                  <path d="M9 14h6" stroke="currentColor" strokeWidth="1.7" opacity="0.9" strokeLinecap="round" />
+                </svg>
+              }
+            />
+            <ContactPathCard
+              title="I’m a Student"
+              subtitle="Join the HCG team. Work on real projects, build strategy skills, and help organizations grow."
+              selected={path === 'student'}
+              onSelect={() => {
+                setPath('student')
+                formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }}
+              icon={
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                  <path d="M12 3 2.5 8 12 13l9.5-5L12 3Z" stroke="currentColor" strokeWidth="1.7" opacity="0.9" strokeLinejoin="round" />
+                  <path d="M5 10.2V16c2.3 2.7 5 4 7 4s4.7-1.3 7-4v-5.8" stroke="currentColor" strokeWidth="1.7" opacity="0.55" strokeLinecap="round" />
+                </svg>
+              }
+            />
+          </div>
         </div>
 
-        <div className="lg:col-span-5">
-          <div className="rounded-3xl glass p-7 text-white shadow-card ring-1 ring-white/10 glow-blue">
-            <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-              What happens next
-            </div>
-            <h3 className="mt-3 text-xl font-semibold tracking-tight">
-              A clear plan with measurable outcomes
-            </h3>
-            <ul className="mt-5 grid gap-3 text-sm text-white/70">
-              {[
-                'We review context, goals, and constraints.',
-                'We align on the right engagement approach and timeline.',
-                'You receive a structured plan and delivery cadence.',
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 flex-none rounded-full bg-hcg-400" />
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
+        <div className="lg:col-span-7">
+          <motion.div
+            ref={formRef}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            className="relative overflow-hidden rounded-3xl glass p-7 ring-1 ring-hcg-400/25 shadow-soft glow-blue"
+          >
+            <ContactMotionBackground />
 
-            {submissions.length ? (
-              <div className="mt-7 rounded-2xl bg-black/30 p-5 ring-1 ring-white/10">
-                <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                  Recent submissions (local state)
+            <div className="relative">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/60">
+                    {path === 'student' ? 'For Students' : 'For Businesses'}
+                  </div>
+                  <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                    {path === 'student' ? 'Join the HCG team.' : 'Build smarter growth with HCG.'}
+                  </div>
+                  <div className="mt-3 text-sm leading-relaxed text-white/75">
+                    {path === 'student'
+                      ? 'Work on real projects, build strategy skills, and help organizations grow.'
+                      : 'Tell us what you’re trying to improve. We’ll help identify the clearest next move.'}
+                  </div>
                 </div>
-                <div className="mt-3 grid gap-3">
-                  {submissions.slice(0, 2).map((s) => (
-                    <div key={s.submittedAt} className="text-sm text-white">
-                      <div className="font-semibold">{s.businessName}</div>
-                      <div className="text-white/70">{s.goals}</div>
-                    </div>
-                  ))}
+                <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+                  Secure • Reviewed by our team
                 </div>
               </div>
-            ) : null}
-          </div>
+
+              <AnimatePresence mode="wait">
+                {path === 'student' ? (
+                  <motion.form
+                    key="student"
+                    onSubmit={handleSubmit}
+                    initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -12 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className="mt-7 grid gap-4"
+                  >
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field label="Name" htmlFor="studentName">
+                        <input
+                          id="studentName"
+                          value={studentForm.name}
+                          onChange={onStudentChange('name')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Your name"
+                          required
+                        />
+                      </Field>
+                      <Field label="Email" htmlFor="studentEmail">
+                        <input
+                          id="studentEmail"
+                          value={studentForm.email}
+                          onChange={onStudentChange('email')}
+                          type="email"
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="you@university.edu"
+                          required
+                        />
+                      </Field>
+                      <Field label="Major / Year" htmlFor="majorYear">
+                        <input
+                          id="majorYear"
+                          value={studentForm.majorYear}
+                          onChange={onStudentChange('majorYear')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="e.g., Business • Junior"
+                        />
+                      </Field>
+                      <Field label="Role Interest" htmlFor="roleInterest">
+                        <input
+                          id="roleInterest"
+                          value={studentForm.roleInterest}
+                          onChange={onStudentChange('roleInterest')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Strategy, marketing, ops, AI systems…"
+                          required
+                        />
+                      </Field>
+                      <div className="sm:col-span-2">
+                        <Field label="LinkedIn / Portfolio" htmlFor="portfolio">
+                          <input
+                            id="portfolio"
+                            value={studentForm.portfolio}
+                            onChange={onStudentChange('portfolio')}
+                            className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="Link"
+                          />
+                        </Field>
+                      </div>
+                      <div className="sm:col-span-2">
+                        <Field label="Why do you want to join HCG?" htmlFor="why">
+                          <textarea
+                            id="why"
+                            value={studentForm.why}
+                            onChange={onStudentChange('why')}
+                            rows={5}
+                            className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="What you’re hoping to learn, build, and contribute…"
+                            required
+                          />
+                        </Field>
+                      </div>
+                    </div>
+
+                    <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <MagneticButton
+                        as="button"
+                        type="submit"
+                        disabled={!canSubmit}
+                        className="rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Apply to Join
+                      </MagneticButton>
+                      <div className="text-sm text-white/70">
+                        {status === 'submitted' && path === 'student' ? (
+                          <span className="font-semibold text-white">
+                            Thanks — we’ll review your application and follow up soon.
+                          </span>
+                        ) : (
+                          <span className="text-white/80">We review every request and respond within 24–48 hours.</span>
+                        )}
+                      </div>
+                    </div>
+                  </motion.form>
+                ) : (
+                  <motion.form
+                    key="business"
+                    onSubmit={handleSubmit}
+                    initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -12 }}
+                    transition={{ duration: 0.35, ease: 'easeOut' }}
+                    className="mt-7 grid gap-4"
+                  >
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Field label="Name" htmlFor="name">
+                        <input
+                          id="name"
+                          value={businessForm.name}
+                          onChange={onBusinessChange('name')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Your name"
+                          required
+                        />
+                      </Field>
+                      <Field label="Business Name" htmlFor="businessName">
+                        <input
+                          id="businessName"
+                          value={businessForm.businessName}
+                          onChange={onBusinessChange('businessName')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Organization"
+                          required
+                        />
+                      </Field>
+                      <Field label="Email" htmlFor="email">
+                        <input
+                          id="email"
+                          value={businessForm.email}
+                          onChange={onBusinessChange('email')}
+                          type="email"
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="name@company.com"
+                          required
+                        />
+                      </Field>
+                      <Field label="Website / Social" htmlFor="link">
+                        <input
+                          id="link"
+                          value={businessForm.link}
+                          onChange={onBusinessChange('link')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Website or LinkedIn…"
+                        />
+                      </Field>
+                      <div className="sm:col-span-2">
+                        <Field label="Industry" htmlFor="industry">
+                          <input
+                            id="industry"
+                            value={businessForm.industry}
+                            onChange={onBusinessChange('industry')}
+                            className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="e.g., healthcare, logistics, professional services…"
+                          />
+                        </Field>
+                      </div>
+                      <div className="sm:col-span-2">
+                        <Field label="What are you looking to improve or solve?" htmlFor="goals">
+                          <textarea
+                            id="goals"
+                            value={businessForm.goals}
+                            onChange={onBusinessChange('goals')}
+                            rows={5}
+                            className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="Growth, operations, marketing, systems, or a specific challenge…"
+                            required
+                          />
+                        </Field>
+                      </div>
+                    </div>
+
+                    <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <MagneticButton
+                        as="button"
+                        type="submit"
+                        disabled={!canSubmit}
+                        className="rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Request Consultation
+                      </MagneticButton>
+                      <div className="text-sm text-white/70">
+                        {status === 'submitted' && path === 'business' ? (
+                          <span className="font-semibold text-white">
+                            Thanks — we’ll review your request and follow up soon.
+                          </span>
+                        ) : (
+                          <span className="text-white/80">We review every request and respond within 24–48 hours.</span>
+                        )}
+                      </div>
+                    </div>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+
+              {submissions.length ? (
+                <div className="mt-7 rounded-2xl bg-black/30 p-5 ring-1 ring-white/10">
+                  <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+                    Recent submissions (local state)
+                  </div>
+                  <div className="mt-3 grid gap-3">
+                    {submissions.slice(0, 2).map((s) => (
+                      <div key={s.submittedAt} className="text-sm text-white">
+                        <div className="font-semibold">
+                          {s.type === 'student' ? s.name : s.businessName}
+                          <span className="text-white/45"> • </span>
+                          <span className="text-hcg-200">{s.type === 'student' ? 'Student' : 'Business'}</span>
+                        </div>
+                        <div className="text-white/70">
+                          {s.type === 'student' ? s.roleInterest : s.goals}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          </motion.div>
         </div>
       </div>
     </Section>
