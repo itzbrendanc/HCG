@@ -17,104 +17,116 @@ export default function HologramLogo({ className = '' }) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <div className={['relative mx-auto w-full max-w-[520px] sm:max-w-[560px] lg:max-w-[620px]', className].join(' ')}>
+    <div
+      className={[
+        'relative mx-auto w-full max-w-[520px] sm:max-w-[560px] lg:max-w-[620px]',
+        'overflow-visible',
+        className,
+      ].join(' ')}
+    >
       {/* Under-spotlight */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[72%] h-40 w-[92%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(65,135,210,0.26),transparent_70%)] blur-2xl"
+        className="pointer-events-none absolute left-1/2 top-[78%] h-40 w-[92%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(65,135,210,0.26),transparent_70%)] blur-2xl"
       />
 
-      {/* Main hologram stack */}
-      <motion.div
-        className="relative"
-        style={{
-          perspective: 1100,
-          transformStyle: 'preserve-3d',
-        }}
-      >
+      <div className="relative" style={{ perspective: 1200 }}>
         {/* Aura */}
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 rounded-[40px] bg-[radial-gradient(closest-side,rgba(65,135,210,0.28),transparent_70%)] blur-3xl"
-          animate={prefersReducedMotion ? undefined : { opacity: [0.35, 0.6, 0.35], scale: [0.98, 1.02, 0.98] }}
-          transition={prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut' }}
+          className="pointer-events-none absolute inset-0 -z-10 rounded-[48px] bg-[radial-gradient(closest-side,rgba(65,135,210,0.28),transparent_70%)] blur-3xl"
+          animate={prefersReducedMotion ? undefined : { opacity: [0.32, 0.6, 0.32], scale: [0.98, 1.02, 0.98] }}
+          transition={prefersReducedMotion ? undefined : { duration: 7.2, repeat: Infinity, ease: 'easeInOut' }}
         />
 
         {/* Particles */}
         {!prefersReducedMotion ? (
           <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-            <Sparkle style={{ left: '12%', top: '22%' }} delay={0.2} />
-            <Sparkle style={{ left: '22%', top: '68%' }} delay={1.1} />
-            <Sparkle style={{ left: '58%', top: '16%' }} delay={0.7} />
-            <Sparkle style={{ left: '78%', top: '44%' }} delay={1.5} />
-            <Sparkle style={{ left: '88%', top: '72%' }} delay={0.9} />
+            <Sparkle style={{ left: '10%', top: '18%' }} delay={0.2} />
+            <Sparkle style={{ left: '22%', top: '70%' }} delay={1.1} />
+            <Sparkle style={{ left: '56%', top: '10%' }} delay={0.7} />
+            <Sparkle style={{ left: '80%', top: '40%' }} delay={1.5} />
+            <Sparkle style={{ left: '90%', top: '74%' }} delay={0.9} />
           </div>
         ) : null}
 
-        {/* Rotating hologram plane */}
+        {/* Cube */}
         <motion.div
+          className="relative mx-auto aspect-square w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px]"
+          style={{
+            transformStyle: 'preserve-3d',
+          }}
           animate={
             prefersReducedMotion
-              ? { rotateY: 0, rotateX: 0 }
-              : { rotateY: 360, rotateX: [-2, 2, -2] }
+              ? { rotateY: 32, rotateX: -10 }
+              : { rotateY: 360, rotateX: [-10, -7, -10] }
           }
           transition={
             prefersReducedMotion
               ? { duration: 0 }
-              : { rotateY: { duration: 18, repeat: Infinity, ease: 'linear' }, rotateX: { duration: 8, repeat: Infinity, ease: 'easeInOut' } }
+              : {
+                  rotateY: { duration: 22, repeat: Infinity, ease: 'linear' },
+                  rotateX: { duration: 9, repeat: Infinity, ease: 'easeInOut' },
+                }
           }
-          className="relative"
-          style={{ transformStyle: 'preserve-3d' }}
         >
-          {/* Scanlines */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[40px] opacity-[0.22]"
-            style={{
-              backgroundImage: 'repeating-linear-gradient(180deg, rgba(255,255,255,0.10) 0px, rgba(255,255,255,0.10) 1px, transparent 2px, transparent 6px)',
-              maskImage: 'radial-gradient(circle at 50% 45%, black 52%, transparent 78%)',
-              mixBlendMode: 'screen',
-            }}
-          />
-
-          {/* Light sweep */}
+          {/* Light sweep across cube */}
           <motion.div
             aria-hidden="true"
-            className="pointer-events-none absolute -inset-y-14 left-0 w-[42%] bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.22),transparent)] blur-2xl"
+            className="pointer-events-none absolute -inset-y-16 left-0 w-[44%] bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.22),transparent)] blur-2xl"
             animate={prefersReducedMotion ? undefined : { x: ['-70%', '190%'] }}
-            transition={prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.4 }}
-            style={{ rotate: -12, mixBlendMode: 'screen' }}
+            transition={prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.5 }}
+            style={{ rotate: -12, mixBlendMode: 'screen', transform: 'translateZ(140px)' }}
           />
 
-          {/* Logo */}
-          <motion.img
-            src={hilltopLogo}
-            alt="Hilltop Consulting Group logo"
-            draggable={false}
-            className="pointer-events-none select-none w-full h-auto"
-            style={{
-              filter: 'brightness(1.1) contrast(1.08) saturate(1.05)',
-            }}
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          />
+          {/* Faces */}
+          {[
+            { name: 'front', transform: 'rotateY(0deg) translateZ(140px)' },
+            { name: 'right', transform: 'rotateY(90deg) translateZ(140px)' },
+            { name: 'back', transform: 'rotateY(180deg) translateZ(140px)' },
+            { name: 'left', transform: 'rotateY(-90deg) translateZ(140px)' },
+          ].map((f) => (
+            <div
+              key={f.name}
+              className="absolute inset-0 grid place-items-center"
+              style={{ transform: f.transform, backfaceVisibility: 'hidden' }}
+            >
+              <div className="relative h-[82%] w-[82%] overflow-hidden rounded-[40px] bg-white/5 ring-1 ring-hcg-300/20 backdrop-blur-[6px]">
+                {/* Scanlines */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-[0.18]"
+                  style={{
+                    backgroundImage:
+                      'repeating-linear-gradient(180deg, rgba(255,255,255,0.10) 0px, rgba(255,255,255,0.10) 1px, transparent 2px, transparent 6px)',
+                    mixBlendMode: 'screen',
+                    maskImage: 'radial-gradient(circle at 50% 45%, black 54%, transparent 82%)',
+                  }}
+                />
 
-          {/* Neon edge glow */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 rounded-[40px]"
-            style={{
-              boxShadow:
-                '0 0 0 1px rgba(65,135,210,0.18), 0 0 42px rgba(65,135,210,0.18)',
-              opacity: 0.8,
-              mixBlendMode: 'screen',
-            }}
-          />
+                {/* Edge glow */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    boxShadow:
+                      '0 0 0 1px rgba(65,135,210,0.22), 0 0 42px rgba(65,135,210,0.18)',
+                    mixBlendMode: 'screen',
+                  }}
+                />
+
+                <img
+                  src={hilltopLogo}
+                  alt=""
+                  draggable={false}
+                  className="pointer-events-none select-none h-full w-full object-contain p-8"
+                  style={{ filter: 'brightness(1.12) contrast(1.08) saturate(1.05)', opacity: 0.92 }}
+                />
+              </div>
+            </div>
+          ))}
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   )
 }
-
