@@ -34,7 +34,7 @@ export default function Hero() {
               initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="mt-6 text-4xl font-semibold leading-[1.06] tracking-tight text-white sm:text-6xl lg:text-7xl"
+              className="mt-6 text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl"
             >
               <span className="block">Strategic Solutions.</span>
               <span className="mt-2 block text-hcg-300">Measurable Impact.</span>
@@ -44,10 +44,10 @@ export default function Hero() {
               initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: 'easeOut', delay: 0.05 }}
-              className="mt-6 max-w-xl text-lg leading-relaxed text-white/70"
+              className="mt-6 max-w-xl text-[18px] leading-relaxed text-white/75 sm:text-lg"
             >
-              We partner with businesses to identify opportunities, solve operational challenges,
-              and drive measurable growth through strategy, marketing, technology, and execution.
+              We help businesses find growth opportunities and solve operational challenges—with strategy,
+              technology, and execution support.
             </motion.p>
 
             <motion.div
@@ -74,7 +74,7 @@ export default function Hero() {
 
             <div className="mt-10">
               <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/45">
-                Trusted by forward-thinking leaders
+                Trusted by forward-thinking teams
               </div>
               <div className="mt-4 grid grid-cols-2 gap-4 text-white/40 sm:grid-cols-5">
                 {['Aurora', 'Northpoint', 'Summit', 'Veritas', 'Pioneer'].map((n) => (

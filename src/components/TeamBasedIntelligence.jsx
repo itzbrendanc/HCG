@@ -4,23 +4,19 @@ import Card from './Card.jsx'
 const reasons = [
   {
     title: 'Trusted Partner',
-    description:
-      'We operate with discretion, clarity, and accountability—built for real decision-makers.',
+    description: 'Discreet, clear, accountable.',
   },
   {
     title: 'Client-Centered',
-    description:
-      'We tailor the work to your constraints, stakeholders, and timelines—without unnecessary complexity.',
+    description: 'Tailored to your constraints.',
   },
   {
     title: 'Measurable Impact',
-    description:
-      'Clear metrics, clear milestones, and a delivery plan that translates into outcomes.',
+    description: 'Metrics, milestones, outcomes.',
   },
   {
     title: 'Future-Focused',
-    description:
-      'We build stronger systems for the future: resilient operations, scalable execution, and strategic optionality.',
+    description: 'Systems that scale.',
   },
 ]
 
@@ -40,7 +36,7 @@ export default function TeamBasedIntelligence() {
             Why Work With HCG?
           </h3>
           <p className="mt-4 text-sm leading-relaxed text-white/70">
-            HCG is built for leaders who want premium thinking and practical execution—without noise.
+            Premium thinking with practical execution—without noise.
           </p>
           <ul className="mt-5 grid gap-2 text-sm text-white/70">
             {[

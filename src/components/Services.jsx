@@ -5,48 +5,48 @@ import Section from './Section.jsx'
 const services = [
   {
     title: 'Strategy & Advisory',
-    description: 'Executive-level clarity on priorities, tradeoffs, and direction.',
-    deliverable: 'Strategic plan, decision memo, or leadership-ready deck.',
+    description: 'Clarify priorities and direction.',
+    deliverable: 'Strategy deck + next steps.',
     icon: 'target',
     detail:
       'HCG helps organizations clarify priorities, evaluate growth opportunities, and build practical strategies that align with long-term goals.',
   },
   {
     title: 'Operations Excellence',
-    description: 'Improve workflows, accountability, and delivery cadence across teams.',
-    deliverable: 'Operating model + process map + execution playbook.',
+    description: 'Reduce friction and improve execution.',
+    deliverable: 'Process map + operating rhythm.',
     icon: 'gear',
     detail:
       'We analyze workflows, systems, and bottlenecks to help teams improve efficiency, reduce friction, and operate with stronger execution discipline.',
   },
   {
     title: 'Growth & Transformation',
-    description: 'Design and execute initiatives that unlock measurable growth.',
-    deliverable: 'Transformation roadmap + milestones + KPI framework.',
+    description: 'Unlock growth and manage change.',
+    deliverable: 'Roadmap + milestones.',
     icon: 'spark',
     detail:
       'We identify new growth paths, refine positioning, and support organizations through strategic change, market expansion, and business model improvement.',
   },
   {
     title: 'Financial & Performance Analysis',
-    description: 'Turn performance data into insight, prioritization, and action.',
-    deliverable: 'Performance dashboard spec + analysis + recommendations.',
+    description: 'Turn metrics into decisions.',
+    deliverable: 'KPI review + recommendations.',
     icon: 'chart',
     detail:
       'We review key metrics, cost structures, and performance indicators to help leaders make sharper, data-informed decisions.',
   },
   {
     title: 'Technology Consulting',
-    description: 'Align systems and technology decisions to business outcomes.',
-    deliverable: 'Architecture direction + build/buy guidance + delivery plan.',
+    description: 'Modernize systems with intent.',
+    deliverable: 'Tech plan + quick wins.',
     icon: 'cpu',
     detail:
       'We help organizations understand where technology, automation, and AI can improve processes, customer experience, and decision-making.',
   },
   {
     title: 'Organizational Effectiveness',
-    description: 'Strengthen leadership, roles, and operating rhythm for execution.',
-    deliverable: 'Org design recommendations + role clarity + governance model.',
+    description: 'Strengthen teams and accountability.',
+    deliverable: 'Role clarity + governance.',
     icon: 'people',
     detail:
       'We support stronger team structures, clearer responsibilities, better communication systems, and more resilient operating models.',
@@ -213,19 +213,21 @@ function ServiceCard({ title, description, deliverable, icon, selected, onSelect
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.99 }}
       className={[
-        'group relative w-full overflow-hidden rounded-2xl bg-black/35 p-6 text-left ring-1 shadow-soft backdrop-blur transition hover:shadow-card',
+        'group relative w-full overflow-hidden rounded-2xl bg-black/35 p-6 text-left ring-1 shadow-soft backdrop-blur transition hover:shadow-card hcg-card-accent',
         selected ? 'ring-hcg-400/55 glow-blue' : 'ring-white/10',
       ].join(' ')}
     >
       <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
 
       <div className="relative flex items-start gap-3">
-        <div className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-hcg-600/15 ring-1 ring-hcg-400/30 shadow-soft">
-          <Icon name={icon} />
+        <div className="grid h-11 w-11 flex-none place-items-center rounded-2xl bg-hcg-600/15 ring-1 ring-hcg-400/30 shadow-soft">
+          <div className="scale-110">
+            <Icon name={icon} />
+          </div>
         </div>
         <div>
           <h4 className="text-sm font-semibold tracking-tight text-white">{title}</h4>
-          <p className="mt-2 text-sm leading-relaxed text-white/70">{description}</p>
+          <p className="mt-2 text-sm leading-relaxed text-white/75">{description}</p>
         </div>
       </div>
 

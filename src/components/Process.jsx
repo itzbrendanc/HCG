@@ -6,26 +6,31 @@ const steps = [
     name: 'Discover',
     hcg: 'Align on objectives, scope, constraints, stakeholders, and success metrics.',
     client: 'A clear engagement brief and success definition.',
+    short: 'Goals + scope.',
   },
   {
     name: 'Analyze',
     hcg: 'Assess current state, data signals, and root causes behind performance gaps.',
     client: 'A diagnostic view of issues, opportunities, and constraints.',
+    short: 'Current state.',
   },
   {
     name: 'Design',
     hcg: 'Develop the target state, solution options, and the path to delivery.',
     client: 'A strategy and design package with clear tradeoffs.',
+    short: 'Plan + roadmap.',
   },
   {
     name: 'Execute',
     hcg: 'Support implementation, decision-making, and delivery with structured cadence.',
     client: 'Shipped work, aligned stakeholders, and measurable progress.',
+    short: 'Ship outcomes.',
   },
   {
     name: 'Optimize',
     hcg: 'Measure outcomes, refine processes, and institutionalize improvements.',
     client: 'A sustainable operating rhythm and continuous improvement plan.',
+    short: 'Improve + scale.',
   },
 ]
 
@@ -69,8 +74,8 @@ export default function Process() {
               >
                 <div className="flex items-center gap-3 lg:flex-col lg:items-start">
                   <div className="relative">
-                    <div className="grid h-10 w-10 place-items-center rounded-full bg-hcg-600/20 text-white ring-1 ring-hcg-300/40 shadow-soft">
-                      <span className="text-sm font-semibold">{idx + 1}</span>
+                    <div className="grid h-12 w-12 place-items-center rounded-full bg-hcg-600/22 text-white ring-1 ring-hcg-300/45 shadow-soft">
+                      <span className="text-base font-semibold">{idx + 1}</span>
                     </div>
                     <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_0_1px_rgba(47,111,180,0.25),0_0_30px_rgba(47,111,180,0.18)]" />
                   </div>
@@ -78,8 +83,8 @@ export default function Process() {
                     <div className="text-sm font-semibold tracking-tight text-white">
                       {s.name}
                     </div>
-                    <p className="mt-2 text-sm leading-relaxed text-white/70">
-                      {s.client}
+                    <p className="mt-2 text-sm leading-relaxed text-white/75">
+                      {s.short}
                     </p>
                   </div>
                 </div>

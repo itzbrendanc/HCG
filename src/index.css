@@ -27,6 +27,10 @@
   h3 {
     font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
   }
+
+  p {
+    color: rgba(255, 255, 255, 0.78);
+  }
 }
 
 @layer utilities {
@@ -97,5 +101,26 @@
     mix-blend-mode: screen;
     opacity: 0.9;
     filter: brightness(1.05) contrast(1.1);
+  }
+
+  .text-body {
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .text-body-strong {
+    color: rgba(255, 255, 255, 0.86);
+  }
+
+  .hcg-card-accent {
+    background-image: radial-gradient(
+        420px 240px at 20% 18%,
+        rgba(65, 135, 210, 0.16),
+        transparent 60%
+      ),
+      radial-gradient(
+        360px 260px at 85% 20%,
+        rgba(255, 255, 255, 0.06),
+        transparent 62%
+      );
   }
 }

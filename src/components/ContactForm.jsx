@@ -14,7 +14,7 @@ const initial = {
 function Field({ label, htmlFor, children }) {
   return (
     <div className="grid gap-2">
-      <label htmlFor={htmlFor} className="text-sm font-semibold text-white">
+      <label htmlFor={htmlFor} className="text-[13px] font-semibold tracking-[0.08em] uppercase text-white/80">
         {label}
       </label>
       {children}
@@ -139,11 +139,11 @@ export default function ContactForm() {
                     value={form.goals}
                     onChange={onChange('goals')}
                     rows={5}
-                    className="w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
-                    placeholder="Growth, operations, marketing, systems, or a specific challenge…"
-                    required
-                  />
-                </Field>
+                  className="w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                  placeholder="Growth, operations, marketing, systems, or a specific challenge…"
+                  required
+                />
+              </Field>
               </div>
             </div>
 
@@ -159,7 +159,7 @@ export default function ContactForm() {
                 {status === 'submitted' ? (
                   <span className="font-semibold text-white">Received. We’ll follow up soon.</span>
                 ) : (
-                  <span>We review every request and respond within 24–48 hours.</span>
+                  <span className="text-white/75">We review every request and respond within 24–48 hours.</span>
                 )}
               </div>
             </div>

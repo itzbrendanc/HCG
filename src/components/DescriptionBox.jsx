@@ -16,7 +16,7 @@ export default function DescriptionBox() {
           <div className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-hcg-600/20 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-28 -right-28 h-72 w-72 rounded-full bg-hcg-500/12 blur-3xl" />
 
-          <p className="relative text-[15px] font-medium leading-relaxed tracking-tight text-white/80 sm:text-base">
+          <p className="relative text-[16px] font-medium leading-relaxed tracking-tight text-white/85 sm:text-[17px]">
             Hilltop Consulting Group helps businesses identify{' '}
             <span className="font-semibold text-hcg-200">growth opportunities</span>,{' '}
             <span className="font-semibold text-hcg-200">strengthen operations</span>, and make{' '}
@@ -32,4 +32,3 @@ export default function DescriptionBox() {
     </div>
   )
 }
-

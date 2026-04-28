@@ -61,7 +61,7 @@ export default function Section({
               </h2>
             ) : null}
             {subtitle ? (
-              <p className={['mt-4 text-lg leading-relaxed', subClass].join(' ')}>
+              <p className={['mt-4 text-[17px] sm:text-lg leading-relaxed text-body', subClass].join(' ')}>
                 {subtitle}
               </p>
             ) : null}
