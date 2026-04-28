@@ -8,7 +8,7 @@ import ServiceMockupVisual from './ServiceMockupVisual.jsx'
 const services = [
   {
     title: 'Strategy',
-    description: 'Find the opportunity.',
+    description: 'Identify the highest-leverage opportunities',
     deliverable: 'Signal map + priority bets.',
     kind: 'strategy',
     detail:
@@ -16,7 +16,7 @@ const services = [
   },
   {
     title: 'Marketing',
-    description: 'Create demand.',
+    description: 'Create demand and attention',
     deliverable: 'Positioning + channel plan.',
     kind: 'marketing',
     detail:
@@ -24,7 +24,7 @@ const services = [
   },
   {
     title: 'Growth',
-    description: 'Convert attention.',
+    description: 'Convert attention into measurable results',
     deliverable: 'Funnel + conversion levers.',
     kind: 'growth',
     detail:
@@ -32,7 +32,7 @@ const services = [
   },
   {
     title: 'Operations',
-    description: 'Build systems.',
+    description: 'Build systems that scale',
     deliverable: 'Workflow map + cadence.',
     kind: 'operations',
     detail:
@@ -40,7 +40,7 @@ const services = [
   },
   {
     title: 'Technology',
-    description: 'Use smarter tools.',
+    description: 'Leverage tools and automation',
     deliverable: 'Automation + AI quick wins.',
     kind: 'technology',
     detail:
@@ -48,7 +48,7 @@ const services = [
   },
   {
     title: 'Execution',
-    description: 'Move with clarity.',
+    description: 'Move quickly with clear direction',
     deliverable: 'Roadmap + checkpoints.',
     kind: 'execution',
     detail:

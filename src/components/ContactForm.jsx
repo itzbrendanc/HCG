@@ -182,7 +182,7 @@ export default function ContactForm() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
             <ContactPathCard
               title="I’m a Business"
-              subtitle="Build smarter growth with HCG. Tell us what you’re trying to improve—we’ll identify the clearest next move."
+              subtitle="Tell us what you're trying to improve. We’ll identify the clearest next step."
               selected={path === 'business'}
               onSelect={() => {
                 setPath('business')
@@ -199,7 +199,7 @@ export default function ContactForm() {
 
             <ContactPathCard
               title="I’m a Student"
-              subtitle="Join the HCG team. Work on real projects, build strategy skills, and help organizations grow."
+              subtitle="Work on real projects, build strategy skills, and help organizations grow."
               selected={path === 'student'}
               onSelect={() => {
                 setPath('student')
@@ -240,7 +240,7 @@ export default function ContactForm() {
                   <div className="mt-3 text-sm leading-relaxed text-white/75">
                     {path === 'student'
                       ? 'Work on real projects, build strategy skills, and help organizations grow.'
-                      : 'Tell us what you’re trying to improve. We’ll help identify the clearest next move.'}
+                      : "Tell us what you're trying to improve. We’ll identify the clearest next step."}
                   </div>
                 </div>
 
@@ -345,7 +345,7 @@ export default function ContactForm() {
                         </span>
                       </MagneticButton>
                       <div className="text-xs text-white/50 mt-2">
-                        Limited spots — selective review process
+                        No spam. Selective review process.
                       </div>
 
                       {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}
@@ -445,6 +445,9 @@ export default function ContactForm() {
                           {status === 'submitting' ? <LoadingDots /> : null}
                         </span>
                       </MagneticButton>
+                      <div className="text-xs text-white/50 mt-2">
+                        No spam. Clear next steps within 24–48 hours.
+                      </div>
 
                       {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}
                     </div>

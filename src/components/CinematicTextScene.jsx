@@ -114,14 +114,14 @@ export default function CinematicTextScene() {
           className="text-[56px] font-semibold leading-[0.96] tracking-tight text-white sm:text-[76px] lg:text-[104px] xl:text-[116px]"
         >
           <div className="block">
-            {splitWords('Strategic Solutions.').map((w) => (
+            {splitWords('Clarity.').map((w) => (
               <motion.span key={`l1-${w}`} variants={word} className="inline-block">
                 {w}{' '}
               </motion.span>
             ))}
           </div>
           <div className="mt-3 block text-hcg-300">
-            {splitWords('Measurable Impact.').map((w) => (
+            {splitWords('Execution. Measurable Growth.').map((w) => (
               <motion.span
                 key={`l2-${w}`}
                 variants={word}
@@ -139,11 +139,9 @@ export default function CinematicTextScene() {
           transition={{ duration: 0.7, ease: 'easeOut', delay: prefersReducedMotion ? 0 : 0.25 }}
           className="mt-6 max-w-2xl text-[16px] leading-relaxed text-white/80 sm:text-lg"
         >
-          We partner with businesses to identify opportunities, solve operational challenges, and drive measurable
-          growth through strategy, marketing, technology, and execution.
+          Hilltop Consulting Group helps organizations turn ideas into structured, execution-driven growth.
         </motion.div>
       </motion.div>
     </div>
   )
 }
-

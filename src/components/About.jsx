@@ -21,11 +21,19 @@ export default function About() {
               About HCG
             </div>
             <h3 className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl">
-              Built to turn insight into action.
+              About HCG
             </h3>
-            <p className="mt-4 text-[15px] leading-relaxed text-white/75 sm:text-base">
-              Hilltop Consulting Group is a student-led marketing and growth strategy organization built to turn ideas into clear action.
-            </p>
+            <div className="mt-4 grid gap-3 text-[15px] leading-relaxed text-white/75 sm:text-base">
+              <p>
+                Hilltop Consulting Group is a student-led consulting and growth strategy firm focused on solving real business problems through structured execution.
+              </p>
+              <p>
+                We operate at the intersection of strategy, marketing, and systems—helping organizations identify opportunities, move faster, and scale with clarity.
+              </p>
+            </div>
+            <div className="mt-3 text-xs font-semibold tracking-[0.18em] uppercase text-white/50">
+              Student-led • Project-based • Execution-focused
+            </div>
 
             <div className="mt-7 grid gap-3 sm:grid-cols-3">
               {[

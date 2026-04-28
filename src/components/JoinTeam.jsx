@@ -1,5 +1,6 @@
 import Section from './Section.jsx'
 import Card from './Card.jsx'
+import { motion } from 'framer-motion'
 
 const roles = [
   {
@@ -64,17 +65,34 @@ export default function JoinTeam() {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href="#contact"
-              className="rounded-xl bg-hcg-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
-            >
-              Apply to Join
-            </a>
-            <p className="text-sm text-white/65">
-              Include your role interest and a link to any relevant work (portfolio, writing, projects).
-            </p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            <div className="mt-16 relative p-8 rounded-3xl glass ring-1 ring-hcg-400/30 shadow-soft glow-blue-strong text-center">
+              <div className="text-2xl sm:text-3xl font-semibold text-white text-center">
+                Join Hilltop Consulting Group
+              </div>
+
+              <div className="text-sm text-white/60 text-center mt-2">
+                Build real systems. Drive real outcomes.
+              </div>
+
+              <div className="flex justify-center mt-10">
+                <a
+                  href="#contact"
+                  className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-10 py-6 text-xl sm:text-2xl font-semibold text-white shadow-soft transition hover:-translate-y-1 hover:scale-[1.03] hover:shadow-glow"
+                >
+                  Apply to Join
+                </a>
+              </div>
+              <p className="mt-6 text-sm text-white/65">
+                Include your role interest and a link to any relevant work (portfolio, writing, projects).
+              </p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </Section>
