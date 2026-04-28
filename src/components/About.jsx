@@ -1,7 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import Section from './Section.jsx'
-import hilltopLogo from '../assets/hilltop-logo.png'
-import AnimatedStrategyGrid from './AnimatedStrategyGrid.jsx'
+import HologramLogo from './HologramLogo.jsx'
 
 export default function About() {
   const prefersReducedMotion = useReducedMotion()
@@ -62,38 +61,20 @@ export default function About() {
           transition={{ duration: 0.85, ease: 'easeOut' }}
           className="lg:col-span-6"
         >
-          <div className="relative overflow-hidden rounded-3xl glass p-7 ring-1 ring-hcg-400/28 shadow-soft glow-blue">
-            <div className="pointer-events-none absolute inset-0">
-              <AnimatedStrategyGrid density={16} />
-              <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_60%_35%,rgba(65,135,210,0.22),transparent_66%)]" />
+          <div className="relative">
+            <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+              Identity
             </div>
 
-            <motion.div
-              aria-hidden="true"
-              className="pointer-events-none absolute -inset-y-24 left-0 w-[38%] bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.18),transparent)] blur-2xl"
-              animate={prefersReducedMotion ? undefined : { x: ['-70%', '190%'] }}
-              transition={prefersReducedMotion ? undefined : { duration: 7.2, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.2 }}
-              style={{ rotate: -10 }}
-            />
+            {/* Hologram logo: no card/panel behind it */}
+            <div className="mt-4">
+              <HologramLogo />
+            </div>
 
-            <div className="relative">
-              <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                Identity
-              </div>
-              <div className="mt-4 grid place-items-center rounded-3xl bg-black/30 p-6 ring-1 ring-white/10">
-                <div className="pointer-events-none absolute -inset-10 rounded-full bg-hcg-600/14 blur-3xl" />
-                <img
-                  src={hilltopLogo}
-                  alt="Hilltop Consulting Group logo"
-                  className="relative w-full max-w-[380px] opacity-95"
-                  style={{ transform: 'translateY(-10px)' }}
-                />
-              </div>
-              <div className="mt-5 flex flex-wrap items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">Strategy</span>
-                <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">Growth</span>
-                <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">Execution</span>
-              </div>
+            <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+              <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">Strategy</span>
+              <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">Growth</span>
+              <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">Execution</span>
             </div>
           </div>
         </motion.div>
