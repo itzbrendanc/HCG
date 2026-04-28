@@ -3,7 +3,7 @@ import hilltopLogo from '../assets/hilltop-logo.png'
 
 export default function MidPageCta() {
   return (
-    <Section className="bg-hcg-night">
+    <Section className="bg-hcg-night" innerClassName="min-h-[70vh] flex flex-col justify-center">
       <div className="rounded-3xl bg-black/35 p-6 ring-1 ring-hcg-400/25 shadow-card backdrop-blur sm:p-7">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-4">
@@ -30,4 +30,3 @@ export default function MidPageCta() {
     </Section>
   )
 }
-

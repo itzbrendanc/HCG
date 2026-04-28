@@ -37,19 +37,65 @@ export default function GrowthVisual() {
         </div>
 
         <div className="mt-4 rounded-2xl bg-black/35 p-4 ring-1 ring-white/10">
-          <div className="grid grid-cols-12 gap-2">
-            {Array.from({ length: 48 }).map((_, i) => (
-              <div
-                key={i}
-                className={[
-                  'h-3 rounded',
-                  i % 7 === 0
-                    ? 'bg-hcg-500/35'
-                    : i % 5 === 0
-                      ? 'bg-white/10'
-                      : 'bg-white/5',
-                ].join(' ')}
+          <div className="flex items-center justify-between">
+            <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+              Conversion Curve
+            </div>
+            <div className="text-xs font-medium text-white/55">Last 90 days</div>
+          </div>
+
+          <div className="mt-3 rounded-2xl bg-black/35 p-3 ring-1 ring-white/10">
+            <svg viewBox="0 0 520 160" className="h-[160px] w-full">
+              <defs>
+                <linearGradient id="hcgCurve" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="rgba(65,135,210,0.10)" />
+                  <stop offset="50%" stopColor="rgba(65,135,210,0.78)" />
+                  <stop offset="100%" stopColor="rgba(65,135,210,0.18)" />
+                </linearGradient>
+                <linearGradient id="hcgFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="rgba(65,135,210,0.22)" />
+                  <stop offset="100%" stopColor="rgba(65,135,210,0.00)" />
+                </linearGradient>
+              </defs>
+
+              {Array.from({ length: 9 }).map((_, i) => (
+                <line
+                  key={i}
+                  x1={20 + i * 60}
+                  y1="18"
+                  x2={20 + i * 60}
+                  y2="142"
+                  stroke="rgba(255,255,255,0.05)"
+                  strokeWidth="1"
+                />
+              ))}
+
+              <path
+                d="M20 132 C 110 120, 150 95, 210 105 C 270 115, 320 78, 365 80 C 410 82, 450 55, 500 42"
+                fill="none"
+                stroke="hcgCurve"
+                strokeWidth="3.2"
+                strokeLinecap="round"
               />
+              <path
+                d="M20 132 C 110 120, 150 95, 210 105 C 270 115, 320 78, 365 80 C 410 82, 450 55, 500 42 L 500 150 L 20 150 Z"
+                fill="url(#hcgFill)"
+                opacity="0.95"
+              />
+              <circle cx="500" cy="42" r="6" fill="rgba(65,135,210,0.95)" />
+            </svg>
+          </div>
+
+          <div className="mt-3 grid grid-cols-3 gap-3">
+            {[
+              { k: 'Visibility', v: '+28%' },
+              { k: 'Leads', v: '+19%' },
+              { k: 'Conversion', v: '+11%' },
+            ].map((m) => (
+              <div key={m.k} className="rounded-2xl bg-black/35 p-4 ring-1 ring-white/10">
+                <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">{m.k}</div>
+                <div className="mt-2 text-lg font-semibold tracking-tight text-hcg-200">{m.v}</div>
+              </div>
             ))}
           </div>
         </div>
@@ -57,4 +103,3 @@ export default function GrowthVisual() {
     </div>
   )
 }
-

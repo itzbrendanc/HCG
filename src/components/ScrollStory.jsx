@@ -36,7 +36,7 @@ export default function ScrollStory() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <section className="bg-hcg-night">
+    <section className="bg-hcg-night bg-hcg-beams">
       <div className="mx-auto max-w-6xl px-5 pt-6 sm:px-8 sm:pt-10">
         <motion.div
           initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
@@ -62,4 +62,3 @@ export default function ScrollStory() {
     </section>
   )
 }
-

@@ -28,7 +28,8 @@ export default function ExampleEngagements() {
       eyebrow="Example Engagements"
       title="A look at the types of challenges HCG is built to support"
       subtitle="High-leverage engagements designed to produce measurable progress."
-      className="bg-hcg-night"
+      className="bg-hcg-night bg-hcg-beams"
+      innerClassName="min-h-[90vh] flex flex-col justify-center"
     >
       <motion.div
         initial="hidden"
@@ -52,8 +53,8 @@ export default function ExampleEngagements() {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="relative overflow-hidden rounded-2xl bg-black/35 p-6 ring-1 ring-white/10 shadow-soft backdrop-blur"
-        >
+            className="relative overflow-hidden rounded-2xl bg-black/35 p-6 ring-1 ring-white/10 shadow-soft backdrop-blur hcg-card-accent"
+          >
             <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-hcg-600/12 blur-3xl" />
             <div className="relative">
               <div className="text-lg font-semibold tracking-tight text-white">

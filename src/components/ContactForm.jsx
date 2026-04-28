@@ -65,7 +65,8 @@ export default function ContactForm() {
       eyebrow="Contact"
       title="Tell us about your business"
       subtitle="Share what you’re looking to improve, and our team will review your request to identify where HCG can create the most value."
-      className="bg-hcg-night"
+      className="bg-hcg-night bg-hcg-beams"
+      innerClassName="min-h-[90vh]"
     >
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="lg:col-span-7">

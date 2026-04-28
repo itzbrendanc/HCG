@@ -25,7 +25,8 @@ export default function TeamBasedIntelligence() {
     <Section
       id="why"
       eyebrow="Why Clients Choose HCG"
-      className="bg-hcg-night"
+      className="bg-hcg-night bg-hcg-beams"
+      innerClassName="min-h-[90vh] flex flex-col justify-center"
     >
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">

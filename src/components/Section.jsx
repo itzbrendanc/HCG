@@ -12,6 +12,7 @@ export default function Section({
   subtitle,
   variant = 'dark',
   className = '',
+  innerClassName = '',
   children,
 }) {
   const prefersReducedMotion = useReducedMotion()
@@ -30,7 +31,7 @@ export default function Section({
         className,
       ].join(' ')}
     >
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20">
+      <div className={['mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20', innerClassName].join(' ')}>
         {(eyebrow || title || subtitle) && (
           <motion.div
             initial={prefersReducedMotion ? 'visible' : 'hidden'}
@@ -53,7 +54,7 @@ export default function Section({
             {title ? (
               <h2
                 className={[
-                  'mt-3 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl',
+                  'mt-3 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl',
                   headingClass,
                 ].join(' ')}
               >
