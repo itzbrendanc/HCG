@@ -41,8 +41,8 @@ function Field({ label, htmlFor, children }) {
 function SuccessMessage() {
   return (
     <div className="text-sm text-white/80">
-      <span className="font-semibold text-green-400">
-        ✓ Submitted successfully — check your email.
+      <span className="font-semibold text-white/90">
+        ✓ Submitted — we’ll reach out within 24–48 hours.
       </span>
     </div>
   )
@@ -53,6 +53,16 @@ function ReviewMessage() {
     <div className="text-sm text-white/80">
       We review every request and respond within 24–48 hours.
     </div>
+  )
+}
+
+function LoadingDots() {
+  return (
+    <span aria-hidden="true" className="inline-flex items-center gap-1">
+      <span className="h-1.5 w-1.5 rounded-full bg-white/70 animate-pulse" />
+      <span className="h-1.5 w-1.5 rounded-full bg-white/55 animate-pulse [animation-delay:120ms]" />
+      <span className="h-1.5 w-1.5 rounded-full bg-white/45 animate-pulse [animation-delay:240ms]" />
+    </span>
   )
 }
 
@@ -92,6 +102,7 @@ export default function ContactForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!canSubmit) return
+    setStatus('submitting')
 
     const submission =
       path === 'student'
@@ -120,11 +131,17 @@ export default function ContactForm() {
             submittedAt: new Date().toISOString(),
           }
 
-    await fetch(GOOGLE_SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: JSON.stringify(submission),
-    })
+    try {
+      await fetch(GOOGLE_SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: JSON.stringify(submission),
+      })
+    } catch (err) {
+      console.error('[HCG lead submission error]', err)
+      setStatus('idle')
+      return
+    }
 
     console.log('[HCG lead submission]', submission)
 
@@ -315,15 +332,21 @@ export default function ContactForm() {
                       </div>
                     </div>
 
-                    <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <MagneticButton
                         as="button"
                         type="submit"
-                        disabled={!canSubmit}
-                        className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                        disabled={!canSubmit || status === 'submitting'}
+                        className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-5 text-lg sm:text-xl font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow enabled:hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
                       >
-                        Apply to Join
+                        <span className="inline-flex items-center justify-center gap-2">
+                          {status === 'submitting' ? 'Submitting application...' : 'Apply to Join'}
+                          {status === 'submitting' ? <LoadingDots /> : null}
+                        </span>
                       </MagneticButton>
+                      <div className="text-xs text-white/50 mt-2">
+                        Limited spots — selective review process
+                      </div>
 
                       {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}
                     </div>
@@ -414,10 +437,13 @@ export default function ContactForm() {
                       <MagneticButton
                         as="button"
                         type="submit"
-                        disabled={!canSubmit}
-                        className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                        disabled={!canSubmit || status === 'submitting'}
+                        className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-7 py-4 text-base sm:text-lg font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow enabled:hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
                       >
-                        Request Consultation
+                        <span className="inline-flex items-center justify-center gap-2">
+                          {status === 'submitting' ? 'Sending request...' : 'Request Consultation'}
+                          {status === 'submitting' ? <LoadingDots /> : null}
+                        </span>
                       </MagneticButton>
 
                       {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}

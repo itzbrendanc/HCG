@@ -33,7 +33,8 @@ export default function About() {
                 { k: 'Growth', v: 'Levers that compound.' },
                 { k: 'Execution', v: 'Roadmaps that ship.' },
               ].map((m) => (
-                <div key={m.k} className="rounded-2xl bg-black/35 p-4 ring-1 ring-white/10">
+                <div key={m.k} className="relative overflow-hidden rounded-2xl bg-black/35 p-4 ring-1 ring-white/10">
+                  <div className="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-hcg-600/10 blur-3xl" />
                   <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
                     {m.k}
                   </div>
@@ -92,4 +93,3 @@ export default function About() {
     </Section>
   )
 }
-

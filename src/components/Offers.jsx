@@ -33,7 +33,7 @@ export default function Offers() {
   return (
     <>
       <Section
-        id="approach"
+        id="approach-method"
         eyebrow="Approach"
         title="A disciplined method built to drive outcomes"
         subtitle="We combine strategic clarity with execution support—so decisions turn into measurable progress."

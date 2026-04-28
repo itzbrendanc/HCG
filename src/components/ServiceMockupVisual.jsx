@@ -14,6 +14,21 @@ function Frame({ children }) {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(560px_260px_at_25%_20%,rgba(65,135,210,0.22),transparent_65%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(560px_260px_at_80%_10%,rgba(255,255,255,0.07),transparent_62%)]" />
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(0,0,0,0))]" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-[linear-gradient(180deg,rgba(0,0,0,0.35),transparent)]" />
+      <div className="pointer-events-none absolute left-5 top-3 flex gap-2 opacity-70">
+        <span className="h-2 w-2 rounded-full bg-white/20" />
+        <span className="h-2 w-2 rounded-full bg-white/15" />
+        <span className="h-2 w-2 rounded-full bg-white/10" />
+      </div>
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            'radial-gradient(rgba(255,255,255,0.6) 1px, transparent 1px)',
+          backgroundSize: '3px 3px',
+          maskImage: 'radial-gradient(circle at 45% 40%, black 30%, transparent 75%)',
+        }}
+      />
       {children}
     </div>
   )

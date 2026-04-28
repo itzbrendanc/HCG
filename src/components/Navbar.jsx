@@ -78,7 +78,7 @@ export default function Navbar() {
           <MagneticButton
             as="a"
             href="#contact"
-            className="rounded-xl bg-hcg-600 px-4 py-2 text-sm font-semibold text-white ring-1 ring-hcg-300/30 shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
+            className="rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-4 py-2 text-sm font-semibold text-white ring-1 ring-hcg-300/30 shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.01]"
           >
             Work With HCG
           </MagneticButton>
@@ -124,7 +124,7 @@ export default function Navbar() {
                   as="a"
                   href="#contact"
                   onClick={() => setOpen(false)}
-                  className="mt-2 rounded-xl bg-hcg-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:shadow-glow"
+                  className="mt-2 rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:shadow-glow"
                 >
                   Work With HCG
                 </MagneticButton>

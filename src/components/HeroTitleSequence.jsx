@@ -31,7 +31,7 @@ export default function HeroTitleSequence() {
           as="a"
           href="#contact"
           onClick={handleRequestConsultation}
-          className="rounded-xl bg-hcg-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
+          className="rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-6 py-3.5 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.01]"
         >
           Request a Consultation
         </MagneticButton>
@@ -51,4 +51,3 @@ export default function HeroTitleSequence() {
     </div>
   )
 }
-
