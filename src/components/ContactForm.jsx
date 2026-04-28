@@ -7,7 +7,7 @@ import MagneticButton from './MagneticButton.jsx'
 import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
 
 const GOOGLE_SHEETS_URL =
-  'https://script.google.com/macros/s/AKfycbyWJ-_-6MT7opV8pMeCyJAHCP7SXMyO6jg5puRdxsSrfn4b5UHq5pBQ2HBtabwPFBst/exec'
+  'https://script.google.com/macros/s/AKfycbzqz1VKuhY84aZTctaHNbOQqp3aJS76q13XevX-01ywuRR41t2q0a5Mm4FB1iXK2zpR/exec'
 
 const initialBusiness = {
   name: '',

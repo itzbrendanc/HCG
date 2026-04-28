@@ -116,68 +116,6 @@ export default function Offers() {
       </Section>
 
       <Section
-        id="about"
-        eyebrow="About Us"
-        title="A professional advisory firm built for complex work"
-        subtitle="Hilltop Consulting Group (HCG) supports leaders with structured strategy, operational clarity, and execution support—delivered with a premium standard."
-        className="bg-hcg-night"
-      >
-        <div className="grid gap-4 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <div className="rounded-3xl glass p-7 ring-1 ring-white/10 shadow-soft">
-              <h3 className="text-xl font-semibold tracking-tight text-white">
-                What HCG stands for
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">
-                HCG partners with organizations that value clarity, momentum, and measurable impact.
-                We focus on high-leverage problems: aligning stakeholders, designing operating systems,
-                and translating strategy into delivery.
-              </p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {[
-                  {
-                    k: 'Market Research',
-                    v: 'Competitive landscape, customer insights, and opportunity sizing.',
-                  },
-                  {
-                    k: 'Data-Driven Analysis',
-                    v: 'Performance diagnostics, KPI frameworks, and decision support.',
-                  },
-                  {
-                    k: 'Execution Support',
-                    v: 'Roadmaps, cadence, and stakeholder alignment to ship outcomes.',
-                  },
-                ].map((m) => (
-                  <div key={m.k} className="rounded-2xl bg-black/30 p-4 ring-1 ring-white/10">
-                    <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                      {m.k}
-                    </div>
-                    <div className="mt-2 text-sm font-semibold tracking-tight text-white">
-                      {m.v}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5">
-            <div className="rounded-3xl glass p-7 ring-1 ring-white/10 shadow-soft glow-blue">
-              <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                Identity
-              </div>
-              <div className="mt-4 grid place-items-center rounded-2xl bg-black/40 p-5 ring-1 ring-white/10">
-                <img src={hilltopLogo} alt="HCG logo" className="w-full max-w-[360px] opacity-95" />
-              </div>
-              <p className="mt-4 text-sm leading-relaxed text-white/70">
-                Strategic advisory. Operational clarity. Measurable growth.
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      <Section
         id="work-with-us"
         className="bg-hcg-night"
       >
