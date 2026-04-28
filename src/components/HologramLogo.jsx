@@ -15,7 +15,6 @@ function Sparkle({ style, delay = 0 }) {
 
 export default function HologramLogo({ className = '' }) {
   const prefersReducedMotion = useReducedMotion()
-  const depth = 220
 
   return (
     <div
@@ -31,7 +30,7 @@ export default function HologramLogo({ className = '' }) {
         className="pointer-events-none absolute left-1/2 top-[78%] h-40 w-[92%] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(65,135,210,0.26),transparent_70%)] blur-2xl"
       />
 
-      <div className="relative" style={{ perspective: 1200 }}>
+      <div className="relative" style={{ perspective: 900 }}>
         {/* Aura */}
         <motion.div
           aria-hidden="true"
@@ -51,129 +50,129 @@ export default function HologramLogo({ className = '' }) {
           </div>
         ) : null}
 
-        {/* Cube */}
+        {/* Cube (true 6-face hologram cube) */}
         <motion.div
-          className="relative mx-auto aspect-square w-full max-w-[460px] sm:max-w-[520px] lg:max-w-[560px]"
+          className="relative mx-auto"
           style={{
             transformStyle: 'preserve-3d',
+            width: 'clamp(200px, 36vw, 310px)',
+            height: 'clamp(200px, 36vw, 310px)',
+            ['--cube']: 'clamp(200px, 36vw, 310px)',
+            ['--z']: 'calc(var(--cube) / 2)',
           }}
           animate={
             prefersReducedMotion
-              ? { rotateY: 36, rotateX: -12 }
-              : { rotateY: 360, rotateX: [-12, -9, -12] }
+              ? { rotateX: -15, rotateY: 32 }
+              : { rotateX: -15, rotateY: 360 }
           }
           transition={
             prefersReducedMotion
               ? { duration: 0 }
               : {
-                  rotateY: { duration: 16, repeat: Infinity, ease: 'linear' },
-                  rotateX: { duration: 9, repeat: Infinity, ease: 'easeInOut' },
+                  rotateY: { duration: 14, repeat: Infinity, ease: 'linear' },
                 }
           }
         >
-          {/* Light sweep across cube */}
+          {/* Light sweep across the cube volume */}
           <motion.div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-y-16 left-0 w-[44%] bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.22),transparent)] blur-2xl"
             animate={prefersReducedMotion ? undefined : { x: ['-70%', '190%'] }}
             transition={prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.5 }}
-            style={{ rotate: -12, mixBlendMode: 'screen', transform: `translateZ(${depth}px)` }}
+            style={{ rotate: -12, mixBlendMode: 'screen', transform: 'translateZ(calc(var(--z) + 20px))' }}
           />
 
-          {/* Wireframe edges (helps depth perception) */}
-          <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
-            {[
-              { name: 'front', t: `rotateY(0deg) translateZ(${depth}px)` },
-              { name: 'back', t: `rotateY(180deg) translateZ(${depth}px)` },
-            ].map((w) => (
-              <div
-                key={w.name}
-                className="absolute inset-0 grid place-items-center opacity-[0.55]"
-                style={{ transform: w.t, backfaceVisibility: 'hidden' }}
-              >
-                <div
-                  className="h-[84%] w-[84%] rounded-[44px] border border-hcg-300/20"
-                  style={{
-                    boxShadow:
-                      '0 0 0 1px rgba(65,135,210,0.18), 0 0 50px rgba(65,135,210,0.10)',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Faces */}
+          {/* Six faces */}
           {[
-            { name: 'front', transform: `rotateY(0deg) translateZ(${depth}px)` },
-            { name: 'right', transform: `rotateY(90deg) translateZ(${depth}px)` },
-            { name: 'back', transform: `rotateY(180deg) translateZ(${depth}px)` },
-            { name: 'left', transform: `rotateY(-90deg) translateZ(${depth}px)` },
-          ].map((f) => (
+            { name: 'front', transform: 'translateZ(var(--z))', hasLogo: true },
+            { name: 'back', transform: 'rotateY(180deg) translateZ(var(--z))', hasLogo: true },
+            { name: 'right', transform: 'rotateY(90deg) translateZ(var(--z))', hasLogo: true },
+            { name: 'left', transform: 'rotateY(-90deg) translateZ(var(--z))', hasLogo: true },
+            { name: 'top', transform: 'rotateX(90deg) translateZ(var(--z))', hasLogo: false },
+            { name: 'bottom', transform: 'rotateX(-90deg) translateZ(var(--z))', hasLogo: false },
+          ].map((face) => (
             <div
-              key={f.name}
-              className="absolute inset-0 grid place-items-center"
-              style={{ transform: f.transform, backfaceVisibility: 'hidden' }}
+              key={face.name}
+              className="absolute inset-0"
+              style={{
+                transform: face.transform,
+                transformStyle: 'preserve-3d',
+                backfaceVisibility: 'hidden',
+              }}
             >
-              <div className="relative h-[84%] w-[84%] overflow-hidden rounded-[44px] bg-white/6 ring-1 ring-hcg-300/22 backdrop-blur-[8px]">
-                {/* Face shading (gives volume) */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'rgba(14, 165, 233, 0.08)',
+                  border: '1px solid rgba(56, 189, 248, 0.45)',
+                  boxShadow:
+                    'inset 0 0 30px rgba(14,165,233,0.15), 0 0 25px rgba(14,165,233,0.20)',
+                  backdropFilter: 'blur(10px)',
+                }}
+              >
+                {/* Subtle scanlines on every face */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-[0.75]"
-                  style={{
-                    background:
-                      f.name === 'front'
-                        ? 'linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0))'
-                        : f.name === 'right'
-                          ? 'linear-gradient(135deg, rgba(0,0,0,0), rgba(65,135,210,0.10))'
-                          : f.name === 'left'
-                            ? 'linear-gradient(225deg, rgba(0,0,0,0), rgba(65,135,210,0.08))'
-                            : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0))',
-                  }}
-                />
-                {/* Scanlines */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-[0.18]"
+                  className="pointer-events-none absolute inset-0 opacity-[0.16]"
                   style={{
                     backgroundImage:
                       'repeating-linear-gradient(180deg, rgba(255,255,255,0.10) 0px, rgba(255,255,255,0.10) 1px, transparent 2px, transparent 6px)',
                     mixBlendMode: 'screen',
-                    maskImage: 'radial-gradient(circle at 50% 45%, black 54%, transparent 82%)',
                   }}
                 />
 
-                {/* Edge glow */}
+                {/* Top/bottom grid */}
+                {!face.hasLogo ? (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 opacity-[0.22]"
+                    style={{
+                      backgroundImage:
+                        'linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)',
+                      backgroundSize: '26px 26px',
+                      maskImage: 'radial-gradient(circle at 50% 50%, black 55%, transparent 85%)',
+                    }}
+                  />
+                ) : null}
+
+                {/* Edge highlight overlay */}
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0"
                   style={{
                     boxShadow:
-                      '0 0 0 1px rgba(65,135,210,0.22), 0 0 42px rgba(65,135,210,0.18)',
+                      'inset 0 0 0 1px rgba(255,255,255,0.10), 0 0 0 1px rgba(65,135,210,0.28), 0 0 48px rgba(65,135,210,0.12)',
                     mixBlendMode: 'screen',
                   }}
                 />
 
-                <img
-                  src={hilltopLogo}
-                  alt=""
-                  draggable={false}
-                  className="pointer-events-none select-none h-full w-full object-contain p-8"
-                  style={{ filter: 'brightness(1.12) contrast(1.08) saturate(1.05)', opacity: 0.92 }}
-                />
-
-                {/* Stronger edge highlights */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 rounded-[44px]"
-                  style={{
-                    boxShadow:
-                      'inset 0 0 0 1px rgba(255,255,255,0.10), 0 0 0 1px rgba(65,135,210,0.20), 0 0 46px rgba(65,135,210,0.14)',
-                    mixBlendMode: 'screen',
-                  }}
-                />
+                {face.hasLogo ? (
+                  <img
+                    src={hilltopLogo}
+                    alt=""
+                    draggable={false}
+                    className="pointer-events-none select-none h-full w-full object-contain p-10"
+                    style={{
+                      filter: 'brightness(1.12) contrast(1.08) saturate(1.05)',
+                      opacity: 0.9,
+                    }}
+                  />
+                ) : (
+                  <div className="absolute inset-0" />
+                )}
               </div>
             </div>
           ))}
+
+          {/* Neon cube edges (outer outline on the cube volume) */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              boxShadow: '0 0 0 1px rgba(56,189,248,0.22), 0 0 60px rgba(14,165,233,0.18)',
+              transform: 'translateZ(0px)',
+            }}
+          />
         </motion.div>
       </div>
     </div>
