@@ -1,5 +1,6 @@
 import Section from './Section.jsx'
 import hilltopLogo from '../assets/hilltop-logo.png'
+import MagneticButton from './MagneticButton.jsx'
 
 export default function MidPageCta() {
   return (
@@ -17,13 +18,14 @@ export default function MidPageCta() {
               </div>
             </div>
           </div>
-          <div className="flex items-center">
-            <a
+            <div className="flex items-center">
+            <MagneticButton
+              as="a"
               href="#contact"
               className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
             >
               Request a Consultation
-            </a>
+            </MagneticButton>
           </div>
         </div>
       </div>

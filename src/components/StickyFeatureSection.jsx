@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import BigScrollWord from './BigScrollWord.jsx'
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true)
@@ -66,7 +67,8 @@ export default function StickyFeatureSection({ items }) {
   return (
     <div ref={wrapRef} style={{ height: containerHeight }} className="relative">
       <div className="sticky top-0">
-        <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
+        <div className="relative mx-auto max-w-6xl px-5 py-14 sm:px-8">
+          <BigScrollWord word={items[active]?.bigWord ?? 'STRATEGY'} align="left" />
           <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-7">
               <div className="relative">
@@ -134,4 +136,3 @@ export default function StickyFeatureSection({ items }) {
     </div>
   )
 }
-

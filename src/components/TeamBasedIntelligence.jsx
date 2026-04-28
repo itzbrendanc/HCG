@@ -1,5 +1,6 @@
 import Section from './Section.jsx'
 import Card from './Card.jsx'
+import { motion, useReducedMotion } from 'framer-motion'
 
 const reasons = [
   {
@@ -21,6 +22,8 @@ const reasons = [
 ]
 
 export default function TeamBasedIntelligence() {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <Section
       id="why"
@@ -29,7 +32,13 @@ export default function TeamBasedIntelligence() {
       innerClassName="min-h-[90vh] flex flex-col justify-center"
     >
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-4">
+        <motion.div
+          initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: -18 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="lg:col-span-4"
+        >
           <div className="text-sm font-semibold tracking-[0.14em] uppercase text-white/55">
             Why HCG
           </div>
@@ -53,15 +62,21 @@ export default function TeamBasedIntelligence() {
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
 
-        <div className="lg:col-span-8">
+        <motion.div
+          initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="lg:col-span-8"
+        >
           <div className="grid gap-4 sm:grid-cols-2">
             {reasons.map((r) => (
               <Card key={r.title} title={r.title} description={r.description} tone="dark" />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </Section>
   )

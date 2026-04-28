@@ -1,5 +1,8 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import hilltopLogoTransparent from '../assets/hilltop-logo-transparent.png'
+import CinematicHeroEffects from './CinematicHeroEffects.jsx'
+import InteractiveHeadline from './InteractiveHeadline.jsx'
+import MouseParallaxLogo from './MouseParallaxLogo.jsx'
+import MagneticButton from './MagneticButton.jsx'
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion()
@@ -17,8 +20,9 @@ export default function Hero() {
   }
 
   return (
-    <section id="top" className="relative scroll-mt-24 bg-hcg-surface">
-      <div className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-20">
+    <section id="top" className="relative scroll-mt-24 bg-hcg-surface min-h-screen">
+      <CinematicHeroEffects />
+      <div className="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-14">
           <div>
             <motion.p
@@ -30,15 +34,7 @@ export default function Hero() {
               Hilltop Consulting Group <span className="text-white/35">•</span> HCG
             </motion.p>
 
-            <motion.h1
-              initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="mt-6 text-5xl font-semibold leading-[1.02] tracking-tight text-white sm:text-6xl lg:text-7xl"
-            >
-              <span className="block">Strategic Solutions.</span>
-              <span className="mt-2 block text-hcg-300">Measurable Impact.</span>
-            </motion.h1>
+            <InteractiveHeadline />
 
             <motion.p
               initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
@@ -56,20 +52,22 @@ export default function Hero() {
               transition={{ duration: 0.55, ease: 'easeOut', delay: 0.08 }}
               className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
             >
-              <a
+              <MagneticButton
+                as="a"
                 href="#contact"
                 onClick={handleRequestConsultation}
                 className="rounded-xl bg-hcg-600 px-5 py-3 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
               >
                 Request a Consultation
-              </a>
-              <a
+              </MagneticButton>
+              <MagneticButton
+                as="a"
                 href="#services"
                 onClick={handleExploreServices}
                 className="rounded-xl bg-white/5 px-5 py-3 text-center text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/10"
               >
                 Explore Our Services
-              </a>
+              </MagneticButton>
             </motion.div>
 
             <div className="mt-10">
@@ -98,38 +96,7 @@ export default function Hero() {
               transition={{ duration: 0.7, ease: 'easeOut' }}
               className="relative mx-auto flex w-full max-w-4xl items-center justify-center"
             >
-              <div className="relative w-full">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(closest-side,rgba(65,135,210,0.22),transparent_60%)]"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -inset-10 -z-10 bg-[radial-gradient(closest-side,transparent_35%,rgba(0,0,0,0.92))]"
-                />
-
-                <motion.img
-                  src={hilltopLogoTransparent}
-                  alt="Hilltop Consulting Group logo"
-                  initial={prefersReducedMotion ? { opacity: 0.9, scale: 1 } : { opacity: 0, scale: 0.96 }}
-                  animate={
-                    prefersReducedMotion
-                      ? { opacity: 0.9, scale: 1 }
-                      : { opacity: 0.9, scale: 1, y: [0, -8, 0] }
-                  }
-                  transition={
-                    prefersReducedMotion
-                      ? { duration: 0 }
-                      : {
-                          opacity: { duration: 0.9, ease: 'easeOut' },
-                          scale: { duration: 0.9, ease: 'easeOut' },
-                          y: { duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.9 },
-                        }
-                  }
-                  draggable={false}
-                  className="pointer-events-none select-none hero-logo-blend mx-auto h-auto w-full max-w-[850px] drop-shadow-[0_0_34px_rgba(65,135,210,0.28)]"
-                />
-              </div>
+              <MouseParallaxLogo />
             </motion.div>
           </div>
         </div>

@@ -10,24 +10,28 @@ const features = [
     eyebrow: 'Strategy',
     title: 'Strategy that moves',
     bullets: ['Find the signal.', 'Sharpen the strategy.', 'Choose the highest-leverage path.'],
+    bigWord: 'STRATEGY',
     visual: <StrategyVisual />,
   },
   {
     eyebrow: 'Marketing',
     title: 'Marketing that converts',
     bullets: ['Clarify positioning.', 'Improve visibility.', 'Convert attention into outcomes.'],
+    bigWord: 'GROWTH',
     visual: <GrowthVisual />,
   },
   {
     eyebrow: 'Systems',
     title: 'Systems that scale',
     bullets: ['Define the operating rhythm.', 'Reduce friction.', 'Build repeatable execution.'],
+    bigWord: 'SYSTEMS',
     visual: <SystemsVisual />,
   },
   {
     eyebrow: 'Execution',
     title: 'Execution that lasts',
     bullets: ['Align stakeholders.', 'Ship the work.', 'Measure and improve.'],
+    bigWord: 'EXECUTION',
     visual: <ExecutionVisual />,
   },
 ]

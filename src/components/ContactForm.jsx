@@ -84,7 +84,7 @@ export default function ContactForm() {
                   id="name"
                   value={form.name}
                   onChange={onChange('name')}
-                  className="w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
                   placeholder="Your name"
                   required
                 />
@@ -94,7 +94,7 @@ export default function ContactForm() {
                   id="businessName"
                   value={form.businessName}
                   onChange={onChange('businessName')}
-                  className="w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
                   placeholder="Organization"
                   required
                 />
@@ -105,7 +105,7 @@ export default function ContactForm() {
                   value={form.email}
                   onChange={onChange('email')}
                   type="email"
-                  className="w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
                   placeholder="name@company.com"
                   required
                 />
@@ -115,7 +115,7 @@ export default function ContactForm() {
                   id="link"
                   value={form.link}
                   onChange={onChange('link')}
-                  className="w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                  className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
                   placeholder="Website or LinkedIn…"
                 />
               </Field>
@@ -125,7 +125,7 @@ export default function ContactForm() {
                     id="industry"
                     value={form.industry}
                     onChange={onChange('industry')}
-                    className="w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                    className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
                     placeholder="e.g., healthcare, logistics, professional services…"
                   />
                 </Field>
@@ -140,7 +140,7 @@ export default function ContactForm() {
                     value={form.goals}
                     onChange={onChange('goals')}
                     rows={5}
-                  className="w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white ring-1 ring-white/10 outline-none transition focus:ring-2 focus:ring-hcg-400/50"
+                  className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
                   placeholder="Growth, operations, marketing, systems, or a specific challenge…"
                   required
                 />

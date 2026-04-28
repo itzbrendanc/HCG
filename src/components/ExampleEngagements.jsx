@@ -49,10 +49,15 @@ export default function ExampleEngagements() {
           <motion.div
             key={c.title}
             variants={{
-              hidden: { opacity: 0, y: 10 },
+              hidden: {
+                opacity: 0,
+                y: 12,
+                x: prefersReducedMotion ? 0 : c.title === 'Marketing & Visibility' ? 18 : c.title === 'Local Growth Strategy' ? -18 : 0,
+              },
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.55, ease: 'easeOut' }}
+            whileHover={prefersReducedMotion ? undefined : { y: -4 }}
             className="relative overflow-hidden rounded-2xl bg-black/35 p-6 ring-1 ring-white/10 shadow-soft backdrop-blur hcg-card-accent"
           >
             <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-hcg-600/12 blur-3xl" />

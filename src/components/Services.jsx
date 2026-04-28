@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
+import MagneticButton from './MagneticButton.jsx'
 
 const services = [
   {
@@ -210,12 +211,15 @@ function ServiceCard({ title, description, deliverable, icon, selected, onSelect
     <motion.button
       type="button"
       onClick={onSelect}
-      whileHover={{ y: -2 }}
+      animate={selected ? { scale: 1.01 } : { scale: 1 }}
+      transition={{ duration: 0.28, ease: 'easeOut' }}
+      whileHover={{ y: -4, rotateX: 1.4, rotateY: -1.4 }}
       whileTap={{ scale: 0.99 }}
       className={[
         'group relative w-full overflow-hidden rounded-2xl bg-black/35 p-6 text-left ring-1 shadow-soft backdrop-blur transition hover:shadow-card hcg-card-accent',
         selected ? 'ring-hcg-400/55 glow-blue' : 'ring-white/10',
       ].join(' ')}
+      style={{ transformStyle: 'preserve-3d', perspective: 900 }}
     >
       <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
 
@@ -231,7 +235,12 @@ function ServiceCard({ title, description, deliverable, icon, selected, onSelect
         </div>
       </div>
 
-      <div className="relative mt-5 rounded-xl bg-black/30 p-4 ring-1 ring-white/10">
+      <div
+        className={[
+          'relative mt-5 rounded-xl bg-black/30 p-4 ring-1 ring-white/10 transition',
+          selected ? 'ring-hcg-400/25' : '',
+        ].join(' ')}
+      >
         <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
           Deliverable
         </div>
@@ -355,13 +364,14 @@ export default function Services() {
               <p className="text-sm text-white/70">
                 Not sure where to start? We’ll help you identify the highest-impact opportunities.
               </p>
-              <div className="mt-4">
-                <a
+          <div className="mt-4">
+                <MagneticButton
+                  as="a"
                   href="#contact"
                   className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
                 >
                   Start With a Consultation
-                </a>
+                </MagneticButton>
               </div>
             </div>
           </div>

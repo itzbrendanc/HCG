@@ -95,14 +95,22 @@ export default function Process() {
               >
                 <div className="flex items-center gap-3 lg:flex-col lg:items-start">
                   <div className="relative">
-                    <div
+                    <motion.div
+                      animate={
+                        prefersReducedMotion
+                          ? { scale: 1 }
+                          : idx === activeIdx
+                            ? { scale: 1.08 }
+                            : { scale: 1 }
+                      }
+                      transition={{ duration: 0.35, ease: 'easeOut' }}
                       className={[
                         'grid h-12 w-12 place-items-center rounded-full bg-hcg-600/22 text-white ring-1 ring-hcg-300/45 shadow-soft',
                         idx === activeIdx ? stepGlow : '',
                       ].join(' ')}
                     >
                       <span className="text-base font-semibold">{idx + 1}</span>
-                    </div>
+                    </motion.div>
                     <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_0_1px_rgba(47,111,180,0.25),0_0_30px_rgba(47,111,180,0.18)]" />
                   </div>
                   <div className="lg:mt-4">

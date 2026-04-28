@@ -151,4 +151,14 @@
     box-shadow: 0 0 0 1px rgba(65, 135, 210, 0.34),
       0 18px 70px rgba(65, 135, 210, 0.20);
   }
+
+  .hcg-input {
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10);
+    transition: box-shadow 200ms ease, background-color 200ms ease, transform 200ms ease;
+  }
+
+  .hcg-input:focus {
+    box-shadow: 0 0 0 2px rgba(65, 135, 210, 0.55),
+      0 0 34px rgba(65, 135, 210, 0.18);
+  }
 }
