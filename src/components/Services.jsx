@@ -119,7 +119,6 @@ export default function Services() {
       id="services"
       eyebrow="What We Do"
       className="bg-hcg-night bg-hcg-beams"
-      innerClassName="min-h-[90vh]"
     >
       <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">

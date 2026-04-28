@@ -59,7 +59,6 @@ export default function Process() {
       title="A proven approach to deliver results"
       subtitle="HCG engagements are designed for clarity and execution: diagnose, design, deliver, and optimize with measurable outcomes."
       className="bg-hcg-night bg-hcg-beams"
-      innerClassName="min-h-[90vh] flex flex-col justify-center"
     >
       <div ref={wrapRef} className="rounded-3xl bg-black/35 p-6 ring-1 ring-white/10 shadow-card backdrop-blur">
         <div className="relative">

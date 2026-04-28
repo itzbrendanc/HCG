@@ -25,7 +25,6 @@ export default function TeamBasedIntelligence() {
       id="approach"
       eyebrow="Approach"
       className="bg-hcg-night bg-hcg-beams"
-      innerClassName="min-h-[90vh] flex flex-col justify-center"
     >
       <div ref={wrapRef} className="grid gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">

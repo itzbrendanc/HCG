@@ -13,6 +13,7 @@ import ContactForm from './components/ContactForm.jsx'
 import JoinTeam from './components/JoinTeam.jsx'
 import Footer from './components/Footer.jsx'
 import ParticleBackground from './components/ParticleBackground.jsx'
+import ScrollRevealSection from './components/ScrollRevealSection.jsx'
 
 export default function App() {
   return (
@@ -23,16 +24,36 @@ export default function App() {
         <main>
           <Hero />
           <DescriptionBox />
-          <ScrollStory />
-          <Services />
-          <ExampleEngagements />
-          <Process />
-          <MidPageCta />
-          <Offers />
-          <TeamBasedIntelligence />
-          <TeamPortalPreview />
-          <ContactForm />
-          <JoinTeam />
+          <ScrollRevealSection direction="left">
+            <ScrollStory />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="right">
+            <Services />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="left">
+            <ExampleEngagements />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="right">
+            <Process />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="left">
+            <MidPageCta />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="right">
+            <Offers />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="left">
+            <TeamBasedIntelligence />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="right">
+            <TeamPortalPreview />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="left">
+            <ContactForm />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="right">
+            <JoinTeam />
+          </ScrollRevealSection>
         </main>
         <Footer />
       </div>

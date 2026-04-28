@@ -29,7 +29,6 @@ export default function ExampleEngagements() {
       title="A look at the types of challenges HCG is built to support"
       subtitle="High-leverage engagements designed to produce measurable progress."
       className="bg-hcg-night bg-hcg-beams"
-      innerClassName="min-h-[90vh] flex flex-col justify-center"
     >
       <motion.div
         initial="hidden"

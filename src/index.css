@@ -12,7 +12,7 @@
   }
 
   body {
-    @apply bg-night-950 text-white antialiased;
+    @apply bg-night-950 text-white antialiased overflow-x-hidden;
     font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto,
       Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
     letter-spacing: -0.01em;
@@ -34,6 +34,28 @@
 }
 
 @layer utilities {
+  .hcg-section-blend {
+    position: relative;
+  }
+  .hcg-section-blend::before,
+  .hcg-section-blend::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    height: 64px;
+    z-index: 0;
+  }
+  .hcg-section-blend::before {
+    top: -32px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.28));
+  }
+  .hcg-section-blend::after {
+    bottom: -32px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.28));
+  }
+
   .bg-hcg-surface {
     background-image: radial-gradient(
         900px 420px at 20% 8%,

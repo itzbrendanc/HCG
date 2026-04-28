@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import hilltopLogo from '../assets/hilltop-logo.png'
+import MagneticButton from './MagneticButton.jsx'
 
 const navItems = [
   { label: 'Services', href: '#services' },
@@ -32,7 +33,7 @@ export default function Navbar() {
       'sticky top-0 z-50',
       'border-b',
       scrolled
-        ? 'border-white/10 bg-night-950/75 shadow-soft'
+        ? 'border-hcg-400/20 bg-night-950/75 shadow-soft shadow-[0_18px_60px_rgba(0,0,0,0.45)]'
         : 'border-transparent bg-night-950/35',
       'backdrop-blur',
     ].join(' ')
@@ -40,37 +41,47 @@ export default function Navbar() {
 
   return (
     <header className={chrome}>
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3 sm:px-8 sm:py-4">
-        <a href="#top" className="group flex items-center gap-2">
-          <img
-            src={hilltopLogo}
-            alt="Hilltop Consulting Group"
-            className="h-8 w-auto sm:h-9 opacity-95"
-          />
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-3.5 sm:px-8 sm:py-4.5">
+        <motion.a
+          href="#top"
+          whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          className="group flex items-center gap-2"
+        >
+          <div className="relative">
+            <div className="pointer-events-none absolute -inset-2 rounded-xl bg-hcg-600/10 opacity-0 blur-xl transition group-hover:opacity-100" />
+            <img
+              src={hilltopLogo}
+              alt="Hilltop Consulting Group"
+              className="relative h-9 w-auto opacity-95 sm:h-10"
+            />
+          </div>
           <div className="hidden leading-tight sm:block">
             <div className="text-sm font-semibold tracking-tight text-white">
               Hilltop Consulting Group
             </div>
             <div className="text-xs text-white/60">HCG</div>
           </div>
-        </a>
+        </motion.a>
 
         <nav className="hidden items-center gap-7 md:flex">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-white/70 transition hover:text-white"
+              className="group relative text-sm font-medium text-white/70 transition hover:text-white"
             >
               {item.label}
+              <span className="pointer-events-none absolute -bottom-2 left-0 h-px w-0 bg-hcg-300/80 transition-all duration-300 ease-out group-hover:w-full" />
             </a>
           ))}
-          <a
+          <MagneticButton
+            as="a"
             href="#contact"
-            className="rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 shadow-soft transition hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-card"
+            className="rounded-xl bg-hcg-600 px-4 py-2 text-sm font-semibold text-white ring-1 ring-hcg-300/30 shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
           >
             Work With HCG
-          </a>
+          </MagneticButton>
         </nav>
 
         <button
@@ -109,13 +120,14 @@ export default function Navbar() {
                     {item.label}
                   </a>
                 ))}
-                <a
+                <MagneticButton
+                  as="a"
                   href="#contact"
                   onClick={() => setOpen(false)}
                   className="mt-2 rounded-xl bg-hcg-600 px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:shadow-glow"
                 >
                   Work With HCG
-                </a>
+                </MagneticButton>
               </div>
             </div>
           </motion.div>

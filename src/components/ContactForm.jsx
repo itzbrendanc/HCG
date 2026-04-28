@@ -94,7 +94,6 @@ export default function ContactForm() {
       id="contact"
       eyebrow="Work With HCG"
       className="bg-hcg-night bg-hcg-beams"
-      innerClassName="min-h-[90vh]"
     >
       <div className="max-w-5xl">
         <AnimatedSectionHeading

@@ -31,7 +31,7 @@ export default function Section({
         className,
       ].join(' ')}
     >
-      <div className={['mx-auto max-w-6xl px-5 py-16 sm:px-8 sm:py-20', innerClassName].join(' ')}>
+      <div className={['mx-auto max-w-6xl px-5 py-12 sm:px-8 sm:py-14', innerClassName].join(' ')}>
         {(eyebrow || title || subtitle) && (
           <motion.div
             initial={prefersReducedMotion ? 'visible' : 'hidden'}
@@ -69,7 +69,7 @@ export default function Section({
           </motion.div>
         )}
 
-        <div className="mt-10">{children}</div>
+        <div className="mt-8">{children}</div>
       </div>
     </section>
   )
