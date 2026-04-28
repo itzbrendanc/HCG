@@ -7,7 +7,7 @@ import MagneticButton from './MagneticButton.jsx'
 import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
 
 const GOOGLE_SHEETS_URL =
-  'https://script.google.com/macros/s/AKfycbzrLv5Zkzvw2i27V_pM7HhQILrdivDPtNQnig1pQXfa3kKyqGxl055hzQqjt7XqwsEQ/exec'
+  'https://script.google.com/macros/s/AKfycbyWJ-_-6MT7opV8pMeCyJAHCP7SXMyO6jg5puRdxsSrfn4b5UHq5pBQ2HBtabwPFBst/exec'
 
 const initialBusiness = {
   name: '',
@@ -34,6 +34,24 @@ function Field({ label, htmlFor, children }) {
         {label}
       </label>
       {children}
+    </div>
+  )
+}
+
+function SuccessMessage() {
+  return (
+    <div className="text-sm text-white/80">
+      <span className="font-semibold text-green-400">
+        ✓ Submitted successfully — check your email.
+      </span>
+    </div>
+  )
+}
+
+function ReviewMessage() {
+  return (
+    <div className="text-sm text-white/80">
+      We review every request and respond within 24–48 hours.
     </div>
   )
 }
@@ -85,6 +103,7 @@ export default function ContactForm() {
             message: studentForm.why,
             roleInterest: studentForm.roleInterest,
             linkedin: studentForm.portfolio,
+            industry: '',
             majorYear: studentForm.majorYear,
             submittedAt: new Date().toISOString(),
           }
@@ -97,6 +116,7 @@ export default function ContactForm() {
             roleInterest: '',
             linkedin: businessForm.link,
             industry: businessForm.industry,
+            majorYear: '',
             submittedAt: new Date().toISOString(),
           }
 
@@ -109,11 +129,15 @@ export default function ContactForm() {
     console.log('[HCG lead submission]', submission)
 
     setSubmissions((prev) => [submission, ...prev].slice(0, 5))
-    if (path === 'student') setStudentForm(initialStudent)
-    else setBusinessForm(initialBusiness)
+
+    if (path === 'student') {
+      setStudentForm(initialStudent)
+    } else {
+      setBusinessForm(initialBusiness)
+    }
 
     setStatus('submitted')
-    window.setTimeout(() => setStatus('idle'), 2500)
+    setTimeout(() => setStatus('idle'), 3000)
   }
 
   return (
@@ -124,6 +148,7 @@ export default function ContactForm() {
           accentLineIdx={1}
           className="max-w-4xl"
         />
+
         <motion.div
           initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +171,15 @@ export default function ContactForm() {
                 setPath('business')
                 formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }}
+              icon={
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                  <path d="M4 10h16v10H4V10Z" stroke="currentColor" strokeWidth="1.7" opacity="0.9" />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="currentColor" strokeWidth="1.7" opacity="0.55" strokeLinecap="round" />
+                  <path d="M9 14h6" stroke="currentColor" strokeWidth="1.7" opacity="0.9" strokeLinecap="round" />
+                </svg>
+              }
             />
+
             <ContactPathCard
               title="I’m a Student"
               subtitle="Join the HCG team. Work on real projects, build strategy skills, and help organizations grow."
@@ -155,6 +188,12 @@ export default function ContactForm() {
                 setPath('student')
                 formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
               }}
+              icon={
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5">
+                  <path d="M12 3 2.5 8 12 13l9.5-5L12 3Z" stroke="currentColor" strokeWidth="1.7" opacity="0.9" strokeLinejoin="round" />
+                  <path d="M5 10.2V16c2.3 2.7 5 4 7 4s4.7-1.3 7-4v-5.8" stroke="currentColor" strokeWidth="1.7" opacity="0.55" strokeLinecap="round" />
+                </svg>
+              }
             />
           </div>
         </div>
@@ -176,15 +215,18 @@ export default function ContactForm() {
                   <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/60">
                     {path === 'student' ? 'For Students' : 'For Businesses'}
                   </div>
+
                   <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
                     {path === 'student' ? 'Join the HCG team.' : 'Build smarter growth with HCG.'}
                   </div>
+
                   <div className="mt-3 text-sm leading-relaxed text-white/75">
                     {path === 'student'
                       ? 'Work on real projects, build strategy skills, and help organizations grow.'
                       : 'Tell us what you’re trying to improve. We’ll help identify the clearest next move.'}
                   </div>
                 </div>
+
                 <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
                   Secure • Reviewed by our team
                 </div>
@@ -203,38 +245,87 @@ export default function ContactForm() {
                   >
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Field label="Name" htmlFor="studentName">
-                        <input id="studentName" value={studentForm.name} onChange={onStudentChange('name')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Your name" required />
+                        <input
+                          id="studentName"
+                          value={studentForm.name}
+                          onChange={onStudentChange('name')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Your name"
+                          required
+                        />
                       </Field>
+
                       <Field label="Email" htmlFor="studentEmail">
-                        <input id="studentEmail" value={studentForm.email} onChange={onStudentChange('email')} type="email" className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="you@university.edu" required />
+                        <input
+                          id="studentEmail"
+                          value={studentForm.email}
+                          onChange={onStudentChange('email')}
+                          type="email"
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="you@university.edu"
+                          required
+                        />
                       </Field>
+
                       <Field label="Major / Year" htmlFor="majorYear">
-                        <input id="majorYear" value={studentForm.majorYear} onChange={onStudentChange('majorYear')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="e.g., Business • Junior" />
+                        <input
+                          id="majorYear"
+                          value={studentForm.majorYear}
+                          onChange={onStudentChange('majorYear')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="e.g., Business • Junior"
+                        />
                       </Field>
+
                       <Field label="Role Interest" htmlFor="roleInterest">
-                        <input id="roleInterest" value={studentForm.roleInterest} onChange={onStudentChange('roleInterest')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Strategy, marketing, ops, AI systems…" required />
+                        <input
+                          id="roleInterest"
+                          value={studentForm.roleInterest}
+                          onChange={onStudentChange('roleInterest')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Strategy, marketing, ops, AI systems…"
+                          required
+                        />
                       </Field>
+
                       <div className="sm:col-span-2">
                         <Field label="LinkedIn / Portfolio" htmlFor="portfolio">
-                          <input id="portfolio" value={studentForm.portfolio} onChange={onStudentChange('portfolio')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Link" />
+                          <input
+                            id="portfolio"
+                            value={studentForm.portfolio}
+                            onChange={onStudentChange('portfolio')}
+                            className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="Link"
+                          />
                         </Field>
                       </div>
+
                       <div className="sm:col-span-2">
                         <Field label="Why do you want to join HCG?" htmlFor="why">
-                          <textarea id="why" value={studentForm.why} onChange={onStudentChange('why')} rows={5} className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="What you’re hoping to learn, build, and contribute…" required />
+                          <textarea
+                            id="why"
+                            value={studentForm.why}
+                            onChange={onStudentChange('why')}
+                            rows={5}
+                            className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="What you’re hoping to learn, build, and contribute…"
+                            required
+                          />
                         </Field>
                       </div>
                     </div>
 
                     <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <MagneticButton as="button" type="submit" disabled={!canSubmit} className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60">
+                      <MagneticButton
+                        as="button"
+                        type="submit"
+                        disabled={!canSubmit}
+                        className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                      >
                         Apply to Join
                       </MagneticButton>
-                      <div className="text-sm text-white/70">
-                        {status === 'submitted' && path === 'student'
-                          ? <span className="font-semibold text-white">Thanks — we’ll review your application and follow up soon.</span>
-                          : <span className="text-white/80">We review every request and respond within 24–48 hours.</span>}
-                      </div>
+
+                      {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}
                     </div>
                   </motion.form>
                 ) : (
@@ -249,38 +340,87 @@ export default function ContactForm() {
                   >
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Field label="Name" htmlFor="name">
-                        <input id="name" value={businessForm.name} onChange={onBusinessChange('name')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Your name" required />
+                        <input
+                          id="name"
+                          value={businessForm.name}
+                          onChange={onBusinessChange('name')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Your name"
+                          required
+                        />
                       </Field>
+
                       <Field label="Business Name" htmlFor="businessName">
-                        <input id="businessName" value={businessForm.businessName} onChange={onBusinessChange('businessName')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Organization" required />
+                        <input
+                          id="businessName"
+                          value={businessForm.businessName}
+                          onChange={onBusinessChange('businessName')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Organization"
+                          required
+                        />
                       </Field>
+
                       <Field label="Email" htmlFor="email">
-                        <input id="email" value={businessForm.email} onChange={onBusinessChange('email')} type="email" className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="name@company.com" required />
+                        <input
+                          id="email"
+                          value={businessForm.email}
+                          onChange={onBusinessChange('email')}
+                          type="email"
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="name@company.com"
+                          required
+                        />
                       </Field>
+
                       <Field label="Website / Social" htmlFor="link">
-                        <input id="link" value={businessForm.link} onChange={onBusinessChange('link')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Website or LinkedIn…" />
+                        <input
+                          id="link"
+                          value={businessForm.link}
+                          onChange={onBusinessChange('link')}
+                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                          placeholder="Website or LinkedIn…"
+                        />
                       </Field>
+
                       <div className="sm:col-span-2">
                         <Field label="Industry" htmlFor="industry">
-                          <input id="industry" value={businessForm.industry} onChange={onBusinessChange('industry')} className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="e.g., healthcare, logistics, professional services…" />
+                          <input
+                            id="industry"
+                            value={businessForm.industry}
+                            onChange={onBusinessChange('industry')}
+                            className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="e.g., healthcare, logistics, professional services…"
+                          />
                         </Field>
                       </div>
+
                       <div className="sm:col-span-2">
                         <Field label="What are you looking to improve or solve?" htmlFor="goals">
-                          <textarea id="goals" value={businessForm.goals} onChange={onBusinessChange('goals')} rows={5} className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none" placeholder="Growth, operations, marketing, systems, or a specific challenge…" required />
+                          <textarea
+                            id="goals"
+                            value={businessForm.goals}
+                            onChange={onBusinessChange('goals')}
+                            rows={5}
+                            className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
+                            placeholder="Growth, operations, marketing, systems, or a specific challenge…"
+                            required
+                          />
                         </Field>
                       </div>
                     </div>
 
                     <div className="mt-2 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <MagneticButton as="button" type="submit" disabled={!canSubmit} className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60">
+                      <MagneticButton
+                        as="button"
+                        type="submit"
+                        disabled={!canSubmit}
+                        className="rounded-xl bg-hcg-600 px-6 py-3.5 text-base font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow disabled:cursor-not-allowed disabled:opacity-60"
+                      >
                         Request Consultation
                       </MagneticButton>
-                      <div className="text-sm text-white/70">
-                        {status === 'submitted' && path === 'business'
-                          ? <span className="font-semibold text-white">Thanks — we’ll review your request and follow up soon.</span>
-                          : <span className="text-white/80">We review every request and respond within 24–48 hours.</span>}
-                      </div>
+
+                      {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}
                     </div>
                   </motion.form>
                 )}
@@ -291,15 +431,20 @@ export default function ContactForm() {
                   <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
                     Recent submissions
                   </div>
+
                   <div className="mt-3 grid gap-3">
                     {submissions.slice(0, 2).map((s) => (
                       <div key={s.submittedAt} className="text-sm text-white">
                         <div className="font-semibold">
                           {s.type === 'student' ? s.name : s.company}
                           <span className="text-white/45"> • </span>
-                          <span className="text-hcg-200">{s.type === 'student' ? 'Student' : 'Business'}</span>
+                          <span className="text-hcg-200">
+                            {s.type === 'student' ? 'Student' : 'Business'}
+                          </span>
                         </div>
-                        <div className="text-white/70">{s.type === 'student' ? s.roleInterest : s.message}</div>
+                        <div className="text-white/70">
+                          {s.type === 'student' ? s.roleInterest : s.message}
+                        </div>
                       </div>
                     ))}
                   </div>
