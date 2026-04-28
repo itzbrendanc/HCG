@@ -1,5 +1,5 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { useMemo, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
 
 const services = [
@@ -244,11 +244,15 @@ function ServiceCard({ title, description, deliverable, icon, selected, onSelect
 export default function Services() {
   const prefersReducedMotion = useReducedMotion()
   const [selectedTitle, setSelectedTitle] = useState(services[0]?.title ?? '')
+  const cardsRef = useRef(null)
 
   const selected = useMemo(
     () => services.find((s) => s.title === selectedTitle) ?? services[0],
     [selectedTitle],
   )
+
+  const { scrollYProgress } = useScroll({ target: cardsRef, offset: ['start end', 'end start'] })
+  const driftY = useTransform(scrollYProgress, [0, 1], [14, -14])
 
   return (
     <Section
@@ -284,7 +288,9 @@ export default function Services() {
         </div>
 
         <motion.div
+          style={prefersReducedMotion ? undefined : { y: driftY }}
           id="services-cards"
+          ref={cardsRef}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}

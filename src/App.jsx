@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import DescriptionBox from './components/DescriptionBox.jsx'
+import ScrollStory from './components/ScrollStory.jsx'
 import Services from './components/Services.jsx'
 import ExampleEngagements from './components/ExampleEngagements.jsx'
 import Process from './components/Process.jsx'
@@ -22,6 +23,7 @@ export default function App() {
         <main>
           <Hero />
           <DescriptionBox />
+          <ScrollStory />
           <Services />
           <ExampleEngagements />
           <Process />

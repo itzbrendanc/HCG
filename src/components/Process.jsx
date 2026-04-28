@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
 
 const steps = [
@@ -36,6 +37,20 @@ const steps = [
 
 export default function Process() {
   const prefersReducedMotion = useReducedMotion()
+  const wrapRef = useRef(null)
+  const { scrollYProgress } = useScroll({ target: wrapRef, offset: ['start end', 'end start'] })
+  const glowX = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+  const [activeIdx, setActiveIdx] = useState(0)
+
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    if (prefersReducedMotion) return
+    const idx = Math.max(0, Math.min(steps.length - 1, Math.round(v * (steps.length - 1))))
+    setActiveIdx(idx)
+  })
+
+  const stepGlow = useMemo(() => {
+    return 'shadow-[0_0_0_1px_rgba(47,111,180,0.28),0_0_34px_rgba(47,111,180,0.18)]'
+  }, [])
 
   return (
     <Section
@@ -45,9 +60,14 @@ export default function Process() {
       subtitle="HCG engagements are designed for clarity and execution: diagnose, design, deliver, and optimize with measurable outcomes."
       className="bg-hcg-night"
     >
-      <div className="rounded-3xl bg-black/35 p-6 ring-1 ring-white/10 shadow-card backdrop-blur">
+      <div ref={wrapRef} className="rounded-3xl bg-black/35 p-6 ring-1 ring-white/10 shadow-card backdrop-blur">
         <div className="relative">
           <div className="pointer-events-none absolute left-6 right-6 top-5 hidden h-px bg-hcg-400/40 lg:block" />
+          <motion.div
+            aria-hidden="true"
+            style={{ left: glowX }}
+            className="pointer-events-none absolute top-5 hidden h-px w-24 -translate-x-1/2 bg-hcg-300/70 blur-[0.5px] lg:block"
+          />
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -74,7 +94,12 @@ export default function Process() {
               >
                 <div className="flex items-center gap-3 lg:flex-col lg:items-start">
                   <div className="relative">
-                    <div className="grid h-12 w-12 place-items-center rounded-full bg-hcg-600/22 text-white ring-1 ring-hcg-300/45 shadow-soft">
+                    <div
+                      className={[
+                        'grid h-12 w-12 place-items-center rounded-full bg-hcg-600/22 text-white ring-1 ring-hcg-300/45 shadow-soft',
+                        idx === activeIdx ? stepGlow : '',
+                      ].join(' ')}
+                    >
                       <span className="text-base font-semibold">{idx + 1}</span>
                     </div>
                     <div className="pointer-events-none absolute inset-0 rounded-full shadow-[0_0_0_1px_rgba(47,111,180,0.25),0_0_30px_rgba(47,111,180,0.18)]" />
