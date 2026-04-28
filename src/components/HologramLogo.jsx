@@ -15,6 +15,7 @@ function Sparkle({ style, delay = 0 }) {
 
 export default function HologramLogo({ className = '' }) {
   const prefersReducedMotion = useReducedMotion()
+  const depth = 220
 
   return (
     <div
@@ -58,14 +59,14 @@ export default function HologramLogo({ className = '' }) {
           }}
           animate={
             prefersReducedMotion
-              ? { rotateY: 32, rotateX: -10 }
-              : { rotateY: 360, rotateX: [-10, -7, -10] }
+              ? { rotateY: 36, rotateX: -12 }
+              : { rotateY: 360, rotateX: [-12, -9, -12] }
           }
           transition={
             prefersReducedMotion
               ? { duration: 0 }
               : {
-                  rotateY: { duration: 22, repeat: Infinity, ease: 'linear' },
+                  rotateY: { duration: 16, repeat: Infinity, ease: 'linear' },
                   rotateX: { duration: 9, repeat: Infinity, ease: 'easeInOut' },
                 }
           }
@@ -76,22 +77,59 @@ export default function HologramLogo({ className = '' }) {
             className="pointer-events-none absolute -inset-y-16 left-0 w-[44%] bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.22),transparent)] blur-2xl"
             animate={prefersReducedMotion ? undefined : { x: ['-70%', '190%'] }}
             transition={prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.5 }}
-            style={{ rotate: -12, mixBlendMode: 'screen', transform: 'translateZ(140px)' }}
+            style={{ rotate: -12, mixBlendMode: 'screen', transform: `translateZ(${depth}px)` }}
           />
+
+          {/* Wireframe edges (helps depth perception) */}
+          <div aria-hidden="true" className="pointer-events-none absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
+            {[
+              { name: 'front', t: `rotateY(0deg) translateZ(${depth}px)` },
+              { name: 'back', t: `rotateY(180deg) translateZ(${depth}px)` },
+            ].map((w) => (
+              <div
+                key={w.name}
+                className="absolute inset-0 grid place-items-center opacity-[0.55]"
+                style={{ transform: w.t, backfaceVisibility: 'hidden' }}
+              >
+                <div
+                  className="h-[84%] w-[84%] rounded-[44px] border border-hcg-300/20"
+                  style={{
+                    boxShadow:
+                      '0 0 0 1px rgba(65,135,210,0.18), 0 0 50px rgba(65,135,210,0.10)',
+                  }}
+                />
+              </div>
+            ))}
+          </div>
 
           {/* Faces */}
           {[
-            { name: 'front', transform: 'rotateY(0deg) translateZ(140px)' },
-            { name: 'right', transform: 'rotateY(90deg) translateZ(140px)' },
-            { name: 'back', transform: 'rotateY(180deg) translateZ(140px)' },
-            { name: 'left', transform: 'rotateY(-90deg) translateZ(140px)' },
+            { name: 'front', transform: `rotateY(0deg) translateZ(${depth}px)` },
+            { name: 'right', transform: `rotateY(90deg) translateZ(${depth}px)` },
+            { name: 'back', transform: `rotateY(180deg) translateZ(${depth}px)` },
+            { name: 'left', transform: `rotateY(-90deg) translateZ(${depth}px)` },
           ].map((f) => (
             <div
               key={f.name}
               className="absolute inset-0 grid place-items-center"
               style={{ transform: f.transform, backfaceVisibility: 'hidden' }}
             >
-              <div className="relative h-[82%] w-[82%] overflow-hidden rounded-[40px] bg-white/5 ring-1 ring-hcg-300/20 backdrop-blur-[6px]">
+              <div className="relative h-[84%] w-[84%] overflow-hidden rounded-[44px] bg-white/6 ring-1 ring-hcg-300/22 backdrop-blur-[8px]">
+                {/* Face shading (gives volume) */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-[0.75]"
+                  style={{
+                    background:
+                      f.name === 'front'
+                        ? 'linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0))'
+                        : f.name === 'right'
+                          ? 'linear-gradient(135deg, rgba(0,0,0,0), rgba(65,135,210,0.10))'
+                          : f.name === 'left'
+                            ? 'linear-gradient(225deg, rgba(0,0,0,0), rgba(65,135,210,0.08))'
+                            : 'linear-gradient(180deg, rgba(255,255,255,0.04), rgba(0,0,0,0))',
+                  }}
+                />
                 {/* Scanlines */}
                 <div
                   aria-hidden="true"
@@ -121,6 +159,17 @@ export default function HologramLogo({ className = '' }) {
                   draggable={false}
                   className="pointer-events-none select-none h-full w-full object-contain p-8"
                   style={{ filter: 'brightness(1.12) contrast(1.08) saturate(1.05)', opacity: 0.92 }}
+                />
+
+                {/* Stronger edge highlights */}
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 rounded-[44px]"
+                  style={{
+                    boxShadow:
+                      'inset 0 0 0 1px rgba(255,255,255,0.10), 0 0 0 1px rgba(65,135,210,0.20), 0 0 46px rgba(65,135,210,0.14)',
+                    mixBlendMode: 'screen',
+                  }}
                 />
               </div>
             </div>
