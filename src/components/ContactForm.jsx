@@ -6,6 +6,9 @@ import ContactMotionBackground from './ContactMotionBackground.jsx'
 import MagneticButton from './MagneticButton.jsx'
 import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
 
+const STUDENT_APPLICATION_URL =
+  'https://docs.google.com/forms/d/e/1FAIpQLScBNtwfSTwljojL8rQzNUD95eUc6Uq_-zFsMFyF9CN9gP0d1Q/viewform?usp=header'
+
 const GOOGLE_SHEETS_URL =
   'https://script.google.com/macros/s/AKfycbzqz1VKuhY84aZTctaHNbOQqp3aJS76q13XevX-01ywuRR41t2q0a5Mm4FB1iXK2zpR/exec'
 
@@ -16,15 +19,6 @@ const initialBusiness = {
   link: '',
   industry: '',
   goals: '',
-}
-
-const initialStudent = {
-  name: '',
-  email: '',
-  majorYear: '',
-  roleInterest: '',
-  portfolio: '',
-  why: '',
 }
 
 function Field({ label, htmlFor, children }) {
@@ -70,66 +64,39 @@ export default function ContactForm() {
   const prefersReducedMotion = useReducedMotion()
   const [path, setPath] = useState('business')
   const [businessForm, setBusinessForm] = useState(initialBusiness)
-  const [studentForm, setStudentForm] = useState(initialStudent)
   const [submissions, setSubmissions] = useState([])
   const [status, setStatus] = useState('idle')
   const formRef = useRef(null)
 
   const canSubmit = useMemo(() => {
-    if (path === 'student') {
-      return (
-        studentForm.name.trim() &&
-        studentForm.email.trim() &&
-        studentForm.roleInterest.trim() &&
-        studentForm.why.trim()
-      )
-    }
-
     return (
       businessForm.name.trim() &&
       businessForm.businessName.trim() &&
       businessForm.email.trim() &&
       businessForm.goals.trim()
     )
-  }, [path, businessForm, studentForm])
+  }, [businessForm])
 
   const onBusinessChange = (key) => (e) =>
     setBusinessForm((v) => ({ ...v, [key]: e.target.value }))
-
-  const onStudentChange = (key) => (e) =>
-    setStudentForm((v) => ({ ...v, [key]: e.target.value }))
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!canSubmit) return
     setStatus('submitting')
 
-    const submission =
-      path === 'student'
-        ? {
-            type: 'student',
-            name: studentForm.name,
-            email: studentForm.email,
-            company: '',
-            message: studentForm.why,
-            roleInterest: studentForm.roleInterest,
-            linkedin: studentForm.portfolio,
-            industry: '',
-            majorYear: studentForm.majorYear,
-            submittedAt: new Date().toISOString(),
-          }
-        : {
-            type: 'business',
-            name: businessForm.name,
-            email: businessForm.email,
-            company: businessForm.businessName,
-            message: businessForm.goals,
-            roleInterest: '',
-            linkedin: businessForm.link,
-            industry: businessForm.industry,
-            majorYear: '',
-            submittedAt: new Date().toISOString(),
-          }
+    const submission = {
+      type: 'business',
+      name: businessForm.name,
+      email: businessForm.email,
+      company: businessForm.businessName,
+      message: businessForm.goals,
+      roleInterest: '',
+      linkedin: businessForm.link,
+      industry: businessForm.industry,
+      majorYear: '',
+      submittedAt: new Date().toISOString(),
+    }
 
     try {
       await fetch(GOOGLE_SHEETS_URL, {
@@ -147,11 +114,7 @@ export default function ContactForm() {
 
     setSubmissions((prev) => [submission, ...prev].slice(0, 5))
 
-    if (path === 'student') {
-      setStudentForm(initialStudent)
-    } else {
-      setBusinessForm(initialBusiness)
-    }
+    setBusinessForm(initialBusiness)
 
     setStatus('submitted')
     setTimeout(() => setStatus('idle'), 3000)
@@ -234,12 +197,12 @@ export default function ContactForm() {
                   </div>
 
                   <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                    {path === 'student' ? 'Join the Axiom team.' : 'Build smarter growth with Axiom.'}
+                    {path === 'student' ? 'Apply to Axiom Strategy' : 'Build smarter growth with Axiom.'}
                   </div>
 
                   <div className="mt-3 text-sm leading-relaxed text-white/75">
                     {path === 'student'
-                      ? 'Work on real projects, build strategy skills, and help organizations grow.'
+                      ? 'Students apply through our official application portal so we can review your LinkedIn, resume, and interest statement in one place.'
                       : "Tell us what you're trying to improve. We’ll identify the clearest next step."}
                   </div>
                 </div>
@@ -251,106 +214,81 @@ export default function ContactForm() {
 
               <AnimatePresence mode="wait">
                 {path === 'student' ? (
-                  <motion.form
+                  <motion.div
                     key="student"
-                    onSubmit={handleSubmit}
                     initial={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: 18 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, x: -12 }}
                     transition={{ duration: 0.35, ease: 'easeOut' }}
-                    className="mt-7 grid gap-4"
+                    className="mt-7"
                   >
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Field label="Name" htmlFor="studentName">
-                        <input
-                          id="studentName"
-                          value={studentForm.name}
-                          onChange={onStudentChange('name')}
-                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                          placeholder="Your name"
-                          required
-                        />
-                      </Field>
+                    <div className="relative overflow-hidden rounded-3xl bg-black/30 p-6 ring-1 ring-hcg-400/25 shadow-card backdrop-blur">
+                      <div aria-hidden="true" className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 rounded-full bg-hcg-600/18 blur-3xl" />
+                      <div aria-hidden="true" className="pointer-events-none absolute -bottom-28 -left-28 h-72 w-72 rounded-full bg-hcg-500/14 blur-3xl" />
 
-                      <Field label="Email" htmlFor="studentEmail">
-                        <input
-                          id="studentEmail"
-                          value={studentForm.email}
-                          onChange={onStudentChange('email')}
-                          type="email"
-                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                          placeholder="you@university.edu"
-                          required
-                        />
-                      </Field>
-
-                      <Field label="Major / Year" htmlFor="majorYear">
-                        <input
-                          id="majorYear"
-                          value={studentForm.majorYear}
-                          onChange={onStudentChange('majorYear')}
-                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                          placeholder="e.g., Business • Junior"
-                        />
-                      </Field>
-
-                      <Field label="Role Interest" htmlFor="roleInterest">
-                        <input
-                          id="roleInterest"
-                          value={studentForm.roleInterest}
-                          onChange={onStudentChange('roleInterest')}
-                          className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                          placeholder="Strategy, marketing, ops, AI systems…"
-                          required
-                        />
-                      </Field>
-
-                      <div className="sm:col-span-2">
-                        <Field label="LinkedIn / Portfolio" htmlFor="portfolio">
-                          <input
-                            id="portfolio"
-                            value={studentForm.portfolio}
-                            onChange={onStudentChange('portfolio')}
-                            className="hcg-input w-full rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                            placeholder="Link"
-                          />
-                        </Field>
+                      <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/60">
+                        Student application portal
+                      </div>
+                      <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                        Apply to Axiom Strategy
+                      </div>
+                      <div className="mt-3 text-sm leading-relaxed text-white/75">
+                        Students apply through our official application portal so we can review your LinkedIn, resume, and interest statement in one place.
                       </div>
 
-                      <div className="sm:col-span-2">
-                        <Field label="Why do you want to join Axiom?" htmlFor="why">
-                          <textarea
-                            id="why"
-                            value={studentForm.why}
-                            onChange={onStudentChange('why')}
-                            rows={5}
-                            className="hcg-input w-full resize-none rounded-xl bg-black/40 px-4 py-3 text-sm text-white outline-none"
-                            placeholder="What you’re hoping to learn, build, and contribute…"
-                            required
-                          />
-                        </Field>
+                      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                        {[
+                          { k: '1', t: 'Submit application' },
+                          { k: '2', t: 'Share resume + LinkedIn' },
+                          { k: '3', t: 'Review for next steps' },
+                        ].map((s) => (
+                          <div
+                            key={s.k}
+                            className="relative overflow-hidden rounded-2xl bg-black/35 p-4 ring-1 ring-white/10"
+                          >
+                            <div className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-hcg-600/10 blur-2xl" />
+                            <div className="flex items-center gap-3">
+                              <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-hcg-300/25">
+                                <span className="text-sm font-semibold text-hcg-200">{s.k}</span>
+                              </div>
+                              <div className="text-sm font-semibold tracking-tight text-white/90">{s.t}</div>
+                            </div>
+                            <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
+                              <motion.div
+                                aria-hidden="true"
+                                className="h-full bg-gradient-to-r from-hcg-600 to-hcg-300"
+                                initial={{ width: '18%' }}
+                                animate={prefersReducedMotion ? { width: '62%' } : { width: ['18%', '78%', '38%'] }}
+                                transition={prefersReducedMotion ? { duration: 0.8 } : { duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
+                              />
+                            </div>
+                          </div>
+                        ))}
                       </div>
+
+                      <div className="mt-6">
+                        <MagneticButton
+                          as="a"
+                          href={STUDENT_APPLICATION_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-10 py-6 text-xl sm:text-2xl font-semibold text-white shadow-soft transition hover:-translate-y-1 hover:scale-[1.03] hover:shadow-glow"
+                        >
+                          Open Student Application
+                        </MagneticButton>
+                        <div className="mt-3 text-xs font-semibold tracking-[0.12em] uppercase text-white/55">
+                          Takes 2–3 minutes. Resume and LinkedIn recommended.
+                        </div>
+                      </div>
+
+                      <motion.div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.7),transparent)]"
+                        animate={prefersReducedMotion ? undefined : { opacity: [0.2, 0.7, 0.2] }}
+                        transition={prefersReducedMotion ? undefined : { duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
+                      />
                     </div>
-
-                    <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <MagneticButton
-                        as="button"
-                        type="submit"
-                        disabled={!canSubmit || status === 'submitting'}
-                        className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-5 text-lg sm:text-xl font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow enabled:hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
-                      >
-                        <span className="inline-flex items-center justify-center gap-2">
-                          {status === 'submitting' ? 'Submitting application...' : 'Apply to Join'}
-                          {status === 'submitting' ? <LoadingDots /> : null}
-                        </span>
-                      </MagneticButton>
-                      <div className="text-xs text-white/50 mt-2">
-                        No spam. Selective review process.
-                      </div>
-
-                      {status === 'submitted' ? <SuccessMessage /> : <ReviewMessage />}
-                    </div>
-                  </motion.form>
+                  </motion.div>
                 ) : (
                   <motion.form
                     key="business"

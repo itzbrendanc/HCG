@@ -82,11 +82,16 @@ export default function JoinTeam() {
 
               <div className="flex justify-center mt-10">
                 <a
-                  href="#contact"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScBNtwfSTwljojL8rQzNUD95eUc6Uq_-zFsMFyF9CN9gP0d1Q/viewform?usp=header"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-10 py-6 text-xl sm:text-2xl font-semibold text-white shadow-soft transition hover:-translate-y-1 hover:scale-[1.03] hover:shadow-glow"
                 >
                   Apply to Join
                 </a>
+              </div>
+              <div className="mt-4 text-sm text-white/60">
+                Applications are reviewed through our official portal.
               </div>
               <p className="mt-6 text-sm text-white/65">
                 Include your role interest and a link to any relevant work (portfolio, writing, projects).
