@@ -7,7 +7,12 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <img src={axiomStrategyLogo} alt="Axiom Strategy" className="h-8 w-auto opacity-95 sm:h-9" />
+            <img
+              src={axiomStrategyLogo}
+              alt="Axiom Strategy"
+              className="h-8 w-auto opacity-100 sm:h-9"
+              style={{ filter: 'brightness(1.12) contrast(1.06) saturate(1.02)' }}
+            />
             <div className="text-sm font-semibold tracking-tight text-white/90">
               Axiom Strategy
             </div>

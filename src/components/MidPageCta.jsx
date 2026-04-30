@@ -13,7 +13,12 @@ export default function MidPageCta() {
         <div className="lg:col-span-3">
           <div className="rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur shadow-soft">
             <div className="flex items-center gap-3">
-              <img src={axiomStrategyLogo} alt="Axiom Strategy" className="h-9 w-auto opacity-95 sm:h-10" />
+              <img
+                src={axiomStrategyLogo}
+                alt="Axiom Strategy"
+                className="h-9 w-auto opacity-100 sm:h-10"
+                style={{ filter: 'brightness(1.12) contrast(1.06) saturate(1.02)' }}
+              />
               <div>
                 <div className="text-sm font-semibold tracking-tight text-white/90">Axiom Strategy</div>
                 <div className="text-xs text-white/55">Next move</div>
