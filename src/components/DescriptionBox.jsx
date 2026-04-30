@@ -17,7 +17,7 @@ export default function DescriptionBox() {
           <div className="pointer-events-none absolute -bottom-28 -right-28 h-72 w-72 rounded-full bg-hcg-500/12 blur-3xl" />
 
           <p className="relative text-[16px] font-medium leading-relaxed tracking-tight text-white/85 sm:text-[17px]">
-            Hilltop Consulting Group helps businesses identify{' '}
+            Axiom Strategy Group helps businesses identify{' '}
             <span className="font-semibold text-hcg-200">growth opportunities</span>,{' '}
             <span className="font-semibold text-hcg-200">strengthen operations</span>, and make{' '}
             <span className="font-semibold text-hcg-200">smarter strategic decisions</span> — combining{' '}

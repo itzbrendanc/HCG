@@ -21,7 +21,7 @@ export default function Hero() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="mb-8 inline-flex w-fit items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-semibold tracking-[0.14em] text-white/70 uppercase ring-1 ring-white/10"
         >
-          Hilltop Consulting Group <span className="text-white/35">•</span> HCG
+          Axiom Strategy Group <span className="text-white/35">•</span> ASG
         </motion.p>
 
         <HeroTitleSequence />

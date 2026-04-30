@@ -1,6 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import Section from './Section.jsx'
-import hilltopLogo from '../assets/hilltop-logo.png'
+import axiomMark from '../assets/axiom-mark.svg'
 import MagneticButton from './MagneticButton.jsx'
 
 const approach = [
@@ -123,8 +123,8 @@ export default function Offers() {
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-4">
               <img
-                src={hilltopLogo}
-                alt="Hilltop Consulting Group"
+                src={axiomMark}
+                alt="Axiom Strategy Group"
                 className="h-12 w-auto opacity-95"
               />
               <div>
@@ -142,7 +142,7 @@ export default function Offers() {
                 href="#contact"
                 className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
               >
-                Work With HCG
+                Work With ASG
               </MagneticButton>
             </div>
           </div>

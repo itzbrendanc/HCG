@@ -112,7 +112,7 @@ export default function MouseParallaxLogo() {
 
         <motion.img
           src={hilltopLogoTransparent}
-          alt="Hilltop Consulting Group logo"
+          alt="Axiom Strategy Group logo"
           initial={prefersReducedMotion ? { opacity: 0.9, scale: 1 } : { opacity: 0, scale: 0.96 }}
           animate={
             prefersReducedMotion

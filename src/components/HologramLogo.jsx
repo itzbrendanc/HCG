@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import hilltopLogo from '../assets/hilltop-logo.png'
+import axiomMark from '../assets/axiom-mark.svg'
 
 function Sparkle({ style, delay = 0 }) {
   return (
@@ -148,7 +148,7 @@ export default function HologramLogo({ className = '' }) {
 
                 {face.hasLogo ? (
                   <img
-                    src={hilltopLogo}
+                    src={axiomMark}
                     alt=""
                     draggable={false}
                     className="pointer-events-none select-none h-full w-full object-contain p-10"

@@ -1,0 +1,49 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axiom Strategy Group logo">
+  <defs>
+    <linearGradient id="axiomBlue" x1="180" y1="40" x2="1040" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9CC7FF" stop-opacity="0.95"/>
+      <stop offset="0.45" stop-color="#2F6FB4" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#9CC7FF" stop-opacity="0.85"/>
+    </linearGradient>
+    <radialGradient id="axiomGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(860 150) rotate(120) scale(520 280)">
+      <stop stop-color="#2F6FB4" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="
+        0 0 0 0 0.19
+        0 0 0 0 0.44
+        0 0 0 0 0.71
+        0 0 0 0.75 0" result="blueBlur"/>
+      <feMerge>
+        <feMergeNode in="blueBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="360" fill="none"/>
+  <path d="M0 0H1200V360H0V0Z" fill="url(#axiomGlow)"/>
+
+  <!-- Monogram -->
+  <g transform="translate(64 64)">
+    <circle cx="116" cy="116" r="114" stroke="url(#axiomBlue)" stroke-opacity="0.55" stroke-width="4"/>
+    <circle cx="116" cy="116" r="88" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="2"/>
+    <path d="M116 44L178 188H150L134 152H98L82 188H54L116 44ZM124 126L116 106L108 126H124Z" fill="url(#axiomBlue)" filter="url(#softGlow)"/>
+    <path d="M54 216H178" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="2" stroke-linecap="round"/>
+    <path d="M78 236H154" stroke="#FFFFFF" stroke-opacity="0.07" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(320 96)" filter="url(#softGlow)">
+    <text x="0" y="90" fill="#FFFFFF" font-size="108" font-weight="650" letter-spacing="6" font-family="ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif">
+      AXIOM
+    </text>
+    <text x="2" y="170" fill="#FFFFFF" fill-opacity="0.78" font-size="30" font-weight="600" letter-spacing="10" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Inter, Roboto, Helvetica, Arial">
+      STRATEGY GROUP
+    </text>
+    <path d="M0 196H740" stroke="url(#axiomBlue)" stroke-opacity="0.45" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
+

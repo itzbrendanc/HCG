@@ -17,14 +17,14 @@ export default function About() {
         >
           <div className="rounded-3xl bg-black/30 p-7 ring-1 ring-white/10 shadow-card backdrop-blur">
             <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-              About HCG
+              About ASG
             </div>
             <h3 className="mt-3 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl">
-              About HCG
+              Axiom Strategy Group
             </h3>
             <div className="mt-4 grid gap-3 text-[15px] leading-relaxed text-white/75 sm:text-base">
               <p>
-                Hilltop Consulting Group is a student-led consulting and growth strategy firm focused on solving real business problems through structured execution.
+                Axiom Strategy Group is a student-led consulting and growth strategy firm focused on solving real business problems through structured execution.
               </p>
               <p>
                 We operate at the intersection of strategy, marketing, and systems—helping organizations identify opportunities, move faster, and scale with clarity.

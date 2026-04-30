@@ -50,7 +50,7 @@ export default function ScrollStory() {
           className="max-w-3xl"
         >
           <div className="text-sm font-semibold tracking-[0.14em] uppercase text-white/55">
-            How HCG Delivers
+            How ASG Delivers
           </div>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
             A scroll-driven story of impact
