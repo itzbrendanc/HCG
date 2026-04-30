@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
-import axiomMark from '../assets/axiom-mark.svg'
+import axiomMark from '../assets/axiom-mark.png'
 
 function Sparkle({ style, delay = 0 }) {
   return (

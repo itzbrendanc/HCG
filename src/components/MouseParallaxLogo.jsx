@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import axiomMark from '../assets/axiom-mark.svg'
+import axiomMark from '../assets/axiom-mark.png'
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true)
