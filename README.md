@@ -1,6 +1,6 @@
-# Axiom Strategy Group (ASG)
+# Axiom Strategy
 
-Axiom Strategy Group (ASG) is a premium consulting website built to communicate credibility and a modern, futuristic consulting aesthetic. The site emphasizes structured delivery, measurable impact, and professional presentation.
+Axiom Strategy is a premium consulting website built to communicate credibility and a modern, futuristic consulting aesthetic. The site emphasizes structured delivery, measurable impact, and professional presentation.
 
 ## Tech
 

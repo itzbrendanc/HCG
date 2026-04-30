@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import axiomMark from '../assets/axiom-mark.svg'
+import axiomStrategyLogo from '../assets/axiom-strategy-logo.png'
 import MagneticButton from './MagneticButton.jsx'
 
 const navItems = [
@@ -51,16 +51,13 @@ export default function Navbar() {
           <div className="relative">
             <div className="pointer-events-none absolute -inset-2 rounded-xl bg-hcg-600/10 opacity-0 blur-xl transition group-hover:opacity-100" />
             <img
-              src={axiomMark}
-              alt="Axiom Strategy Group"
-              className="relative h-9 w-auto opacity-95 sm:h-10"
+              src={axiomStrategyLogo}
+              alt="Axiom Strategy"
+              className="relative h-8 w-auto opacity-95 sm:h-9"
             />
           </div>
           <div className="hidden leading-tight sm:block">
-            <div className="text-sm font-semibold tracking-tight text-white">
-              Axiom Strategy Group
-            </div>
-            <div className="text-xs text-white/60">ASG</div>
+            <div className="text-sm font-semibold tracking-tight text-white">Axiom Strategy</div>
           </div>
         </motion.a>
 
@@ -80,7 +77,7 @@ export default function Navbar() {
             href="#contact"
             className="rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-4 py-2 text-sm font-semibold text-white ring-1 ring-hcg-300/30 shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.01]"
           >
-            Work With ASG
+            Work With Axiom
           </MagneticButton>
         </nav>
 
@@ -126,7 +123,7 @@ export default function Navbar() {
                   onClick={() => setOpen(false)}
                   className="mt-2 rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-4 py-2 text-center text-sm font-semibold text-white shadow-soft transition hover:shadow-glow"
                 >
-                  Work With ASG
+                  Work With Axiom
                 </MagneticButton>
               </div>
             </div>

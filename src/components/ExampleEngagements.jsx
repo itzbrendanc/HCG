@@ -26,7 +26,7 @@ export default function ExampleEngagements() {
     <Section
       id="examples"
       eyebrow="Example Engagements"
-      title="A look at the types of challenges ASG is built to support"
+      title="A look at the types of challenges Axiom is built to support"
       subtitle="High-leverage engagements designed to produce measurable progress."
       className="bg-hcg-night bg-hcg-beams"
     >

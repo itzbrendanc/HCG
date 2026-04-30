@@ -29,9 +29,9 @@ export default function JoinTeam() {
   return (
     <Section
       id="join-hcg"
-      eyebrow="Join ASG"
+      eyebrow="Join Axiom"
       title="Build with a premium consulting standard"
-      subtitle="Axiom Strategy Group welcomes motivated builders who value clarity, discipline, and high-quality deliverables."
+      subtitle="Axiom Strategy welcomes motivated builders who value clarity, discipline, and high-quality deliverables."
       className="bg-hcg-night"
     >
       <div className="grid gap-4 lg:grid-cols-12">
@@ -73,7 +73,7 @@ export default function JoinTeam() {
           >
             <div className="mt-16 relative p-8 rounded-3xl glass ring-1 ring-hcg-400/30 shadow-soft glow-blue-strong text-center">
               <div className="text-2xl sm:text-3xl font-semibold text-white text-center">
-                Join Axiom Strategy Group
+                Join Axiom Strategy
               </div>
 
               <div className="text-sm text-white/60 text-center mt-2">

@@ -139,7 +139,7 @@ export default function CinematicTextScene() {
           transition={{ duration: 0.7, ease: 'easeOut', delay: prefersReducedMotion ? 0 : 0.25 }}
           className="mt-6 max-w-2xl text-[16px] leading-relaxed text-white/80 sm:text-lg"
         >
-          Axiom Strategy Group helps organizations turn ideas into structured, execution-driven growth.
+          Axiom Strategy helps organizations turn ideas into structured, execution-driven growth.
         </motion.div>
       </motion.div>
     </div>

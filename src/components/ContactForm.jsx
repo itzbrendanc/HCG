@@ -138,12 +138,12 @@ export default function ContactForm() {
         body: JSON.stringify(submission),
       })
     } catch (err) {
-      console.error('[ASG lead submission error]', err)
+      console.error('[AXIOM lead submission error]', err)
       setStatus('idle')
       return
     }
 
-    console.log('[ASG lead submission]', submission)
+    console.log('[AXIOM lead submission]', submission)
 
     setSubmissions((prev) => [submission, ...prev].slice(0, 5))
 
@@ -158,7 +158,7 @@ export default function ContactForm() {
   }
 
   return (
-    <Section id="contact" eyebrow="Work With ASG" className="bg-hcg-night bg-hcg-beams">
+    <Section id="contact" eyebrow="Work With Axiom" className="bg-hcg-night bg-hcg-beams">
       <div className="max-w-5xl">
         <AnimatedSectionHeading
           lines={['Ready to move?', 'Let’s build what’s next.']}
@@ -234,7 +234,7 @@ export default function ContactForm() {
                   </div>
 
                   <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                    {path === 'student' ? 'Join the ASG team.' : 'Build smarter growth with ASG.'}
+                    {path === 'student' ? 'Join the Axiom team.' : 'Build smarter growth with Axiom.'}
                   </div>
 
                   <div className="mt-3 text-sm leading-relaxed text-white/75">
@@ -318,7 +318,7 @@ export default function ContactForm() {
                       </div>
 
                       <div className="sm:col-span-2">
-                        <Field label="Why do you want to join ASG?" htmlFor="why">
+                        <Field label="Why do you want to join Axiom?" htmlFor="why">
                           <textarea
                             id="why"
                             value={studentForm.why}

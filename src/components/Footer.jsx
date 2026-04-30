@@ -1,4 +1,4 @@
-import axiomMark from '../assets/axiom-mark.svg'
+import axiomStrategyLogo from '../assets/axiom-strategy-logo.png'
 import MagneticButton from './MagneticButton.jsx'
 
 export default function Footer() {
@@ -7,9 +7,9 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <img src={axiomMark} alt="Axiom Strategy Group" className="h-9 w-auto opacity-95" />
+            <img src={axiomStrategyLogo} alt="Axiom Strategy" className="h-8 w-auto opacity-95 sm:h-9" />
             <div className="text-sm font-semibold tracking-tight text-white/90">
-              Axiom Strategy Group (ASG)
+              Axiom Strategy
             </div>
           </div>
 
@@ -20,7 +20,7 @@ export default function Footer() {
               href="#contact"
               className="inline-flex items-center justify-center rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 shadow-soft transition hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-card"
             >
-              Work With ASG
+              Work With Axiom
             </MagneticButton>
           </div>
 
@@ -105,7 +105,7 @@ export default function Footer() {
 
         <div className="mt-8 border-t border-white/10 pt-6">
           <div className="flex flex-col gap-2 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
-            <div>© {new Date().getFullYear()} Axiom Strategy Group (ASG). All rights reserved.</div>
+            <div>© {new Date().getFullYear()} Axiom Strategy. All rights reserved.</div>
             <div className="text-white/45">
               Strategic advisory. Operational clarity. Measurable growth.
             </div>

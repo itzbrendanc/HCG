@@ -1,5 +1,5 @@
 import Section from './Section.jsx'
-import axiomMark from '../assets/axiom-mark.svg'
+import axiomStrategyLogo from '../assets/axiom-strategy-logo.png'
 import MagneticButton from './MagneticButton.jsx'
 import CinematicWordWall from './CinematicWordWall.jsx'
 
@@ -13,9 +13,9 @@ export default function MidPageCta() {
         <div className="lg:col-span-3">
           <div className="rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur shadow-soft">
             <div className="flex items-center gap-3">
-              <img src={axiomMark} alt="Axiom Strategy Group" className="h-10 w-auto opacity-95" />
+              <img src={axiomStrategyLogo} alt="Axiom Strategy" className="h-9 w-auto opacity-95 sm:h-10" />
               <div>
-                <div className="text-sm font-semibold tracking-tight text-white/90">ASG</div>
+                <div className="text-sm font-semibold tracking-tight text-white/90">Axiom Strategy</div>
                 <div className="text-xs text-white/55">Next move</div>
               </div>
             </div>

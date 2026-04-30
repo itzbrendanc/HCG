@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useReducedMotion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import hilltopLogoTransparent from '../assets/hilltop-logo-transparent.png'
+import axiomMark from '../assets/axiom-mark.svg'
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(true)
@@ -111,8 +111,8 @@ export default function MouseParallaxLogo() {
         </motion.div>
 
         <motion.img
-          src={hilltopLogoTransparent}
-          alt="Axiom Strategy Group logo"
+          src={axiomMark}
+          alt="Axiom Strategy logo"
           initial={prefersReducedMotion ? { opacity: 0.9, scale: 1 } : { opacity: 0, scale: 0.96 }}
           animate={
             prefersReducedMotion
