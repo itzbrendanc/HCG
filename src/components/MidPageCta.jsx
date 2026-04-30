@@ -17,7 +17,6 @@ export default function MidPageCta() {
                 src={axiomStrategyLogo}
                 alt="Axiom Strategy"
                 className="h-9 w-auto opacity-100 sm:h-10"
-                style={{ filter: 'brightness(1.12) contrast(1.06) saturate(1.02)' }}
               />
               <div>
                 <div className="text-sm font-semibold tracking-tight text-white/90">Axiom Strategy</div>

@@ -126,7 +126,6 @@ export default function Offers() {
                 src={axiomStrategyLogo}
                 alt="Axiom Strategy"
                 className="h-10 w-auto opacity-100 sm:h-12"
-                style={{ filter: 'brightness(1.12) contrast(1.06) saturate(1.02)' }}
               />
               <div>
                 <div className="text-lg font-semibold tracking-tight text-white">

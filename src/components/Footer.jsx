@@ -11,7 +11,6 @@ export default function Footer() {
               src={axiomStrategyLogo}
               alt="Axiom Strategy"
               className="h-8 w-auto opacity-100 sm:h-9"
-              style={{ filter: 'brightness(1.12) contrast(1.06) saturate(1.02)' }}
             />
             <div className="text-sm font-semibold tracking-tight text-white/90">
               Axiom Strategy

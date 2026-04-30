@@ -54,7 +54,6 @@ export default function Navbar() {
               src={axiomStrategyLogo}
               alt="Axiom Strategy"
               className="relative h-8 w-auto opacity-100 sm:h-9"
-              style={{ filter: 'brightness(1.12) contrast(1.06) saturate(1.02)' }}
             />
           </div>
           <div className="hidden leading-tight sm:block">
