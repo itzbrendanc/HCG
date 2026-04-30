@@ -222,71 +222,83 @@ export default function ContactForm() {
                     transition={{ duration: 0.35, ease: 'easeOut' }}
                     className="mt-7"
                   >
-                    <div className="relative overflow-hidden rounded-3xl bg-black/30 p-6 ring-1 ring-hcg-400/25 shadow-card backdrop-blur">
-                      <div aria-hidden="true" className="pointer-events-none absolute -right-28 -top-28 h-72 w-72 rounded-full bg-hcg-600/18 blur-3xl" />
-                      <div aria-hidden="true" className="pointer-events-none absolute -bottom-28 -left-28 h-72 w-72 rounded-full bg-hcg-500/14 blur-3xl" />
+                    <div className="relative overflow-hidden rounded-3xl bg-black/30 p-7 ring-1 ring-hcg-400/25 shadow-card backdrop-blur sm:p-8">
+                      {/* Decorative layers (kept behind content) */}
+                      <div aria-hidden="true" className="pointer-events-none absolute -z-10 -right-32 -top-32 h-80 w-80 rounded-full bg-hcg-600/18 blur-3xl" />
+                      <div aria-hidden="true" className="pointer-events-none absolute -z-10 -bottom-32 -left-32 h-80 w-80 rounded-full bg-hcg-500/14 blur-3xl" />
+                      <motion.div
+                        aria-hidden="true"
+                        className="pointer-events-none absolute -z-10 -inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.7),transparent)]"
+                        animate={prefersReducedMotion ? undefined : { opacity: [0.18, 0.55, 0.18] }}
+                        transition={prefersReducedMotion ? undefined : { duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+                      />
 
-                      <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/60">
-                        Student application portal
-                      </div>
-                      <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                        Apply to Axiom Strategy
-                      </div>
-                      <div className="mt-3 text-sm leading-relaxed text-white/75">
-                        Students apply through our official application portal so we can review your LinkedIn, resume, and interest statement in one place.
-                      </div>
+                      <div className="relative z-10">
+                        <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/60">
+                          Student application portal
+                        </div>
+                        <div className="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl leading-tight">
+                          Apply to Axiom Strategy
+                        </div>
+                        <div className="mt-4 text-sm leading-relaxed text-white/75">
+                          Apply through our official portal to submit your LinkedIn, resume, and interest statement for structured review.
+                        </div>
 
-                      <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                        {[
-                          { k: '1', t: 'Submit application' },
-                          { k: '2', t: 'Share resume + LinkedIn' },
-                          { k: '3', t: 'Review for next steps' },
-                        ].map((s) => (
-                          <div
-                            key={s.k}
-                            className="relative overflow-hidden rounded-2xl bg-black/35 p-4 ring-1 ring-white/10"
-                          >
-                            <div className="pointer-events-none absolute -right-12 -top-12 h-28 w-28 rounded-full bg-hcg-600/10 blur-2xl" />
-                            <div className="flex items-center gap-3">
-                              <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-hcg-300/25">
-                                <span className="text-sm font-semibold text-hcg-200">{s.k}</span>
+                        <div className="mt-8 grid gap-5 md:grid-cols-3">
+                          {[
+                            { k: '1', t: 'Submit application' },
+                            { k: '2', t: 'Share resume + LinkedIn' },
+                            { k: '3', t: 'Review for next steps' },
+                          ].map((s) => (
+                            <motion.div
+                              key={s.k}
+                              whileHover={prefersReducedMotion ? undefined : { y: -4, scale: 1.01 }}
+                              transition={{ duration: 0.25, ease: 'easeOut' }}
+                              className="relative overflow-hidden rounded-2xl bg-black/30 p-5 ring-1 ring-hcg-400/18 shadow-card backdrop-blur"
+                            >
+                              <div aria-hidden="true" className="pointer-events-none absolute -z-10 -right-12 -top-12 h-28 w-28 rounded-full bg-hcg-600/10 blur-2xl" />
+                              <div className="flex items-start gap-3">
+                                <div className="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/5 ring-1 ring-hcg-300/30 shadow-soft">
+                                  <span className="text-sm font-semibold text-hcg-200">{s.k}</span>
+                                </div>
+                                <div className="text-sm font-semibold leading-snug tracking-tight text-white/90">
+                                  {s.t}
+                                </div>
                               </div>
-                              <div className="text-sm font-semibold tracking-tight text-white/90">{s.t}</div>
-                            </div>
-                            <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
-                              <motion.div
-                                aria-hidden="true"
-                                className="h-full bg-gradient-to-r from-hcg-600 to-hcg-300"
-                                initial={{ width: '18%' }}
-                                animate={prefersReducedMotion ? { width: '62%' } : { width: ['18%', '78%', '38%'] }}
-                                transition={prefersReducedMotion ? { duration: 0.8 } : { duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
-                              />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                              <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
+                                <motion.div
+                                  aria-hidden="true"
+                                  className="h-full bg-gradient-to-r from-hcg-600 to-hcg-300"
+                                  initial={{ width: '18%' }}
+                                  animate={prefersReducedMotion ? { width: '62%' } : { width: ['18%', '78%', '38%'] }}
+                                  transition={prefersReducedMotion ? { duration: 0.8 } : { duration: 5.6, repeat: Infinity, ease: 'easeInOut' }}
+                                />
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
 
-                      <div className="mt-6">
-                        <MagneticButton
-                          as="a"
-                          href={STUDENT_APPLICATION_URL}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-10 py-6 text-xl sm:text-2xl font-semibold text-white shadow-soft transition hover:-translate-y-1 hover:scale-[1.03] hover:shadow-glow"
-                        >
-                          Open Student Application
-                        </MagneticButton>
-                        <div className="mt-3 text-xs font-semibold tracking-[0.12em] uppercase text-white/55">
+                        <div className="mt-6 text-center text-xs font-semibold uppercase tracking-[0.18em] text-white/45">
+                          Selective review • Real projects • Execution-focused
+                        </div>
+
+                        <div className="my-8 h-px w-full bg-white/10" />
+
+                        <div className="mt-0 flex justify-center">
+                          <MagneticButton
+                            as="a"
+                            href={STUDENT_APPLICATION_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="w-full rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-5 text-lg font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-glow sm:w-auto sm:text-xl"
+                          >
+                            Open Student Application
+                          </MagneticButton>
+                        </div>
+                        <div className="mt-3 text-center text-xs font-medium tracking-wide text-white/50">
                           Takes 2–3 minutes. Resume and LinkedIn recommended.
                         </div>
                       </div>
-
-                      <motion.div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute -inset-x-10 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.7),transparent)]"
-                        animate={prefersReducedMotion ? undefined : { opacity: [0.2, 0.7, 0.2] }}
-                        transition={prefersReducedMotion ? undefined : { duration: 3.8, repeat: Infinity, ease: 'easeInOut' }}
-                      />
                     </div>
                   </motion.div>
                 ) : (
