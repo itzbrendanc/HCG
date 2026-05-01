@@ -6,9 +6,9 @@ export default function TeamPortalPreview() {
     <Section
       id="portal"
       className="bg-hcg-night"
-      eyebrow="Internal Team Portal Preview"
+      eyebrow="INTERNAL TEAM PORTAL PREVIEW"
       title="Built like an operating system."
-      subtitle="Every project moves through a clear workflow."
+      subtitle="Every project moves through a clear workflow — from intake to follow-up to delivery."
     >
       <PortalDashboardVisual />
     </Section>
