@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
 import MagneticButton from './MagneticButton.jsx'
@@ -61,15 +61,14 @@ function ServiceCard({ title, description, deliverable, kind, selected, onSelect
     <motion.button
       type="button"
       onClick={onSelect}
-      animate={selected ? { scale: 1.01 } : { scale: 1 }}
-      transition={{ duration: 0.28, ease: 'easeOut' }}
-      whileHover={{ y: -4, rotateX: 1.4, rotateY: -1.4 }}
+      animate={selected ? { scale: 1.005 } : { scale: 1 }}
+      transition={{ duration: 0.24, ease: 'easeOut' }}
+      whileHover={{ y: -2 }}
       whileTap={{ scale: 0.99 }}
       className={[
         'group relative w-full overflow-hidden rounded-3xl bg-black/35 p-7 text-left ring-1 shadow-soft backdrop-blur transition hover:shadow-card hcg-card-accent',
         selected ? 'ring-hcg-400/55 glow-blue-strong' : 'ring-white/10',
       ].join(' ')}
-      style={{ transformStyle: 'preserve-3d', perspective: 900 }}
     >
       <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
 
@@ -129,9 +128,6 @@ export default function Services() {
     [selectedTitle],
   )
 
-  const { scrollYProgress } = useScroll({ target: cardsRef, offset: ['start end', 'end start'] })
-  const driftY = useTransform(scrollYProgress, [0, 1], [14, -14])
-
   return (
     <Section
       id="services"
@@ -165,7 +161,6 @@ export default function Services() {
         </div>
 
         <motion.div
-          style={prefersReducedMotion ? undefined : { y: driftY }}
           id="services-cards"
           ref={cardsRef}
           initial="hidden"
@@ -176,7 +171,7 @@ export default function Services() {
             visible: {
               transition: prefersReducedMotion
                 ? { staggerChildren: 0 }
-                : { staggerChildren: 0.08, delayChildren: 0.05 },
+                : { staggerChildren: 0.05, delayChildren: 0.03 },
             },
           }}
           className="grid gap-4 sm:grid-cols-2 lg:col-span-8"
@@ -185,10 +180,10 @@ export default function Services() {
             <motion.div
               key={s.title}
               variants={{
-                hidden: { opacity: 0, y: 10 },
+                hidden: { opacity: 0, y: 6 },
                 visible: { opacity: 1, y: 0 },
               }}
-              transition={{ duration: 0.55, ease: 'easeOut' }}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
             >
               <ServiceCard
                 title={s.title}

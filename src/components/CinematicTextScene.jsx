@@ -28,8 +28,8 @@ export default function CinematicTextScene() {
   const sx = useSpring(mx, { stiffness: 80, damping: 18, mass: 0.6 })
   const sy = useSpring(my, { stiffness: 80, damping: 18, mass: 0.6 })
 
-  const textX = useTransform(sx, (v) => v * 10)
-  const textY = useTransform(sy, (v) => v * 6)
+  const textX = useTransform(sx, (v) => v * 6)
+  const textY = useTransform(sy, (v) => v * 3.5)
 
   useEffect(() => {
     if (!finePointer || prefersReducedMotion) return
@@ -80,28 +80,16 @@ export default function CinematicTextScene() {
       <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_50%_30%,rgba(65,135,210,0.22),transparent_65%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(760px_520px_at_15%_15%,rgba(255,255,255,0.06),transparent_62%)]" />
 
-      <AnimatedStrategyGrid density={22} />
+      <AnimatedStrategyGrid density={16} />
 
       {/* Blue light sweep */}
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute -inset-y-24 left-0 w-[40%] bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.20),transparent)] blur-2xl"
         animate={prefersReducedMotion ? undefined : { x: ['-60%', '180%'] }}
-        transition={prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.4 }}
+        transition={prefersReducedMotion ? undefined : { duration: 8.6, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.8 }}
         style={{ transformOrigin: '50% 50%', rotate: -10 }}
       />
-
-      {/* Particle streams */}
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.22]"
-        animate={prefersReducedMotion ? undefined : { y: [0, -10, 0] }}
-        transition={prefersReducedMotion ? undefined : { duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ maskImage: 'radial-gradient(circle at 50% 40%, black 45%, transparent 78%)' }}
-      >
-        <div className="absolute left-1/2 top-[34%] h-px w-[120%] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(65,135,210,0.55),transparent)]" />
-        <div className="absolute left-1/2 top-[60%] h-px w-[120%] -translate-x-1/2 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent)]" />
-      </motion.div>
 
       <motion.div
         style={prefersReducedMotion ? undefined : { x: textX, y: textY }}
