@@ -73,69 +73,76 @@ export default function PortalDashboardVisual() {
   const prefersReducedMotion = useReducedMotion()
 
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-black/35 p-7 ring-1 ring-hcg-400/30 shadow-card backdrop-blur glow-blue-strong">
-      {/* Outer glow */}
-      <div className="pointer-events-none absolute -inset-24 bg-[radial-gradient(900px_520px_at_55%_35%,rgba(65,135,210,0.22),transparent_66%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(800px_520px_at_20%_18%,rgba(255,255,255,0.06),transparent_64%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(0,0,0,0))]" />
+    <div className="relative mx-auto max-w-6xl">
+      {/* Section backdrop behind the dashboard */}
+      <div className="pointer-events-none absolute -inset-x-10 -inset-y-10">
+        <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_50%_40%,rgba(65,135,210,0.18),transparent_66%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(760px_520px_at_20%_20%,rgba(255,255,255,0.05),transparent_64%)]" />
+      </div>
 
-      {/* Subtle internal grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.18]"
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)',
-          backgroundSize: '84px 84px',
-          maskImage: 'radial-gradient(circle at 50% 38%, black 42%, transparent 82%)',
-        }}
-      />
+      <div className="relative overflow-hidden rounded-3xl bg-black/35 p-8 ring-1 ring-hcg-400/35 shadow-card backdrop-blur glow-blue-strong sm:p-9">
+        {/* Outer glow */}
+        <div className="pointer-events-none absolute -inset-24 bg-[radial-gradient(1000px_620px_at_55%_35%,rgba(65,135,210,0.24),transparent_66%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_620px_at_20%_18%,rgba(255,255,255,0.06),transparent_64%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(0,0,0,0))]" />
 
-      <div className="relative">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <div className="text-xs font-semibold tracking-[0.18em] uppercase text-white/55">
-              Internal Team Portal Preview
-            </div>
-            <div className="mt-2 text-2xl font-semibold tracking-tight text-white">
-              Built like an operating system.
-            </div>
-            <div className="mt-2 text-sm text-white/75">
-              Every project moves through a clear workflow — from intake to follow-up to delivery.
-            </div>
-          </div>
+        {/* Subtle internal grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.20]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
+            backgroundSize: '84px 84px',
+            maskImage: 'radial-gradient(circle at 50% 38%, black 42%, transparent 82%)',
+          }}
+        />
 
-          <div className="grid grid-cols-3 gap-3">
-            {[
-              { k: 'Leads', v: '24' },
-              { k: 'In flight', v: '7' },
-              { k: 'This week', v: '+3' },
-            ].map((m) => (
-              <div
-                key={m.k}
-                className="rounded-2xl bg-black/30 px-4 py-3 ring-1 ring-white/10 backdrop-blur"
-              >
-                <div className="flex items-center gap-3">
-                  <MetricIcon kind={m.k} />
-                  <div>
-                    <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                      {m.k}
+        <div className="relative">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-xl">
+              <div className="text-xs font-semibold tracking-[0.18em] uppercase text-white/55">
+                Internal Team Portal Preview
+              </div>
+              <div className="mt-2 text-2xl font-semibold tracking-tight text-white sm:text-[28px]">
+                Built like an operating system.
+              </div>
+              <div className="mt-2 text-sm leading-relaxed text-white/75">
+                Every project moves through a clear workflow — from intake to follow-up to delivery.
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { k: 'Leads', v: '24' },
+                { k: 'In flight', v: '7' },
+                { k: 'This week', v: '+3' },
+              ].map((m) => (
+                <div
+                  key={m.k}
+                  className="rounded-2xl bg-black/25 px-4 py-3 ring-1 ring-white/10 backdrop-blur"
+                >
+                  <div className="flex items-center gap-3">
+                    <MetricIcon kind={m.k} />
+                    <div>
+                      <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+                        {m.k}
+                      </div>
+                      <div className="mt-1 text-sm font-semibold text-white">{m.v}</div>
                     </div>
-                    <div className="mt-1 text-sm font-semibold text-white">{m.v}</div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
         {/* Progress bars */}
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="mt-7 grid gap-3 sm:grid-cols-3">
           {[
             { k: 'Status', label: 'On track', v: 68 },
             { k: 'Follow-up', label: 'In progress', v: 52 },
             { k: 'Delivery', label: 'In motion', v: 36 },
           ].map((m) => (
-            <div key={m.k} className="rounded-2xl bg-black/30 p-4 ring-1 ring-white/10">
+            <div key={m.k} className="rounded-2xl bg-black/25 p-4 ring-1 ring-white/10">
               <div className="flex items-center justify-between">
                 <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
                   {m.k}
@@ -145,9 +152,9 @@ export default function PortalDashboardVisual() {
                 </div>
                 <span className="text-xs font-semibold text-white/45">{m.v}%</span>
               </div>
-              <div className="mt-3 h-2 rounded-full bg-white/5 ring-1 ring-white/10">
+              <div className="mt-3 h-2.5 rounded-full bg-white/5 ring-1 ring-white/10">
                 <motion.div
-                  className="h-2 rounded-full bg-gradient-to-r from-hcg-600/70 via-hcg-400/70 to-hcg-300/40 shadow-[0_0_18px_rgba(65,135,210,0.18)]"
+                  className="h-2.5 rounded-full bg-gradient-to-r from-hcg-600/80 via-hcg-400/75 to-hcg-300/45 shadow-[0_0_22px_rgba(65,135,210,0.22)]"
                   initial={prefersReducedMotion ? { width: `${m.v}%` } : { width: '0%' }}
                   whileInView={{ width: `${m.v}%` }}
                   viewport={{ once: true, amount: 0.5 }}
@@ -159,7 +166,7 @@ export default function PortalDashboardVisual() {
         </div>
 
         {/* CRM table */}
-        <div className="mt-6 overflow-hidden rounded-2xl ring-1 ring-white/10">
+        <div className="mt-7 overflow-hidden rounded-2xl ring-1 ring-white/10">
           <div className="grid grid-cols-12 gap-3 bg-white/5 px-4 py-3 text-xs font-semibold text-white/60">
             <div className="col-span-5">Leads</div>
             <div className="col-span-2">Status</div>
@@ -211,6 +218,7 @@ export default function PortalDashboardVisual() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
         </div>
       </div>
     </div>
