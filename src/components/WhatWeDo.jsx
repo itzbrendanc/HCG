@@ -31,19 +31,16 @@ function HologramSystemPreview() {
   return (
     <motion.div
       aria-hidden="true"
-      className="relative overflow-hidden rounded-2xl bg-black/25 p-6 ring-1 ring-white/10 shadow-soft backdrop-blur"
-      initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.4 }}
-      transition={{ duration: 0.45, ease: 'easeOut' }}
+      className="relative min-h-[240px] overflow-hidden rounded-2xl bg-black/35 p-6 ring-1 ring-hcg-400/25 shadow-soft backdrop-blur glow-blue-strong sm:min-h-[280px]"
     >
       {/* Aura */}
-      <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/18 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-28 -right-24 h-72 w-72 rounded-full bg-hcg-500/12 blur-3xl" />
+      <div className="pointer-events-none absolute -left-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/28 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-28 -right-24 h-72 w-72 rounded-full bg-hcg-500/20 blur-3xl" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-hcg-400/10 blur-3xl" />
 
       {/* Grid lines */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.22]"
+        className="pointer-events-none absolute inset-0 opacity-[0.34]"
         style={{
           backgroundImage:
             'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
@@ -59,7 +56,7 @@ function HologramSystemPreview() {
         transition={
           prefersReducedMotion
             ? undefined
-            : { duration: 10, repeat: Infinity, ease: 'easeInOut', repeatDelay: 2.2 }
+            : { duration: 9.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.6 }
         }
         style={{ rotate: -10 }}
       />
@@ -72,7 +69,7 @@ function HologramSystemPreview() {
             ? undefined
             : { duration: 6.6, repeat: Infinity, ease: 'easeInOut' }
         }
-        className="relative"
+        className="relative z-10"
       >
         <div className="flex items-center justify-between">
           <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
@@ -121,7 +118,7 @@ function HologramSystemPreview() {
                 strokeWidth="3.5"
                 strokeLinecap="round"
                 filter="url(#holoGlow)"
-                opacity="0.9"
+                opacity="1"
               />
               <path
                 d="M90 118 C 170 70, 250 70, 300 102 S 420 150, 510 108"
@@ -141,16 +138,16 @@ function HologramSystemPreview() {
                   <circle
                     cx={n.cx}
                     cy={n.cy}
-                    r="6"
-                    fill="rgba(65,135,210,0.75)"
-                    opacity="0.9"
+                    r="7"
+                    fill="rgba(65,135,210,0.82)"
+                    opacity="1"
                   />
                   <circle
                     cx={n.cx}
                     cy={n.cy}
-                    r="12"
-                    fill="rgba(65,135,210,0.18)"
-                    opacity="0.75"
+                    r="15"
+                    fill="rgba(65,135,210,0.22)"
+                    opacity="0.95"
                     filter="url(#holoGlow)"
                   />
                 </g>
@@ -202,8 +199,8 @@ export default function WhatWeDo() {
               Select a lever to explore how we work.
             </div>
 
-            {/* Hologram preview (hidden on very small screens to avoid crowding) */}
-            <div className="mt-7 hidden sm:block">
+            {/* Hologram preview (visible on desktop; responsive sizing keeps mobile clean) */}
+            <div className="mt-7">
               <HologramSystemPreview />
             </div>
           </div>
