@@ -20,15 +20,17 @@ export default function Hero() {
 
         <HeroTitleSequence />
 
-        <div className="mt-12">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/45">
+        <div className="mt-12 flex flex-wrap items-center gap-3 text-white/45">
+          <div className="text-xs font-semibold tracking-[0.14em] uppercase">
             Trusted by forward-thinking teams
           </div>
-          <div className="mt-4 grid grid-cols-2 gap-4 text-white/40 sm:grid-cols-5">
-            {['Aurora', 'Northpoint', 'Summit', 'Veritas', 'Pioneer'].map((n) => (
+          <div className="hidden h-3 w-px bg-white/10 sm:block" />
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold tracking-[0.12em] uppercase text-white/40">
+            {['Aurora', 'Northpoint', 'Summit', 'Veritas', 'Pioneer'].map((n, idx) => (
               <div key={n} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-hcg-400/70" />
-                <span className="text-xs font-semibold tracking-[0.12em] uppercase">{n}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-hcg-400/60" />
+                <span>{n}</span>
+                {idx < 4 ? <span className="ml-1 hidden text-white/15 sm:inline">•</span> : null}
               </div>
             ))}
           </div>

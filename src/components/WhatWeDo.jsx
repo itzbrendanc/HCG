@@ -1,13 +1,28 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import Section from './Section.jsx'
 
-const items = [
-  { title: 'Strategy', desc: 'Identify the highest-leverage opportunities.' },
-  { title: 'Marketing', desc: 'Create demand and attention.' },
-  { title: 'Growth', desc: 'Convert attention into measurable results.' },
-  { title: 'Operations', desc: 'Build systems that scale.' },
-  { title: 'Technology', desc: 'Leverage tools and automation.' },
-  { title: 'Execution', desc: 'Move quickly with clear direction.' },
+const pillars = [
+  {
+    title: 'Identify Bottlenecks',
+    desc: 'Find the constraint—where decisions, process, or funnel friction is slowing momentum.',
+  },
+  {
+    title: 'Build Execution Systems',
+    desc: 'Turn intent into repeatable workflows with clear owners, cadence, and tracking.',
+  },
+  {
+    title: 'Drive Measurable Growth',
+    desc: 'Focus on the few levers that compound and report progress with simple metrics.',
+  },
+]
+
+const levers = [
+  'Strategy',
+  'Marketing',
+  'Growth',
+  'Operations',
+  'Technology',
+  'Execution',
 ]
 
 export default function WhatWeDo() {
@@ -22,10 +37,10 @@ export default function WhatWeDo() {
       <div className="mx-auto max-w-6xl">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Clear capabilities. Built to execute.
+            What we do
           </h2>
           <p className="mt-4 text-base leading-relaxed text-white/75 sm:text-lg">
-            Six levers that move organizations from intent to measurable outcomes.
+            Axiom works like a focused operating layer: diagnose the constraint, design the system, drive outcomes.
           </p>
         </div>
 
@@ -34,27 +49,44 @@ export default function WhatWeDo() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-8 grid gap-4 lg:grid-cols-3"
         >
-          {items.map((it) => (
+          {pillars.map((it) => (
             <div
               key={it.title}
-              className="group rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur transition hover:ring-hcg-400/25"
+              className="group rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur transition hover:ring-hcg-400/20"
             >
-              <div className="flex items-center gap-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-hcg-400/80 shadow-[0_0_18px_rgba(65,135,210,0.35)]" />
-                <div className="text-lg font-semibold tracking-tight text-white">
-                  {it.title}
+              <div className="flex items-start gap-3">
+                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-hcg-300/90 shadow-[0_0_18px_rgba(65,135,210,0.28)]" />
+                <div>
+                  <div className="text-lg font-semibold tracking-tight text-white">
+                    {it.title}
+                  </div>
+                  <div className="mt-2 text-sm leading-relaxed text-white/70">
+                    {it.desc}
+                  </div>
                 </div>
-              </div>
-              <div className="mt-3 text-sm leading-relaxed text-white/70">
-                {it.desc}
               </div>
             </div>
           ))}
         </motion.div>
+
+        <div className="mt-8 rounded-3xl bg-black/20 p-6 ring-1 ring-white/10 backdrop-blur">
+          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+            Six Growth Levers
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {levers.map((l) => (
+              <span
+                key={l}
+                className="rounded-full bg-white/5 px-4 py-2 text-sm font-semibold text-white/75 ring-1 ring-white/10"
+              >
+                {l}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </Section>
   )
 }
-

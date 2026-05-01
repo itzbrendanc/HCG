@@ -61,22 +61,22 @@ export default function CinematicTextScene() {
     show: {
       transition: prefersReducedMotion
         ? { staggerChildren: 0 }
-        : { staggerChildren: 0.06, delayChildren: 0.12 },
+        : { staggerChildren: 0.045, delayChildren: 0.08 },
     },
   }
 
   const word = {
-    hidden: { opacity: 0, y: 18, filter: 'blur(10px)' },
+    hidden: { opacity: 0, y: 14, filter: 'blur(8px)' },
     show: {
       opacity: 1,
       y: 0,
       filter: 'blur(0px)',
-      transition: { duration: 0.9, ease: 'easeOut' },
+      transition: { duration: 0.7, ease: 'easeOut' },
     },
   }
 
   return (
-    <div ref={ref} className="relative isolate overflow-hidden rounded-[34px] bg-black/20 ring-1 ring-white/5">
+    <div ref={ref} className="relative isolate overflow-hidden rounded-[34px] bg-black/15 ring-1 ring-white/5">
       <div className="absolute inset-0 bg-[radial-gradient(900px_520px_at_50%_30%,rgba(65,135,210,0.22),transparent_65%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(760px_520px_at_15%_15%,rgba(255,255,255,0.06),transparent_62%)]" />
 
