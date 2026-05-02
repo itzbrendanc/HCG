@@ -89,20 +89,46 @@ function ServiceCard({ title, description, selected, onSelect }) {
   )
 }
 
+const EXEC_STEPS = [
+  {
+    key: 'Diagnose',
+    detail: 'Find root causes, not surface symptoms.',
+  },
+  {
+    key: 'Systemize',
+    detail: 'Turn decisions into repeatable workflows.',
+  },
+  {
+    key: 'Execute',
+    detail: 'Move with cadence, ownership, and accountability.',
+  },
+]
+
 function ExecutionMapVisual({ className = '' }) {
   const prefersReducedMotion = useReducedMotion()
+  const [active, setActive] = useState(EXEC_STEPS[0].key)
+
+  const activeDetail = useMemo(
+    () => EXEC_STEPS.find((s) => s.key === active)?.detail ?? EXEC_STEPS[0].detail,
+    [active],
+  )
+
+  const isActive = (k) => k === active
 
   return (
     <motion.div
-      aria-hidden="true"
+      aria-label="Execution map"
       className={[
-        'relative min-h-[320px] overflow-hidden rounded-3xl bg-black/30 p-8 ring-1 ring-hcg-400/30 shadow-card backdrop-blur',
+        'relative min-h-[380px] overflow-hidden rounded-3xl bg-black/30 p-8 ring-1 ring-hcg-400/35 shadow-card backdrop-blur',
         'glow-blue-strong',
         className,
       ].join(' ')}
+      whileHover={prefersReducedMotion ? undefined : { y: -2 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
     >
       <div className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-hcg-600/22 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-hcg-500/18 blur-3xl" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full bg-hcg-400/10 blur-3xl" />
 
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.28]"
@@ -115,9 +141,9 @@ function ExecutionMapVisual({ className = '' }) {
       />
 
       <motion.div
-        animate={prefersReducedMotion ? undefined : { y: [0, -5, 0] }}
+        animate={prefersReducedMotion ? undefined : { y: [0, -4, 0] }}
         transition={
-          prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut' }
+          prefersReducedMotion ? undefined : { duration: 7.8, repeat: Infinity, ease: 'easeInOut' }
         }
         className="relative z-10"
       >
@@ -137,66 +163,147 @@ function ExecutionMapVisual({ className = '' }) {
 
         <div className="mt-6 grid gap-4">
           <div className="grid grid-cols-3 items-center gap-3">
-            {['Diagnose', 'Systemize', 'Execute'].map((label) => (
-              <div
-                key={label}
-                className="rounded-xl bg-black/25 px-3 py-2 text-center ring-1 ring-white/10"
+            {EXEC_STEPS.map(({ key }) => (
+              <button
+                key={key}
+                type="button"
+                onMouseEnter={() => setActive(key)}
+                onFocus={() => setActive(key)}
+                onClick={() => setActive(key)}
+                className={[
+                  'rounded-xl px-3 py-2 text-center ring-1 transition',
+                  isActive(key)
+                    ? 'bg-hcg-600/18 ring-hcg-400/30 text-white shadow-[0_0_26px_rgba(65,135,210,0.14)]'
+                    : 'bg-black/25 ring-white/10 text-white/80 hover:ring-white/15',
+                ].join(' ')}
               >
-                <div className="text-xs font-semibold tracking-tight text-white/80">
-                  {label}
+                <div className="text-xs font-semibold tracking-tight">
+                  {key}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
 
-          <div className="relative h-[120px] overflow-hidden rounded-2xl bg-black/20 ring-1 ring-white/10">
-            <svg className="absolute inset-0" viewBox="0 0 600 180" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="svcHoloLine" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0" stopColor="rgba(65,135,210,0.10)" />
-                  <stop offset="0.5" stopColor="rgba(65,135,210,0.72)" />
-                  <stop offset="1" stopColor="rgba(65,135,210,0.10)" />
-                </linearGradient>
-                <filter id="svcHoloGlow" x="-30%" y="-30%" width="160%" height="160%">
-                  <feGaussianBlur stdDeviation="2.8" />
-                </filter>
-              </defs>
-              <path
-                d="M90 112 C 170 60, 250 60, 300 96 S 420 150, 510 104"
-                fill="none"
-                stroke="url(#svcHoloLine)"
-                strokeWidth="3.5"
-                strokeLinecap="round"
-                filter="url(#svcHoloGlow)"
-                opacity="1"
-              />
-              {[
-                { cx: 92, cy: 116 },
-                { cx: 300, cy: 100 },
-                { cx: 508, cy: 108 },
-              ].map((n) => (
-                <g key={`${n.cx}-${n.cy}`}>
-                  <circle cx={n.cx} cy={n.cy} r="7" fill="rgba(65,135,210,0.82)" opacity="1" />
-                  <circle
-                    cx={n.cx}
-                    cy={n.cy}
-                    r="15"
-                    fill="rgba(65,135,210,0.22)"
-                    opacity="0.95"
-                    filter="url(#svcHoloGlow)"
-                  />
-                </g>
-              ))}
-            </svg>
+          <div className="relative overflow-hidden rounded-2xl bg-black/20 ring-1 ring-white/10">
+            {/* Detail panel */}
+            <div className="relative grid gap-3 p-5 sm:grid-cols-12 sm:items-center">
+              <div className="sm:col-span-7">
+                <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+                  Active Step
+                </div>
+                <div className="mt-1 text-base font-semibold tracking-tight text-white">
+                  {active}
+                </div>
+                <div className="mt-2 text-sm leading-relaxed text-white/70">
+                  {activeDetail}
+                </div>
+              </div>
 
-            <div className="absolute left-4 right-4 bottom-4 h-2.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
-              <motion.div
-                className="h-full w-[66%] bg-gradient-to-r from-hcg-600/45 via-hcg-400/85 to-hcg-300/35"
-                animate={prefersReducedMotion ? undefined : { opacity: [0.78, 1, 0.78] }}
-                transition={
-                  prefersReducedMotion ? undefined : { duration: 3.8, repeat: Infinity, ease: 'easeInOut' }
-                }
-              />
+              {/* Connection canvas */}
+              <div className="sm:col-span-5">
+                <div className="relative h-[120px] overflow-hidden rounded-xl bg-black/20 ring-1 ring-white/10">
+                  <svg className="absolute inset-0" viewBox="0 0 600 180" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="svcHoloLine" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stopColor="rgba(65,135,210,0.10)" />
+                        <stop offset="0.5" stopColor="rgba(65,135,210,0.78)" />
+                        <stop offset="1" stopColor="rgba(65,135,210,0.10)" />
+                      </linearGradient>
+                      <linearGradient id="svcHoloActive" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stopColor="rgba(65,135,210,0.18)" />
+                        <stop offset="0.55" stopColor="rgba(65,135,210,0.95)" />
+                        <stop offset="1" stopColor="rgba(65,135,210,0.18)" />
+                      </linearGradient>
+                      <filter id="svcHoloGlow" x="-30%" y="-30%" width="160%" height="160%">
+                        <feGaussianBlur stdDeviation="3.2" />
+                      </filter>
+                    </defs>
+
+                    {/* Base path */}
+                    <path
+                      d="M90 112 C 190 56, 260 56, 300 92 S 410 150, 510 108"
+                      fill="none"
+                      stroke="url(#svcHoloLine)"
+                      strokeWidth="3.5"
+                      strokeLinecap="round"
+                      opacity="0.75"
+                    />
+
+                    {/* Active glow path */}
+                    <path
+                      d="M90 112 C 190 56, 260 56, 300 92 S 410 150, 510 108"
+                      fill="none"
+                      stroke="url(#svcHoloActive)"
+                      strokeWidth="4.5"
+                      strokeLinecap="round"
+                      filter="url(#svcHoloGlow)"
+                      opacity={active === 'Diagnose' ? 0.65 : active === 'Systemize' ? 0.85 : 1}
+                    />
+
+                    {/* Pulse along the line */}
+                    {!prefersReducedMotion ? (
+                      <motion.circle
+                        r="8"
+                        fill="rgba(65,135,210,0.85)"
+                        filter="url(#svcHoloGlow)"
+                        animate={{
+                          cx: [96, 300, 508],
+                          cy: [116, 96, 108],
+                          opacity: [0.2, 0.95, 0.2],
+                        }}
+                        transition={{
+                          duration: 4.8,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                      />
+                    ) : null}
+
+                    {[
+                      { key: 'Diagnose', cx: 92, cy: 116 },
+                      { key: 'Systemize', cx: 300, cy: 96 },
+                      { key: 'Execute', cx: 508, cy: 108 },
+                    ].map((n) => (
+                      <g key={n.key}>
+                        <circle
+                          cx={n.cx}
+                          cy={n.cy}
+                          r="7"
+                          fill={isActive(n.key) ? 'rgba(65,135,210,0.92)' : 'rgba(65,135,210,0.55)'}
+                          opacity="1"
+                        />
+                        <circle
+                          cx={n.cx}
+                          cy={n.cy}
+                          r={isActive(n.key) ? 18 : 14}
+                          fill={isActive(n.key) ? 'rgba(65,135,210,0.24)' : 'rgba(65,135,210,0.16)'}
+                          opacity={isActive(n.key) ? 1 : 0.75}
+                          filter="url(#svcHoloGlow)"
+                        />
+                      </g>
+                    ))}
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            {/* Execution Signal */}
+            <div className="px-5 pb-5">
+              <div className="flex items-center justify-between text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
+                <span>Execution Signal</span>
+                <span className="text-white/45">Active</span>
+              </div>
+              <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10 shadow-[inset_0_0_18px_rgba(0,0,0,0.35)]">
+                <motion.div
+                  className="h-full w-[68%] bg-gradient-to-r from-hcg-600/55 via-hcg-400/90 to-hcg-300/40"
+                  animate={prefersReducedMotion ? undefined : { opacity: [0.8, 1, 0.8] }}
+                  transition={
+                    prefersReducedMotion
+                      ? undefined
+                      : { duration: 3.9, repeat: Infinity, ease: 'easeInOut' }
+                  }
+                />
+              </div>
             </div>
           </div>
         </div>
