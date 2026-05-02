@@ -1,8 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
-import MagneticButton from './MagneticButton.jsx'
-import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
 
 const services = [
   {
@@ -65,43 +63,49 @@ function ServiceCard({ title, description, selected, onSelect }) {
       whileHover={{ y: -1 }}
       whileTap={{ scale: 0.99 }}
       className={[
-        'group relative w-full overflow-hidden rounded-3xl bg-black/30 p-6 text-left ring-1 shadow-soft backdrop-blur transition hover:bg-black/35',
-        selected ? 'ring-hcg-400/30' : 'ring-white/10',
+        'group relative w-full overflow-hidden rounded-2xl bg-black/25 p-6 text-left ring-1 shadow-soft backdrop-blur transition',
+        'hover:bg-black/30 hover:ring-white/15',
+        selected ? 'ring-hcg-400/25' : 'ring-white/10',
       ].join(' ')}
     >
-      <div
-        className={[
-          'relative rounded-2xl bg-black/20 p-5 ring-1 ring-white/10 transition',
-          selected ? 'ring-hcg-400/18' : '',
-        ].join(' ')}
-      >
-        <div className="flex items-center justify-between gap-3">
-          <div className="text-xl font-semibold tracking-tight text-white">
-            {title}
-          </div>
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-            {selected ? 'Selected' : 'Explore'}
-          </div>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <div className="text-lg font-semibold tracking-tight text-white">{title}</div>
+          <div className="mt-2 text-sm leading-relaxed text-white/70">{description}</div>
         </div>
-        <div className="mt-2 text-sm font-semibold text-hcg-200">{description}</div>
+        <span
+          className={[
+            'mt-0.5 inline-flex h-8 w-8 items-center justify-center rounded-xl ring-1 transition',
+            selected
+              ? 'bg-hcg-600/18 ring-hcg-400/25 text-hcg-200'
+              : 'bg-white/5 ring-white/10 text-white/55',
+          ].join(' ')}
+          aria-hidden="true"
+        >
+          →
+        </span>
       </div>
     </motion.button>
   )
 }
 
-function ServicesHologramPreview() {
+function ExecutionMapVisual({ className = '' }) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
     <motion.div
       aria-hidden="true"
-      className="relative mt-8 hidden min-h-[280px] overflow-hidden rounded-2xl bg-black/35 p-7 ring-1 ring-hcg-400/30 shadow-soft backdrop-blur glow-blue-strong md:block"
+      className={[
+        'relative min-h-[320px] overflow-hidden rounded-3xl bg-black/30 p-8 ring-1 ring-hcg-400/30 shadow-card backdrop-blur',
+        'glow-blue-strong',
+        className,
+      ].join(' ')}
     >
       <div className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-hcg-600/22 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-hcg-500/18 blur-3xl" />
 
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.32]"
+        className="pointer-events-none absolute inset-0 opacity-[0.28]"
         style={{
           backgroundImage:
             'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
@@ -111,22 +115,27 @@ function ServicesHologramPreview() {
       />
 
       <motion.div
-        animate={prefersReducedMotion ? undefined : { y: [0, -6, 0] }}
+        animate={prefersReducedMotion ? undefined : { y: [0, -5, 0] }}
         transition={
           prefersReducedMotion ? undefined : { duration: 6.8, repeat: Infinity, ease: 'easeInOut' }
         }
         className="relative z-10"
       >
         <div className="flex items-center justify-between">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-            Execution Map
+          <div>
+            <div className="text-xs font-semibold tracking-[0.16em] uppercase text-white/55">
+              Execution Map
+            </div>
+            <div className="mt-1 text-lg font-semibold tracking-tight text-white">
+              System view
+            </div>
           </div>
           <div className="rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-hcg-200 ring-1 ring-white/10">
             + Growth Signal
           </div>
         </div>
 
-        <div className="mt-5 grid gap-4">
+        <div className="mt-6 grid gap-4">
           <div className="grid grid-cols-3 items-center gap-3">
             {['Diagnose', 'Systemize', 'Execute'].map((label) => (
               <div
@@ -140,7 +149,7 @@ function ServicesHologramPreview() {
             ))}
           </div>
 
-          <div className="relative h-[92px] overflow-hidden rounded-2xl bg-black/20 ring-1 ring-white/10">
+          <div className="relative h-[120px] overflow-hidden rounded-2xl bg-black/20 ring-1 ring-white/10">
             <svg className="absolute inset-0" viewBox="0 0 600 180" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="svcHoloLine" x1="0" y1="0" x2="1" y2="0">
@@ -196,106 +205,108 @@ function ServicesHologramPreview() {
   )
 }
 
+function LeveragePanel() {
+  return (
+    <div className="rounded-3xl bg-black/25 p-8 ring-1 ring-white/10 backdrop-blur">
+      <div className="text-xs font-semibold tracking-[0.16em] uppercase text-white/55">
+        Built around leverage
+      </div>
+      <div className="mt-5 grid gap-4">
+        {[
+          { k: 'Diagnose', v: 'the bottleneck' },
+          { k: 'Systemize', v: 'the workflow' },
+          { k: 'Execute', v: 'with accountability' },
+        ].map((r) => (
+          <div key={r.k} className="flex items-start gap-3">
+            <span className="mt-1.5 h-2 w-2 rounded-full bg-hcg-300/80 shadow-[0_0_16px_rgba(65,135,210,0.18)]" />
+            <div className="text-sm leading-relaxed text-white/75">
+              <span className="font-semibold text-white">{r.k}</span> {r.v}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export default function Services() {
   const prefersReducedMotion = useReducedMotion()
   const [selectedTitle, setSelectedTitle] = useState(services[0]?.title ?? '')
   const cardsRef = useRef(null)
   const [showAll, setShowAll] = useState(false)
 
-  const primary = useMemo(
-    () => services.filter((s) => ['Strategy', 'Marketing', 'Operations'].includes(s.title)),
-    [],
-  )
+  const primary = useMemo(() => {
+    const order = ['Strategy', 'Marketing', 'Operations']
+    return order.map((t) => services.find((s) => s.title === t)).filter(Boolean)
+  }, [])
 
   const visibleServices = showAll ? services : primary
 
   return (
     <Section
       id="services"
-      eyebrow="How We Drive Growth"
       className="bg-hcg-night bg-hcg-beams"
     >
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-4">
-          <AnimatedSectionHeading
-            lines={['How We Drive Growth', 'Six execution levers.']}
-            accentLineIdx={1}
-            className="max-w-sm"
-            sweep={false}
-          />
-          <p className="mt-5 text-sm leading-relaxed text-white/75">
+      <div className="grid gap-10">
+        {/* Top intro area */}
+        <div className="max-w-3xl">
+          <div className="text-xs font-semibold tracking-[0.18em] uppercase text-white/55">
+            HOW WE DRIVE GROWTH
+          </div>
+          <h2 className="mt-3 text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl">
+            How We Drive Growth
+          </h2>
+          <div className="mt-3 text-sm font-semibold tracking-[0.14em] uppercase text-white/55">
+            Six execution levers.
+          </div>
+          <p className="mt-4 text-[17px] leading-relaxed text-white/75 sm:text-lg">
             We isolate the highest-leverage areas in your business and turn them into systems that drive measurable results.
           </p>
+        </div>
 
-          <ServicesHologramPreview />
-
-          <div className="mt-6">
-            <button
-              type="button"
-              onClick={() => {
-                const el = document.getElementById('services-cards')
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                if (services[0]?.title) setSelectedTitle(services[0].title)
-                setShowAll(true)
-              }}
-              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/15"
-            >
-              View All Services <span className="text-hcg-300">→</span>
-            </button>
+        {/* Two-column feature area */}
+        <div className="grid gap-6 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-7">
+            <ExecutionMapVisual />
+          </div>
+          <div className="lg:col-span-5">
+            <LeveragePanel />
           </div>
         </div>
 
+        {/* Primary cards row */}
         <motion.div
           id="services-cards"
           ref={cardsRef}
-          initial="hidden"
-          whileInView="visible"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: prefersReducedMotion
-                ? { staggerChildren: 0 }
-                : { staggerChildren: 0.05, delayChildren: 0.03 },
-            },
-          }}
-          className="grid gap-6 sm:grid-cols-2 lg:col-span-8"
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="grid gap-4 lg:grid-cols-3"
         >
           {visibleServices.map((s) => (
-            <motion.div
+            <ServiceCard
               key={s.title}
-              variants={{
-                hidden: { opacity: 0, y: 6 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              transition={{ duration: 0.45, ease: 'easeOut' }}
-            >
-              <ServiceCard
-                title={s.title}
-                description={s.description}
-                selected={s.title === selectedTitle}
-                onSelect={() => setSelectedTitle(s.title)}
-              />
-            </motion.div>
+              title={s.title}
+              description={`${s.description}.`}
+              selected={s.title === selectedTitle}
+              onSelect={() => setSelectedTitle(s.title)}
+            />
           ))}
-
-          <div className="sm:col-span-2">
-            <div className="mt-2 rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur">
-              <p className="text-sm text-white/70">
-                Not sure where to start? We’ll help you identify the highest-impact opportunities.
-              </p>
-              <div className="mt-4">
-                <MagneticButton
-                  as="a"
-                  href="#contact"
-                  className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
-                >
-                  Start With a Consultation
-                </MagneticButton>
-              </div>
-            </div>
-          </div>
         </motion.div>
+
+        {/* Subtle “View all” */}
+        {!showAll ? (
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => setShowAll(true)}
+              className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm font-semibold text-white/75 ring-1 ring-white/10 transition hover:bg-white/10"
+            >
+              View all levers <span className="text-hcg-300">→</span>
+            </button>
+          </div>
+        ) : null}
       </div>
     </Section>
   )
