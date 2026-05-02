@@ -1,9 +1,8 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useMemo, useRef, useState } from 'react'
 import Section from './Section.jsx'
 import MagneticButton from './MagneticButton.jsx'
 import AnimatedSectionHeading from './AnimatedSectionHeading.jsx'
-import ServiceMockupVisual from './ServiceMockupVisual.jsx'
 
 const services = [
   {
@@ -56,31 +55,24 @@ const services = [
   },
 ]
 
-function ServiceCard({ title, description, deliverable, kind, selected, onSelect }) {
+function ServiceCard({ title, description, selected, onSelect }) {
   return (
     <motion.button
       type="button"
       onClick={onSelect}
-      animate={selected ? { scale: 1.005 } : { scale: 1 }}
+      animate={selected ? { scale: 1.003 } : { scale: 1 }}
       transition={{ duration: 0.24, ease: 'easeOut' }}
-      whileHover={{ y: -2 }}
+      whileHover={{ y: -1 }}
       whileTap={{ scale: 0.99 }}
       className={[
-        'group relative w-full overflow-hidden rounded-3xl bg-black/35 p-7 text-left ring-1 shadow-soft backdrop-blur transition hover:shadow-card hcg-card-accent',
-        selected ? 'ring-hcg-400/55 glow-blue-strong' : 'ring-white/10',
+        'group relative w-full overflow-hidden rounded-3xl bg-black/30 p-6 text-left ring-1 shadow-soft backdrop-blur transition hover:bg-black/35',
+        selected ? 'ring-hcg-400/30' : 'ring-white/10',
       ].join(' ')}
     >
-      <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-hcg-600/10 blur-3xl opacity-0 transition group-hover:opacity-100" />
-
-      <div className="relative grid gap-5">
-        <div className="relative h-44 w-full overflow-hidden rounded-3xl ring-1 ring-white/10">
-          <ServiceMockupVisual kind={kind} active={selected} />
-        </div>
-
       <div
         className={[
-          'relative rounded-2xl bg-black/30 p-4 ring-1 ring-white/10 transition',
-          selected ? 'ring-hcg-400/25' : '',
+          'relative rounded-2xl bg-black/20 p-5 ring-1 ring-white/10 transition',
+          selected ? 'ring-hcg-400/18' : '',
         ].join(' ')}
       >
         <div className="flex items-center justify-between gap-3">
@@ -92,27 +84,6 @@ function ServiceCard({ title, description, deliverable, kind, selected, onSelect
           </div>
         </div>
         <div className="mt-2 text-sm font-semibold text-hcg-200">{description}</div>
-        <div className="mt-3 text-sm text-white/70">{deliverable}</div>
-      </div>
-      </div>
-
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-6 opacity-0 transition duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-        <div className="mx-6 mb-6 rounded-2xl bg-black/40 p-4 ring-1 ring-hcg-400/20 backdrop-blur">
-          <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">Detail</div>
-          <div className="mt-2 text-sm font-semibold text-white/80">
-            {kind === 'strategy'
-              ? 'Priority bets • tradeoffs'
-              : kind === 'marketing'
-                ? 'Messaging • channel fit'
-                : kind === 'growth'
-                  ? 'Funnel levers • conversion'
-                  : kind === 'operations'
-                    ? 'Owners • cadence'
-                    : kind === 'technology'
-                      ? 'Automation • AI workflows'
-                      : 'Milestones • checkpoints'}
-          </div>
-        </div>
       </div>
     </motion.button>
   )
@@ -124,7 +95,7 @@ function ServicesHologramPreview() {
   return (
     <motion.div
       aria-hidden="true"
-      className="relative mt-6 hidden min-h-[220px] overflow-hidden rounded-2xl bg-black/35 p-6 ring-1 ring-hcg-400/25 shadow-soft backdrop-blur glow-blue-strong lg:block"
+      className="relative mt-8 hidden min-h-[280px] overflow-hidden rounded-2xl bg-black/35 p-7 ring-1 ring-hcg-400/30 shadow-soft backdrop-blur glow-blue-strong md:block"
     >
       <div className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-hcg-600/22 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-hcg-500/18 blur-3xl" />
@@ -209,9 +180,9 @@ function ServicesHologramPreview() {
               ))}
             </svg>
 
-            <div className="absolute left-4 right-4 bottom-4 h-2 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
+            <div className="absolute left-4 right-4 bottom-4 h-2.5 overflow-hidden rounded-full bg-white/5 ring-1 ring-white/10">
               <motion.div
-                className="h-full w-[62%] bg-gradient-to-r from-hcg-600/40 via-hcg-400/80 to-hcg-300/30"
+                className="h-full w-[66%] bg-gradient-to-r from-hcg-600/45 via-hcg-400/85 to-hcg-300/35"
                 animate={prefersReducedMotion ? undefined : { opacity: [0.78, 1, 0.78] }}
                 transition={
                   prefersReducedMotion ? undefined : { duration: 3.8, repeat: Infinity, ease: 'easeInOut' }
@@ -229,11 +200,14 @@ export default function Services() {
   const prefersReducedMotion = useReducedMotion()
   const [selectedTitle, setSelectedTitle] = useState(services[0]?.title ?? '')
   const cardsRef = useRef(null)
+  const [showAll, setShowAll] = useState(false)
 
-  const selected = useMemo(
-    () => services.find((s) => s.title === selectedTitle) ?? services[0],
-    [selectedTitle],
+  const primary = useMemo(
+    () => services.filter((s) => ['Strategy', 'Marketing', 'Operations'].includes(s.title)),
+    [],
   )
+
+  const visibleServices = showAll ? services : primary
 
   return (
     <Section
@@ -241,7 +215,7 @@ export default function Services() {
       eyebrow="How We Drive Growth"
       className="bg-hcg-night bg-hcg-beams"
     >
-      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-4">
           <AnimatedSectionHeading
             lines={['How We Drive Growth', 'Six execution levers.']}
@@ -262,6 +236,7 @@ export default function Services() {
                 const el = document.getElementById('services-cards')
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
                 if (services[0]?.title) setSelectedTitle(services[0].title)
+                setShowAll(true)
               }}
               className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/15"
             >
@@ -284,9 +259,9 @@ export default function Services() {
                 : { staggerChildren: 0.05, delayChildren: 0.03 },
             },
           }}
-          className="grid gap-4 sm:grid-cols-2 lg:col-span-8"
+          className="grid gap-6 sm:grid-cols-2 lg:col-span-8"
         >
-          {services.map((s) => (
+          {visibleServices.map((s) => (
             <motion.div
               key={s.title}
               variants={{
@@ -298,38 +273,11 @@ export default function Services() {
               <ServiceCard
                 title={s.title}
                 description={s.description}
-                deliverable={s.deliverable}
-                kind={s.kind}
                 selected={s.title === selectedTitle}
                 onSelect={() => setSelectedTitle(s.title)}
               />
             </motion.div>
           ))}
-
-          <div className="sm:col-span-2">
-            <AnimatePresence mode="wait">
-              {selected ? (
-                <motion.div
-                  key={selected.title}
-                  initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: 6 }}
-                  transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="rounded-3xl bg-black/40 p-7 ring-1 ring-hcg-400/35 shadow-card backdrop-blur glow-blue-strong"
-                >
-                  <div className="text-xs font-semibold tracking-[0.14em] uppercase text-white/55">
-                    Focus
-                  </div>
-                  <div className="mt-3 text-2xl font-semibold tracking-tight text-hcg-200">
-                    {selected.title}
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-white/75">
-                    {selected.detail}
-                  </p>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
-          </div>
 
           <div className="sm:col-span-2">
             <div className="mt-2 rounded-3xl bg-black/30 p-6 ring-1 ring-white/10 backdrop-blur">
