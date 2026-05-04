@@ -197,7 +197,7 @@ export default function ContactForm() {
                   </div>
 
                   <div className="mt-3 text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                    {path === 'student' ? 'Apply to Axiom Strategy' : 'Build smarter growth with Axiom.'}
+                    {path === 'student' ? 'Student Application' : 'Build smarter growth with Axiom.'}
                   </div>
 
                   <div className="mt-3 text-sm leading-relaxed text-white/75">
@@ -284,7 +284,11 @@ export default function ContactForm() {
 
                         <div className="my-8 h-px w-full bg-white/10" />
 
-                        <div className="mt-0 flex justify-center">
+                        <div className="mt-0 text-center text-sm font-semibold text-white/70">
+                          Join a select group of students working on real business problems.
+                        </div>
+
+                        <div className="mt-4 flex flex-col justify-center gap-3 sm:flex-row">
                           <MagneticButton
                             as="a"
                             href={STUDENT_APPLICATION_URL}
@@ -292,7 +296,18 @@ export default function ContactForm() {
                             rel="noopener noreferrer"
                             className="w-full rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-5 text-lg font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-glow sm:w-auto sm:text-xl"
                           >
-                            Open Student Application
+                            Apply Now
+                          </MagneticButton>
+                          <MagneticButton
+                            as="a"
+                            href="#about"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                            }}
+                            className="w-full rounded-2xl bg-white/5 px-8 py-5 text-lg font-semibold text-white/85 ring-1 ring-white/12 transition hover:bg-white/10 hover:text-white sm:w-auto sm:text-xl"
+                          >
+                            Explore the Program
                           </MagneticButton>
                         </div>
                         <div className="mt-3 text-center text-xs font-medium tracking-wide text-white/50">
