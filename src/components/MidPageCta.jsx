@@ -33,7 +33,7 @@ export default function MidPageCta() {
               <MagneticButton
                 as="a"
                 href="#contact"
-                className="inline-flex w-full items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-hcg-600 px-7 py-4 text-base font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.01]"
               >
                 Request a Consultation
               </MagneticButton>

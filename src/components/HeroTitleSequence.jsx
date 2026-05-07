@@ -29,7 +29,7 @@ export default function HeroTitleSequence() {
           href={STUDENT_APPLICATION_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-6 py-3.5 text-center text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.01]"
+          className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-4 text-center text-base font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.02]"
         >
           Apply
         </MagneticButton>
@@ -37,7 +37,7 @@ export default function HeroTitleSequence() {
           as="a"
           href="#contact"
           onClick={handleRequestConsultation}
-          className="rounded-xl bg-white/5 px-5 py-3 text-center text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/10"
+          className="w-full sm:w-auto rounded-2xl bg-white/5 px-8 py-4 text-center text-base font-semibold text-white ring-1 ring-white/12 transition hover:bg-white/10"
         >
           Contact
         </MagneticButton>

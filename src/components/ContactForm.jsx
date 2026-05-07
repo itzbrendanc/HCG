@@ -294,7 +294,7 @@ export default function ContactForm() {
                             href={STUDENT_APPLICATION_URL}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-5 text-lg font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:scale-[1.02] hover:shadow-glow sm:w-auto sm:text-xl"
+                            className="w-full rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-10 py-6 text-xl font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:scale-[1.03] hover:shadow-glow sm:w-auto"
                           >
                             Apply Now
                           </MagneticButton>
@@ -305,7 +305,7 @@ export default function ContactForm() {
                               e.preventDefault()
                               document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                             }}
-                            className="w-full rounded-2xl bg-white/5 px-8 py-5 text-lg font-semibold text-white/85 ring-1 ring-white/12 transition hover:bg-white/10 hover:text-white sm:w-auto sm:text-xl"
+                            className="w-full rounded-2xl bg-white/5 px-10 py-6 text-xl font-semibold text-white/85 ring-1 ring-white/12 transition hover:bg-white/10 hover:text-white hover:scale-[1.01] sm:w-auto"
                           >
                             Explore the Program
                           </MagneticButton>
@@ -403,7 +403,7 @@ export default function ContactForm() {
                         as="button"
                         type="submit"
                         disabled={!canSubmit || status === 'submitting'}
-                        className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-7 py-4 text-base sm:text-lg font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow enabled:hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
+                        className="w-full sm:w-auto rounded-2xl bg-gradient-to-r from-hcg-600 to-hcg-500 px-8 py-5 text-lg font-semibold text-white shadow-soft transition enabled:hover:-translate-y-0.5 enabled:hover:shadow-glow enabled:hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         <span className="inline-flex items-center justify-center gap-2">
                           {status === 'submitting' ? 'Sending request...' : 'Request Consultation'}

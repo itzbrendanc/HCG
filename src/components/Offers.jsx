@@ -114,7 +114,7 @@ export default function Offers() {
                 <div className="mt-7">
                   <a
                     href="#contact"
-                    className="inline-flex w-full items-center justify-center rounded-xl bg-white/5 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/12 transition hover:bg-hcg-600/15 hover:ring-hcg-400/25 hover:shadow-soft"
+                    className="inline-flex w-full items-center justify-center rounded-2xl bg-white/5 px-7 py-4 text-base font-semibold text-white ring-1 ring-white/12 transition hover:bg-hcg-600/15 hover:ring-hcg-400/25 hover:shadow-soft hover:scale-[1.01]"
                   >
                     Contact Us
                   </a>
@@ -151,7 +151,7 @@ export default function Offers() {
               <MagneticButton
                 as="a"
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-xl bg-hcg-600 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow"
+                className="inline-flex w-full items-center justify-center rounded-2xl bg-hcg-600 px-7 py-4 text-base font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-glow hover:scale-[1.01] sm:w-auto"
               >
                 Work With Axiom
               </MagneticButton>
