@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
+import WhatWeDo from './components/WhatWeDo.jsx'
 import DescriptionBox from './components/DescriptionBox.jsx'
 import ScrollStory from './components/ScrollStory.jsx'
 import Services from './components/Services.jsx'
@@ -26,6 +27,9 @@ export default function App() {
           <Hero />
           <ScrollRevealSection direction="right">
             <About />
+          </ScrollRevealSection>
+          <ScrollRevealSection direction="left">
+            <WhatWeDo />
           </ScrollRevealSection>
           <DescriptionBox />
           <ScrollRevealSection direction="left">

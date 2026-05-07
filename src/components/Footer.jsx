@@ -22,7 +22,7 @@ export default function Footer() {
             <MagneticButton
               as="a"
               href="#contact"
-              className="inline-flex items-center justify-center rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold text-white ring-1 ring-white/15 shadow-soft transition hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-card"
+              className="inline-flex w-full items-center justify-center rounded-2xl bg-white/10 px-6 py-3 text-base font-semibold text-white ring-1 ring-white/15 shadow-soft transition hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-card sm:w-auto"
             >
               Work With Axiom
             </MagneticButton>
