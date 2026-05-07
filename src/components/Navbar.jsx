@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import axiomStrategyLogo from '../assets/axiom-strategy-logo.png'
 import MagneticButton from './MagneticButton.jsx'
 
 const navItems = [
@@ -51,7 +50,7 @@ export default function Navbar() {
           <div className="relative">
             <div className="pointer-events-none absolute -inset-2 rounded-xl bg-hcg-600/10 opacity-0 blur-xl transition group-hover:opacity-100" />
             <img
-              src={axiomStrategyLogo}
+              src="/axiom-logo.png"
               alt="Axiom Strategy"
               className="relative h-8 w-auto opacity-100 sm:h-9"
             />
